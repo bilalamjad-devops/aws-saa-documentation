@@ -1,3 +1,15 @@
+
+
+
+
+- S3 Access Point
+
+22-August-2026
+
+<details>
+  <summary>Old</summary>
+  
+
 Great! Here's a concise **S3 summary** focused on the concepts that repeatedly appear in the SAA exam.
 
 # Amazon S3 Summary
@@ -279,3 +291,6 @@ We'll go through each concept with questions just like we did for Lambda, RDS, a
 
 
 24-July-2026
+
+
+</details>
