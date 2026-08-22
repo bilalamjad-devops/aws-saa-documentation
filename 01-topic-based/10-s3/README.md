@@ -2,7 +2,7 @@
 
 
 
-- S3 Access Point
+1. S3 Access Point
 
 
 
@@ -53,6 +53,9 @@ your brain should immediately think:
 **S3 Access Point** ✅
 
 ---
+
+2. S3 VPC Endpoint
+3. S3 Object Lock
 
 ### Don't confuse these three
 
