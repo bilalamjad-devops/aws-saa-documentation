@@ -1,5 +1,28 @@
 
 
+
+
+### Exam shortcut 🧠
+
+Remember this pair:
+
+| Problem                              | Think of                       |
+| ------------------------------------ | ------------------------------ |
+| Need logic closer to global users    | **Lambda@Edge**                |
+| Origin sometimes fails               | **CloudFront Origin Failover** |
+| Static content slow                  | **CloudFront caching**         |
+
+
+
+22-August-2026
+
+
+<details>
+  <summary>Old</summary>
+  
+
+
+
 Absolutely. Here is the **one-page CloudFront summary** that covers the important concepts and the patterns from all 8 questions. If you remember this, you'll answer most CloudFront questions in SAA.
 
 ---
@@ -535,3 +558,7 @@ This completes the **CloudFront** section. Combined with your previous summaries
 
 
 27-July-2026
+
+
+</details>
+
