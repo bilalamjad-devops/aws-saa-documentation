@@ -1,3 +1,57 @@
+
+
+
+
+
+
+
+
+
+
+### 6. Why the other options don't work
+
+| Option                          | Why?                                                                                   |
+| ------------------------------- | -------------------------------------------------------------------------------------- |
+| **EKS Secret Encryption + KMS** | ✅ Encrypts Kubernetes Secrets stored in etcd                                           |
+| Secrets Manager                 | ❌ Separate secret-management service; doesn't enable etcd encryption                   |
+| EBS encryption                  | ❌ Encrypts EBS volumes, not Kubernetes Secrets in etcd                                 |
+| EBS CSI driver                  | ❌ Provides EBS storage to Kubernetes applications; unrelated to etcd Secret encryption |
+
+### SAA memory trick
+
+When you see:
+
+> **EKS + Kubernetes Secrets + etcd + encryption**
+
+immediately think:
+
+**→ EKS Secret Encryption → AWS KMS key**
+
+And one important distinction:
+
+> **KMS = manages encryption keys.**
+
+> **Secrets Manager = manages application secrets.**
+
+> **EBS encryption = protects EBS storage.**
+
+You'll encounter these three concepts repeatedly in SAA questions.
+
+
+
+
+
+22-August-2026
+
+---
+---
+---
+
+
+
+
+
+
 Excellent progress. You now understand the majority of EBS questions that appear in the SAA exam. Here's a compact summary that you should revise before moving to EFS.
 
 ---
