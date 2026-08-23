@@ -43,6 +43,71 @@ You'll encounter these three concepts repeatedly in SAA questions.
 
 22-August-2026
 
+
+Exactly. Think of it like this:
+
+| EC2 workload                            | Storage choice                  | Main idea                      |
+| --------------------------------------- | ------------------------------- | ------------------------------ |
+| **Linux EC2 → one instance**            | **EBS**                         | Block storage attached to EC2  |
+| **Windows EC2 → one instance**          | **EBS**                         | Windows EC2 can also use EBS   |
+| **Linux EC2 → many EC2s share files**   | **EFS**                         | Shared Linux file system       |
+| **Windows EC2 → many EC2s share files** | **FSx for Windows File Server** | Shared Windows/SMB file system |
+
+### The important correction
+
+It's **not**:
+
+> Linux = EBS, Windows = FSx
+
+Both Linux **and Windows EC2 can use EBS**.
+
+The distinction is mainly **how you need to access the storage**:
+
+**1. One EC2 needs its own disk → EBS**
+
+```text
+EC2 Linux
+   |
+  EBS
+```
+
+or
+
+```text
+EC2 Windows
+   |
+  EBS
+```
+
+**2. Multiple Linux machines need the same shared files → EFS**
+
+```text
+EC2 Linux ─┐
+EC2 Linux ─┼── EFS
+EC2 Linux ─┘
+```
+
+**3. Multiple Windows machines need the same shared files → FSx for Windows**
+
+```text
+EC2 Windows ─┐
+EC2 Windows ─┼── FSx for Windows
+EC2 Windows ─┘
+```
+
+The keyword to remember for **FSx for Windows** is **SMB**.
+
+So for your SAA questions:
+
+> **Windows + shared file system + SMB → FSx for Windows File Server**
+
+> **Linux + shared file system → EFS**
+
+> **EC2 + individual block disk → EBS**
+
+And yes, your previous Question 24 was exactly testing this distinction.
+
+
 ---
 ---
 ---
