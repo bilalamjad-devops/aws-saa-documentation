@@ -7,7 +7,7 @@
 1. Aurora v2
 2. read replia is differnt
 3. standby is different
-4. 
+4. Aurora Auto Scaling
 
 Yes — you're building the right mental model, but there are **2 important corrections**.
 
