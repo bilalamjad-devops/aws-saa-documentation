@@ -3,6 +3,7 @@
 
 
 1. S3 Access Point
+2. CORS
 
 
 
@@ -95,6 +96,107 @@ That's a very useful distinction for the exam.
 
 ---
 
+
+
+### 4. Don't confuse "S3 website" and "S3 API"
+
+This question intentionally gives you **two URLs**.
+
+**Website endpoint:**
+
+```text
+http://tutorialsdojo.s3-website-us-east-1.amazonaws.com
+```
+
+This is serving your static website.
+
+**S3 API endpoint:**
+
+```text
+tutorialsdojo.s3.amazonaws.com
+```
+
+JavaScript is trying to communicate with the second one.
+
+Even though both ultimately involve the **same S3 bucket**, the browser sees different origins.
+
+That's the whole reason CORS appears in the question.
+
+---
+
+### 5. Your question: "S3 stores static content, not JS?"
+
+Correct this in your mind:
+
+❌ **Wrong**
+
+> S3 stores static content but not JavaScript.
+
+✅ **Correct**
+
+> **S3 can store static website files, including HTML, CSS, JavaScript, images, etc.**
+
+For example:
+
+```text
+S3
+│
+├── index.html       ← browser renders it
+├── app.js           ← browser executes it
+├── style.css        ← browser applies it
+└── logo.png         ← browser displays it
+```
+
+S3 doesn't **execute** the JavaScript.
+
+The **browser executes it**.
+
+---
+
+### 6. And CORS is a browser security concept
+
+This is an important SAA exam association:
+
+| Situation                                     | Think                         |
+| --------------------------------------------- | ----------------------------- |
+| JavaScript from Website A calls Website/API B | **CORS**                      |
+| Browser blocks cross-origin request           | **CORS**                      |
+| S3 website JS calls S3 API endpoint           | **S3 CORS**                   |
+| Copy objects between regions                  | **S3 CRR**                    |
+| Different AWS accounts access resources       | **Cross-account/IAM**         |
+| Load balancer distributes across AZs          | **Cross-Zone Load Balancing** |
+
+### 🔥 Exam shortcut
+
+If you see:
+
+> **"Browser blocks JavaScript because it is accessing a different domain/origin."**
+
+Immediately think:
+
+**CORS.**
+
+And one subtle point: **CORS does not itself authenticate the user or grant S3 permissions**. It tells the browser which cross-origin requests are permitted; IAM/bucket policies still control whether the S3 request is actually authorized.
+
+
+23-August-2026
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 
 22-August-2026
 
