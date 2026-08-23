@@ -1,4 +1,104 @@
-Perfect timing. Before moving to EBS, let's compress DynamoDB into an exam-focused cheat sheet.
+
+1. DynamoDb stream
+
+
+
+
+# 7. One more important distinction for your SAA knowledge
+
+You should now have this mental map:
+
+### Kinesis Data Streams
+
+**"I have real-time data coming IN."**
+
+```text
+Sources
+   ↓
+Kinesis Data Streams
+```
+
+### DynamoDB Streams
+
+**"Something changed INSIDE my DynamoDB."**
+
+```text
+DynamoDB
+   ↓
+DynamoDB Streams
+```
+
+### S3 Event
+
+**"A file was uploaded/changed in S3."**
+
+```text
+S3
+ ↓
+EventBridge / Lambda
+```
+
+### EventBridge
+
+**"Something happened; trigger another service."**
+
+```text
+Event
+ ↓
+EventBridge
+ ↓
+Target
+```
+
+---
+
+## 🔥 Memorize this
+
+When you see:
+
+> **Real-time data coming from many sources**
+
+Think:
+
+**Kinesis Data Streams**
+
+When you see:
+
+> **Changes happening inside DynamoDB**
+
+Think:
+
+**DynamoDB Streams**
+
+When you see:
+
+> **PII must be removed BEFORE storage**
+
+Think:
+
+**Kinesis → Lambda → DynamoDB**
+
+That's the core idea behind Question 18.
+
+
+23-August-2026
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<details>
+  <summary>Old</summary>
+  Perfect timing. Before moving to EBS, let's compress DynamoDB into an exam-focused cheat sheet.
 
 # DynamoDB Summary for SAA
 
@@ -429,3 +529,5 @@ Those are the ones that appear again and again in exam questions.
 
 
 20-July-2026
+
+</details>
