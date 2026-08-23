@@ -13,9 +13,11 @@ Remember this pair:
 | Static content slow                  | **CloudFront caching**         |
 
 
+Signed URL/ Signed Cookie
 
 22-August-2026
 
+23-August-2026
 
 <details>
   <summary>Old</summary>
