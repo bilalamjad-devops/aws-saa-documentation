@@ -8,6 +8,7 @@
 
 Yes. This question is basically testing **one new AWS service: AWS Artifact**. You don't need to think about application security here.
 
+
 ### First, understand the situation
 
 Imagine your company is using AWS.
