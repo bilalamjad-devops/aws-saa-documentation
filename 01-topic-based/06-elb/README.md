@@ -1,3 +1,102 @@
+
+
+
+
+
+# 5. Your mental map should now be
+
+| Service                  | Think                                           |
+| ------------------------ | ----------------------------------------------- |
+| **AWS WAF**              | Web/HTTP attacks                                |
+| **AWS Network Firewall** | Network/VPC traffic                             |
+| **GuardDuty**            | Threat detection                                |
+| **Macie**                | Sensitive data/PII in S3                        |
+| **Firewall Manager**     | Centrally manage security rules across accounts |
+| **Security Hub**         | Central view of security findings               |
+| **Inspector**            | Vulnerability scanning                          |
+| **CloudTrail**           | API/activity logging                            |
+
+A very useful distinction:
+
+> **WAF blocks malicious web requests.**
+> **GuardDuty detects suspicious activity.**
+> **Macie discovers sensitive data.**
+> **Network Firewall protects network traffic.**
+> **Firewall Manager centrally manages security policies across accounts.**
+
+---
+
+## 6. And one important correction to your wording
+
+You said:
+
+> "someone has injected data in SQL server"
+
+Almost think of it as:
+
+**Someone is attempting SQL injection through the web application.**
+
+The attack path is:
+
+```text
+Attacker
+   │
+   │ malicious HTTP request
+   ↓
+AWS WAF
+   │
+   │ ❌ SQL injection detected
+   │
+   X BLOCK
+   │
+   ↓
+ALB
+   ↓
+Application
+   ↓
+SQL Database
+```
+
+The big idea is **stop the malicious request before it reaches the application/database**.
+
+### Exam shortcut 🧠
+
+When you see:
+
+**SQL injection + ALB/CloudFront/API Gateway**
+
+→ **WAF**
+
+When you additionally see:
+
+**multiple AWS accounts**
+
+→ **Firewall Manager**
+
+So for Q23:
+
+> **WAF + SQLi managed rule + Firewall Manager across accounts = correct.**
+
+
+23-August-2026
+
+
+
+
+
+
+
+
+
+
+
+
+<summary>
+
+<details>Old</details>
+
+
+
 Excellent! Before moving to **IAM**, here is a compact summary of **Elastic Load Balancing (ELB)** that covers almost everything you need for the SAA exam.
 
 ---
@@ -420,3 +519,5 @@ You're now ready to move on to **IAM**, which is another core SAA topic. Underst
 
 
 21-July-2026
+
+</summary>
