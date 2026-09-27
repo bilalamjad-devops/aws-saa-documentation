@@ -323,6 +323,17 @@ Maan lijiye aap ke computer par ek 10 GB ki Video file hai:
 > * **Millisecond Storage:** Amazon DynamoDB (NoSQL)
 > * **Analytics Storage (Seconds/Minutes):** Amazon Redshift (OLAP)
 > 
+
+---
+---
+---
+
+### SAA-C03 Networking & Security Rule 💡
+
+> **Multi-VPC Security & Routing Rule:**
+> * Centralized Multi-VPC / Multi-Region Connectivity $\rightarrow$ **AWS Transit Gateway**
+> * Statefull/Stateless Active Traffic Flow Inspection & IPS Protection $\rightarrow$ **AWS Network Firewall**
+> 
 > 
 
 
