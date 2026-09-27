@@ -179,6 +179,20 @@ Is question ka correct answer **Use path conditions to define rules that forward
 > 
 > 
 
+---
+---
+---
+
+
+### SAA-C03 Athena Performance Optimization Rule 💡
+
+> **Athena Query Optimization Rule:**
+> * Athena performance aur cost optimize karne ke liye best practice **Columnar Formats (Apache Parquet ya Apache ORC)** me transform karna aur **Partitioning** istemal karna hai.
+> 
+> 
+
+---
+
 27-September-2026
 
 27-September-2026
