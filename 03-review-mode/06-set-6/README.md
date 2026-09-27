@@ -113,6 +113,63 @@ Isliye yahan answer **Storage Optimized Instances** hi hoga!
 Yeh point clear ho gaya ke 'compute resources' sirf EC2 ke liye general word tha? Question 14 par chalein?
 
 
+---
+---
+---
+---
+
+
+- `Use path conditions to define rules that forward requests to different target groups based on the URL in the request.`
+- Use host conditions to define rules that forward requests to different target groups based on the hostname in the host header. This enables you to support multiple domains using a single load balancer.
+
+
+<img width="1259" height="812" alt="path-conditions-alb-03JUL2025" src="https://github.com/user-attachments/assets/42323a74-ebb6-42b7-a5fe-7a329860fd2d" />
+
+
+
+Is question ka correct answer **Use path conditions to define rules that forward requests to different target groups based on the URL in the request.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+* **Current Setup:** Application Load Balancer (ALB) ke peeche Auto Scaling Group chal raha hai.
+* **New Requirement:** URL structure ke hisab se traffic ko alag-alag Target Groups par bhejna:
+* `/api/android` $\rightarrow$ `Android-Target-Group`
+* `/api/ios` $\rightarrow$ `iOS-Target-Group`
+
+
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Path-Based Routing on ALB (Path Conditions)**
+
+* **Application Load Balancer (Layer 7):** ALB HTTP/HTTPS traffic ka URL path parh sakta hai.
+* **Path-Based Routing Rules:** ALB mein aap rules create kar sakte hain jo URL ke **path** (e.g., `/api/android` ya `/api/ios`) ko check karke request ko unke respective **Target Groups** par forward kar dete hain.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Replace ALB with NLB + Host conditions:** Network Load Balancer (Layer 4) par kaam karta hai, yeh HTTP URLs ya Path-based rules par routing nahi kar sakta.
+* ❌ **Replace ALB with Gateway Load Balancer:** Gateway Load Balancer (GWLB) third-party virtual appliances (firewalls, IDS/IPS) ke traffic inspection ke liye hota hai, URL routing ke liye nahi.
+* ❌ **Use host conditions based on hostname:** Host-based routing domain names ke liye hoti hai (e.g., `android.example.com` vs `ios.example.com`), URL paths (e.g., `/api/android`) ke liye nahi.
+
+---
+
+### SAA-C03 ALB Routing Rules Cheat Sheet 💡
+
+> * **Path-Based Routing:** Request URL ke path par decision lena (`[example.com/api/v1](https://example.com/api/v1)` vs `[example.com/api/v2](https://example.com/api/v2)`).
+> * **Host-Based Routing:** Request ke Domain / Hostname par decision lena (`app.example.com` vs `mobile.example.com`).
+> * **HTTP Header / Method / Query Parameter Routing:** Custom headers, HTTP methods (GET/POST), ya query strings ki bunyad par routing karna.
+> 
+> 
+
+---
+
+27-September-2026
 
 27-September-2026
 
