@@ -192,6 +192,16 @@ Is question ka correct answer **Use path conditions to define rules that forward
 > 
 
 ---
+---
+---
+
+### SAA-C03 Exam Rule 💡
+
+> **IAM Least Privilege Rule:**
+> * Never use wildcards (`*`) for **Actions** or **Resources** when specific operations and specific target resources are explicitly listed in the scenario.
+> 
+> 
+
 
 27-September-2026
 
