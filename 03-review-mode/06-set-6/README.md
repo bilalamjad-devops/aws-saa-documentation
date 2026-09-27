@@ -168,6 +168,16 @@ Is question ka correct answer **Use path conditions to define rules that forward
 > 
 
 ---
+---
+---
+
+### SAA-C03 Exam Rule
+
+> **Streaming & Ingestion Rule:**
+> * Continuous Real-time Data + Thousands of Devices + **Multiple Consumers**: $\rightarrow$ **Amazon Kinesis Data Streams**
+> * Decoupled Messaging + Single Consumer Processing / Buffering: $\rightarrow$ **Amazon SQS**
+> 
+> 
 
 27-September-2026
 
