@@ -337,6 +337,21 @@ Maan lijiye aap ke computer par ek 10 GB ki Video file hai:
 > 
 
 
+---
+---
+---
+
+<img width="1920" height="1080" alt="2018-12-10_10-50-47-8b7b5c45cd789db9c3d60d111ad22276" src="https://github.com/user-attachments/assets/d8fe79c4-1239-48c4-90bd-0b4e8b2e8610" />
+
+
+
+### SAA-C03 Core Concept 💡
+
+> * **Scale Out (Horizontal):** Add more instances $\rightarrow$ Decoupled Microservices, Auto Scaling, High Availability.
+> * **Scale Up (Vertical):** Change instance size $\rightarrow$ Monolithic databases, legacy apps with hardware limits.
+> 
+> 
+
 27-September-2026
 
 27-September-2026
