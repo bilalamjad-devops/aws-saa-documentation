@@ -202,6 +202,19 @@ Is question ka correct answer **Use path conditions to define rules that forward
 > 
 > 
 
+---
+---
+---
+---
+
+### Correct Option Explanation
+
+#### ✅ **Add 0.0.0.0/0 $\rightarrow$ Internet Gateway (IGW)**
+
+* **Public Subnet Definition:** Subnet tab hi "Public Subnet" banta hai jab uski Route Table mein **Default Route (`0.0.0.0/0`)** Internet Gateway (`igw-xxxxxx`) ki taraf pointed ho.
+* **Outbound/Inbound Internet Routing:** `0.0.0.0/0` (CIDR block representing all IPv4 addresses) add karne se EC2 instance Internet se traffic send aur receive kar sakta hai.
+
+---
 
 27-September-2026
 
