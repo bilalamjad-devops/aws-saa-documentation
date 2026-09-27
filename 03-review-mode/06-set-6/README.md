@@ -207,6 +207,10 @@ Is question ka correct answer **Use path conditions to define rules that forward
 ---
 ---
 
+
+<img width="732" height="361" alt="2018-01-29_10-12-42-b725ca3ed0b358d7a00e8b0fd1c1bc51" src="https://github.com/user-attachments/assets/f972f182-8ab6-488b-b45a-a4902e854724" />
+
+
 ### Correct Option Explanation
 
 #### ✅ **Add 0.0.0.0/0 $\rightarrow$ Internet Gateway (IGW)**
