@@ -1,4 +1,3 @@
-27-September-2026
 
 ---
 
@@ -75,4 +74,19 @@ Is jagah CPU metric kaam nahi karti. Isliye hum **SQS Queue ki Length (Size)** p
 ---
 ---
 ---
+
+
+<img width="1253" height="838" alt="amazon-rds-iam-db-authentication" src="https://github.com/user-attachments/assets/6b4a8ae0-82e5-490a-a267-5581b928bf72" />
+
+
+### SAA-C03 Exam Rule
+
+> **Database Authentication Rule:**
+> * Agar question mein **"Access Database using IAM Roles / EC2 Credentials instead of passwords"** poocha jaye, toh hamesha **IAM DB Authentication** choose karein.
+> 
+> 
+
+---
+
+27-September-2026
 
