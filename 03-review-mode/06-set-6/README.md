@@ -87,6 +87,32 @@ Is jagah CPU metric kaam nahi karti. Isliye hum **SQS Queue ki Length (Size)** p
 > 
 
 ---
+---
+---
+
+
+Aap ki baat boht sahi jagah se uthi hai — question ki pehli line mein likha hai: *"set up the required **compute resources**..."*
+
+Lekin AWS ki terminologies mein **"compute resources"** ek general (aam) word hai jo kisi bhi **EC2 Instance / Server** ke liye istemal hota hai.
+
+---
+
+
+
+---
+
+### Summary Rule
+
+> **"Compute Resources"** = EC2 Instance (General Term)
+> **"High Sequential Read/Write on Local Storage"** = Storage Optimized (Specific Requirement)
+
+Isliye yahan answer **Storage Optimized Instances** hi hoga!
+
+---
+
+Yeh point clear ho gaya ke 'compute resources' sirf EC2 ke liye general word tha? Question 14 par chalein?
+
+
 
 27-September-2026
 
