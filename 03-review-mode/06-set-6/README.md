@@ -298,6 +298,16 @@ Maan lijiye aap ke computer par ek 10 GB ki Video file hai:
 > 
 
 ---
+---
+---
+
+### SAA-C03 Load Balancer Selection Rule 💡
+
+> * **Layer 4 (TCP/UDP) + Ultra-low Latency + Millions of Requests/sec:** $\rightarrow$ **Network Load Balancer (NLB)**
+> * **Layer 7 (HTTP/HTTPS) + Path/Host Routing:** $\rightarrow$ **Application Load Balancer (ALB)**
+> 
+> 
+
 
 27-September-2026
 
