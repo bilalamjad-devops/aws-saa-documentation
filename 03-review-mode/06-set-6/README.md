@@ -419,6 +419,25 @@ Maan lijiye aap ki application par ek sath 10,000 log aaye. Application 10,000 a
 | **RDS Proxy** | Intermediate URL jo DB connections manage aur reuse karta hai. | Security Guard jo hall ke andar ek waqt mein limited logon ko baari-baari bhejta hai. |
 
 ---
+---
+---
+
+
+#### Yeh Kaise Kaam Karta Hai?
+
+* Normal routing hamesha **Primary Origin** par jati hai.
+* Agar Primary Origin down ho jaye, connection timeout ho jaye, ya **500, 502, 503, 504** error de, toh CloudFront user ko error dikhane ke bajaye **automatically Secondary Origin** se data fetch karke de deta hai.
+
+---
+
+### Summary 💡
+
+> * **Origin:** Jahan asal data pada hai (S3, EC2, ALB, On-Premises).
+> * **Origin Group:** 2 Origins ka pair (Primary + Backup) jo High Availability aur Automatic Failover ke liye use hota hai.
+> 
+> 
+
+---
 
 27-September-2026
 
