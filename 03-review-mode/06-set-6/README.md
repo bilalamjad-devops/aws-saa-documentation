@@ -219,6 +219,19 @@ Is question ka correct answer **Use path conditions to define rules that forward
 * **Outbound/Inbound Internet Routing:** `0.0.0.0/0` (CIDR block representing all IPv4 addresses) add karne se EC2 instance Internet se traffic send aur receive kar sakta hai.
 
 ---
+---
+---
+
+
+- `Use an AWS Storage File gateway with enough storage to keep data from the last 48 hours. Send the backups to an SMB share mounted as a local disk.`
+
+### SAA-C03 AWS Storage Gateway Cheat Sheet 💡
+
+> * **Amazon S3 File Gateway:** On-premises applications ke liye **NFS / SMB** file shares provide karta hai jo background mein S3 objects ban jate hain (local cache supported).
+> * **Volume Gateway:** On-premises servers ko **iSCSI block storage** volumes deta hai (Stored Volumes / Cached Volumes).
+> * **Tape Gateway:** On-premises physical tape backup infrastructure ko **virtual tape library (VTL)** se replace karta hai.
+> 
+> 
 
 27-September-2026
 
