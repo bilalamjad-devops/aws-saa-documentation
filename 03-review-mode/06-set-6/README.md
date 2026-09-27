@@ -286,6 +286,18 @@ Maan lijiye aap ke computer par ek 10 GB ki Video file hai:
 * **Aurora Clone:** Aap file ka ek **Shortcut (Pointer)** bana lete hain. Shortcut ek second mein ban jata hai. Agar aap shortcut file mein koi choti editing karte hain, toh sirf woh edit wala hissa alag se save hota hai.
 
 ---
+---
+---
+
+### SAA-C03 S3 Protection Rule 💡
+
+> **S3 Object Overwrite & Data Protection:**
+> * Accidental overwrites & deletes se bachne ke liye $\rightarrow$ **S3 Versioning**
+> * Completely immutable / WORM (Write Once Read Many) compliance ke liye $\rightarrow$ **S3 Object Lock**
+> 
+> 
+
+---
 
 27-September-2026
 
