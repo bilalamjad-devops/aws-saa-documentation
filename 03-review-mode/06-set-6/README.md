@@ -1098,6 +1098,46 @@ Is question ka correct answer **Amazon S3 Standard** hai.
 > 
 
 ---
+---
+---
+
+Is question ka correct answer **You should consider using AWS CloudHSM over AWS KMS if you require your keys stored in dedicated, third-party validated hardware security modules under your exclusive control.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Financial Firm Requirement:** Online credit card processing / payment compliance (e.g., PCI-DSS, FIPS 140-2 Level 3) ke liye highly secure key storage environment chahiye.
+2. **KMS vs CloudHSM Decision:** AWS KMS (Key Management Service) aur AWS CloudHSM ke darmiyan accurate conceptual distinction determine karni hai.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **AWS CloudHSM for Dedicated Control & Compliance**
+
+* **Dedicated Hardware (Single-Tenant):** AWS CloudHSM aap ko ek **dedicated hardware security module (HSM)** provide karta hai jo VPC ke andar hota hai aur strictly aap ke **exclusive control** mein hota hai (AWS admin bhi aap ke keys ko access ya manage nahi kar sakta).
+* **FIPS 140-2 Level 3 Compliance:** CloudHSM high compliance standards aur custom cryptographic algorithms / PKCS#11 APIs ke liye demand kiya jata hai.
+* Is liye jab **exclusive single-tenant control** aur third-party validated hardware required ho, toh CloudHSM ideal choice hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Option 1 (If you don't want to operate your own HSM, consider CloudHSM):** Yeh ulta likha hua hai. Agar aap HSM ko khud operate/manage nahi karna chahte, toh aap **AWS KMS** use karte hain (kyunke KMS fully managed service hai). CloudHSM mein aap ko HSM cluster khud admin/manage karna parta hai.
+* ❌ **Option 3 (CloudHSM should ALWAYS be used for payment transactions):** Always ka word galat hai. AWS KMS bhi PCI-DSS compliant hai aur boht si payment transactions ke liye happily use hota hai. CloudHSM sirf tab zaroori hota hai jab strict regulatory requirements exclusive hardware control demand karein.
+* ❌ **Option 4 (No major difference):** Dono mein boht bada farq hai (KMS multi-tenant / fully managed hai, jabke CloudHSM single-tenant / customer-managed dedicated hardware hai).
+
+---
+
+### SAA-C03 KMS vs CloudHSM Cheat Sheet 💡
+
+> * **AWS KMS:** Multi-tenant, Fully Managed, integrated with 100+ AWS services, easy to use, lower cost.
+> * **AWS CloudHSM:** Single-tenant (Dedicated Hardware), Customer-managed, FIPS 140-2 Level 3, supports PKCS#11 / JCE / CNG, higher cost.
+> 
+> 
+
+---
 
 28-September-2026
 
