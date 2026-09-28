@@ -1519,6 +1519,48 @@ Is question ka correct answer **Use Route 53 to distribute the load to the multi
 > 
 
 ---
+---
+---
+
+Is question ka correct answer **Use AWS Lambda and Amazon API Gateway.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Workload:** Virtual Reality (VR) aur Augmented Reality (AR) games ke **RESTful web APIs** hain jo pehle on-premises data center par chal rahe the.
+2. **Goal:** AWS Cloud par migrate hona hai taake system **scale out** kar sake aur **cost minimize** ho sake.
+3. **Key Constraint:** Solution **most cost-effective** aur **scalable** honi chahiye.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **AWS Lambda + Amazon API Gateway (Serverless Architecture)**
+
+* **Serverless Scalability:** Amazon API Gateway RESTful APIs ko host, manage, aur scale karta hai, jabke AWS Lambda backend code (business logic) ko compute karta hai.
+* **Auto Scaling:** Jab games par sudden traffic spike aata hai (thousands of requests per second), toh Serverless architecture automatically scale up ho jata hai bina kisi manual server management ke.
+* **Cost-Effective (Pay-per-Use):** Is mein servers 24/7 chalane ka kharcha nahi hota. Aap sirf utni requests aur execution time ke paise dete hain jitni API calls hoti hain. Agar raat ko game par zero traffic hai, toh **zero cost** hogi.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Option 2 (Amazon ECS + AWS Fargate):** Containers / Fargate microservices scalable hain, lekin Serverless (Lambda + API Gateway) ke muqabla mein in ka baseline running cost ziada hota hai kyunke tasks hamesha active rehte hain (even during low-traffic periods).
+* ❌ **Option 3 (Static S3 Bucket + CloudFront):** S3 static website hosting HTML, CSS, Images, aur JS files ke liye hoti hai. Yeh dynamic backend **RESTful APIs** aur database logic ko execute nahi kar sakti.
+* ❌ **Option 4 (EC2 Spot Fleet + EFA + ALB):** Spot Fleet cheaper zaroor hota hai, lekin EC2 instances 24/7 manage karna aur EFA (HPC inter-node network adapter) use karna simple RESTful APIs ke liye over-engineered hai aur Serverless se boht ziada costly parega.
+
+---
+
+### SAA-C03 Serverless REST APIs Cheat Sheet 💡
+
+> * **Scalable + Low Operational Overhead + Pay-Per-Request REST APIs:** $\rightarrow$ **Amazon API Gateway + AWS Lambda**
+> * **Static Web Hosting (HTML/CSS/JS):** $\rightarrow$ **Amazon S3 + Amazon CloudFront**
+> * **Containerized Application Hosting:** $\rightarrow$ **Amazon ECS / EKS with AWS Fargate**
+> 
+> 
+
+---
 
 28-September-2026
 
