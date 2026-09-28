@@ -1642,6 +1642,46 @@ Is question ka correct answer **Create Amazon Aurora Replicas.** hai.
 > 
 
 ---
+---
+---
+
+Is question ka correct answer **Application files are stored in S3. The server log files can also optionally be stored in S3 or in CloudWatch Logs.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Architecture:** Application AWS Elastic Beanstalk par deployed hai (Node.js application).
+2. **Core Requirement:** Elastic Beanstalk mein application source files aur server log files kahan store hoti hain?
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Application Files $\rightarrow$ S3 & Server Logs $\rightarrow$ S3 / CloudWatch Logs**
+
+* **Application Source Code:** Jab aap Elastic Beanstalk par apni application file (zip/code) upload karte hain, toh Elastic Beanstalk isay auto-created **Amazon S3 bucket** mein save karta hai.
+* **Server Log Files:** EC2 instances ke server logs by default local disks (EBS) par hote hain, lekin auto-scaling termination se data lose na ho, is liye Elastic Beanstalk mein feature hota hai ke logs ko **Amazon S3** par rotate/export kar sakein, ya **Amazon CloudWatch Logs** par real-time stream kar sakein.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **CloudTrail:** CloudTrail API audit logging ke liye hota hai (konse user/role ne AWS management console ya API se kya action perform kiya). Yeh application server runtime logs (e.g., Node.js / Nginx logs) store nahi karta.
+* ❌ **Only EBS Volumes:** Agar logs sirf EBS par rahenge, toh jab Auto Scaling Group kisi EC2 instance ko terminate karega, toh saare logs delete ho jayenge. Is liye S3 aur CloudWatch Logs support kiye jate hain.
+* ❌ **Glacier:** Elastic Beanstalk logs ko directly Glacier par upload nahi karta; logs pehle S3 mein jate hain aur wahan se Lifecycle Policy ke zariye Glacier par move kiye ja sakte hain.
+
+---
+
+### SAA-C03 Elastic Beanstalk Log Management Cheat Sheet 💡
+
+> * **Application Code / Versions:** Stored in **Amazon S3**.
+> * **Tail Logs / Bundle Logs:** Stored locally and can be published to **Amazon S3**.
+> * **Real-Time Streaming / Log Search:** Streamed directly to **Amazon CloudWatch Logs**.
+> 
+> 
+
+---
 
 
 
