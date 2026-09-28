@@ -876,6 +876,54 @@ Is question ka correct answer **The Resources section is missing.** hai.
 > 
 
 ---
+---
+---
+
+
+<img width="1067" height="748" alt="egress-only-gateway-saa-c02-aws" src="https://github.com/user-attachments/assets/77e0b653-05ee-441c-82f6-4bc2a6183664" />
+
+
+Is question ka correct answer **Egress-only Internet gateway** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **IPv6 Architecture:** EC2 instance private subnet mein hai aur **IPv6 address** use kar raha hai.
+2. **Outbound Internet Access Needed:** Instance ko internet se communicate karna hai (e.g., updates, mining data/traffic send karna).
+3. **Inbound Traffic Blocked:** Internet se koi bhi unauthorized user bahar se andar IPv6 ke zariye request/connect na kar sake.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Egress-Only Internet Gateway (IPv6 Specific)**
+
+* **IPv6 Equivalent of NAT Gateway:** AWS mein IPv6 addresses multi-AZ public globally routable hotay hain, lekin unhe private subnet mein secure rakhne ke liye **Egress-Only Internet Gateway** use hota hai.
+* **Functionality:** Yeh **outbound-only** traffic allow karta hai (instance internet par data bhej sakta hai), lekin internet se direct **inbound connections ko block** kar deta hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **NAT Gateway / NAT Instance:** NAT Gateways sirf **IPv4** traffic ke liye Address Translation karte hain. IPv6 ke liye NAT Gateway use nahi hota (kyunke IPv6 mein NAT ki zaroorat nahi hoti).
+* ❌ **Internet Gateway (IGW):** Standard IGW bi-directional hota hai (dono taraf se traffic allow karta hai — Inbound aur Outbound), jis se external internet users instance tak pahunch saken ge jo regulatory compliance ke khilaf hai.
+
+---
+
+### SAA-C03 VPC Gateways Cheat Sheet 💡
+
+> * **IPv4 Private Subnet Outbound Internet:** $\rightarrow$ **NAT Gateway** (or NAT Instance)
+> * **IPv6 Private Subnet Outbound Internet:** $\rightarrow$ **Egress-Only Internet Gateway**
+> * **Public Subnet Two-Way Internet:** $\rightarrow$ **Internet Gateway (IGW)**
+> 
+> 
+
+---
+
+
+28-September-2026
+
 
 
 27-September-2026
