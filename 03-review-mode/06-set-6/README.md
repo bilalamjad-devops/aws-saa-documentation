@@ -1020,6 +1020,19 @@ Global Accelerator ke andar aap har AWS Region ke liye ek **Endpoint Group** ban
 * **Multi-Region Support:** Easily routes traffic to ALBs in different AWS Regions.
 
 ---
+---
+---
+
+
+### Key Takeaway for SAA-C03 Exam 💡
+
+Exam mein jab bhi yeh keywords aayen:
+
+* *"Easy to deploy / Port web application"*
+* *"Focus on code, not infrastructure"*
+* *"Automatically handles load balancing, scaling, and provisioning"*
+
+Toh 90% chance hai ke sahi answer **AWS Elastic Beanstalk** hoga!
 
 28-September-2026
 
