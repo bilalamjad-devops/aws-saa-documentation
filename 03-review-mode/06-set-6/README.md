@@ -491,8 +491,25 @@ Is question aur answer ka plain Roman Urdu mein matlab yeh hai:
 
 > * **Direct HTTPS Webhook to Lambda (Simple / Low Overhead):** $\rightarrow$ **Lambda Function URL**
 > * **Advanced API Features (Rate Limiting, API Keys, Request Validation, Transformation):** $\rightarrow$ **Amazon API Gateway**
+
+
+---
+---
+---
+
+
+- `The failed Lambda functions have been running for over 15 minutes and reached the maximum execution time.`
+
+<img width="677" height="420" alt="2019-01-16_00-06-49-7fc593e456d2ce9edb7d49cf69d68e7e (1)" src="https://github.com/user-attachments/assets/dea280f9-026d-4666-a512-3897995a26bc" />
+
+### SAA-C03 AWS Lambda Execution Rule 💡
+
+> **AWS Lambda Timeout Rule:**
+> * Maximum Timeout Limit = **15 Minutes**.
+> * Agar task 15 minutes se zyaada ka ho $\rightarrow$ Use **AWS Step Functions**, **AWS Fargate (ECS)**, ya **AWS Batch**.
 > 
 > 
+
 
 27-September-2026
 
