@@ -720,7 +720,39 @@ Maan lijiye aap ke main servers US mein hain lekin aap ke customer Europe mein b
 > * **Maximum Configurable:** Up to 365 Days (1 Year) for an additional fee.
 > * *Fix for this scenario:* Stream Retention period ko 3 days (72 hours) ya is se ziada par extend karna padega.
 > 
+
+
+--- 
+--- 
+---
+
+- `Authenticate the users using Redis AUTH by creating a new Redis Cluster with both the --transit-encryption-enabled and --auth-token parameters enabled.`
+
+
+<img width="1284" height="816" alt="ElastiCache-Redis-Secure-Compliant-26March2026" src="https://github.com/user-attachments/assets/cf102f85-b97f-4909-9192-963f4b6d334d" />
+
+
+
+
+### Correct Option Explanation
+
+#### ✅ **Redis AUTH + Transit Encryption (--auth-token & --transit-encryption-enabled)**
+
+* **Redis AUTH:** Amazon ElastiCache for Redis mein password-based authentication feature ko **Redis AUTH** kehte hain. Is ke zariye commands execute karne se pehle authentication token (password) require hota hai.
+* **Transit Encryption Prerequisite:** ElastiCache Redis mein Redis AUTH (password protection) tabhi enable ho sakta hai jab **In-Transit Encryption (TLS/SSL)** bhi enabled ho (`--transit-encryption-enabled`).
+* Is liye password set karne ke liye `--auth-token` (password string) aur `--transit-encryption-enabled` dono flags ko new cluster create karte waqt enable karna hota hai.
+
+---
+
+
+### SAA-C03 ElastiCache Redis Security Cheat Sheet 💡
+
+> * **Password Authentication (Redis AUTH):** Requires **In-Transit Encryption** + `--auth-token`.
+> * **Role-Based Access Control (RBAC):** Users and user groups can be created using Redis 6.x+.
+> * **Data Protection at Rest:** Enabled via **KMS Customer Managed / AWS Managed Keys**.
 > 
+> 
+
 
 27-September-2026
 
