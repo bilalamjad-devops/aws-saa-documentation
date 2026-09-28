@@ -1220,6 +1220,31 @@ Kinesis ki capacity ko **Shard** kehte hain.
 > **Kinesis Slowdown / Throughput Exceeded Error** $\rightarrow$ **Increase Shard Count (Split Shards / UpdateShardCount)**.
 
 ---
+---
+---
+
+- `Create a role in IAM. Afterwards, assign this role to a new EC2 instance.`
+
+
+
+
+#### ✅ **IAM Role for EC2 Instance**
+
+* **No Hardcoded Credentials:** AWS ki **#1 Security Best Practice** yeh hai ke kabhi bhi API keys ko code, EC2 storage, ya config files mein store na kiya jaye.
+* **Temporary Security Credentials:** Jab aap ek **IAM Role** banate hain (jis mein S3 write permissions hon) aur usay **EC2 instance profile** ke zariye EC2 par attach karte hain, toh EC2 Instance Metadata Service (IMDS) automatically temporary, rotating credentials application ko provide kar deti hai.
+* Is se security vulnerabilities khatam ho jati hain aur keys rotate karne ka koi manual overhead nahi hota.
+
+---
+
+
+### SAA-C03 Security & IAM Best Practices Cheat Sheet 💡
+
+> * **EC2 to AWS Services (S3, DynamoDB, etc.):** Always use **IAM Roles** (Instance Profiles). Never hardcode API Keys.
+> * **Cross-Account Access:** Use **IAM Roles** with `AssumeRole`.
+> * **Lambda to AWS Services:** Use **Lambda Execution Role**.
+> 
+> 
+
 
 28-September-2026
 
