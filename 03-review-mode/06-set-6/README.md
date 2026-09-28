@@ -920,6 +920,57 @@ Is question ka correct answer **Egress-only Internet gateway** hai.
 > 
 
 ---
+---
+---
+
+
+
+
+<img width="1585" height="488" alt="AWS-Aurora-CRRR" src="https://github.com/user-attachments/assets/723d2aa4-670e-4b95-b371-69ad42a6baa9" />
+
+
+
+Is question ka correct answer **Migrate the existing database to Amazon Aurora and create a cross-region read replica.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Current Setup:** Amazon RDS for MySQL Multi-AZ deployment multi-region architecture ke sath setup hai.
+2. **Issue:** Secondary AWS Region se read performance boht slow hai kyunke cross-region database read latency ka samna hai.
+3. **Requirement:** Cross-region read replication latency **less than 1 second** achieve karni hai.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Amazon Aurora + Cross-Region Read Replica**
+
+* **Ultra-Fast Engine:** Amazon Aurora ek cloud-native relational database engine hai jo MySQL/PostgreSQL-compatible hai.
+* **Low Replication Latency:** Amazon Aurora ka dedicated storage engine distributed cloud storage network use karta hai. Is waja se Aurora Cross-Region Read Replicas ki replication latency typical cases mein **less than 1 second** hoti hai (aksar sub-second ya millisecond level par).
+* Is liye Aurora par migrate karke Cross-Region Read Replica create karna sub-second cross-region read latency dene ka sab se reliable solution hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Option 2 (RDS MySQL Read Replica in Secondary Region):** Standard Amazon RDS MySQL cross-region read replication asynchronous replication mechanism par kaam karti hai. Is mein network delay aur heavy write/read activity ki waja se **replication lag / latency 1 second se ziada** (kabhi kabhi minutes tak) ho sakti hai.
+* ❌ **Option 3 (Upgrade MySQL Engine Version):** Standard MySQL engine version upgrade karne se cross-region storage replication architecture badal nahi jata, is liye sub-second latency guarantee nahi hoti.
+* ❌ **Option 4 (Use Amazon ElastiCache):** ElastiCache in-memory cache hai jo read latency kam karta hai, LEKIN yeh *read replication latency* (jo do regions ke beech database sync ka time hai) ko control ya sub-second nahi kar sakta.
+
+---
+
+### SAA-C03 Database Replication Latency Cheat Sheet 💡
+
+> * **Amazon RDS Cross-Region Replication Latency:** Asynchronous; minutes/seconds tak lag ho sakta hai.
+> * **Amazon Aurora Cross-Region Read Replica Latency:** Storage-level optimized; **Typically < 1 second (sub-second)**.
+> * **Amazon Aurora Global Database Replication Latency:** **< 1 second (typically < 100 ms)**.
+> 
+> 
+
+---
+
+28-September-2026
 
 
 28-September-2026
