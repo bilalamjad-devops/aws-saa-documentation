@@ -1276,6 +1276,52 @@ Aayein is question ko S3 ki technical zabān chhor kar ek **real-life dukaan (sh
 
 Aap chahein toh **5-10 minute ka chhota sa break** le lein, pani peelein ya thoda walk kar lein. Dimag refresh ho jaye ga toh hum relax ho kar aage chalein ge!
 
+
+---
+
+Is question ke correct **TWO** options:
+
+* **Download the Amazon RDS Root CA certificate. Import the certificate to your servers and configure your application to use SSL to encrypt the connection to RDS.**
+* **Force all connections to your DB instance to use SSL by setting the `rds.force_ssl` parameter to true. Once done, reboot your DB instance.**
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Architecture:** Auto Scaling group EC2 instances par application chal rahi hai jo Amazon RDS (Microsoft SQL Server) ke sath communicate karti hai.
+2. **Core Requirement:** EC2 web servers aur RDS database ke darmiyan **in-flight data (transit status encryption)** ko secure/encrypt karna hai.
+
+---
+
+### Correct Options Explanation
+
+#### ✅ **1. Download RDS Root CA Certificate & Configure App for SSL**
+
+* **Server Verification & Encryption:** RDS aur EC2 ke darmiyan secure SSL/TLS connection establish karne ke liye application server ke paas **AWS RDS Root CA certificate** hona chahiye.
+* Is certificate ko import karke application ko SSL mode mein Database connection open karne ke liye configure kiya jata hai.
+
+#### ✅ **2. Force SSL on RDS (`rds.force_ssl = true`)**
+
+* **Enforce Encryption:** Parameter group mein `rds.force_ssl` ko `true` set karne se RDS database strict ho jata hai — yeh kisi bhi unencrypted (plain text) connection request ko accept nahi karta aur **SSL connection ko mandatory/force** kar deta hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Port 443 in Security Groups:** Microsoft SQL Server ka default database port **1433** hota hai (HTTPS ka 443 hota hai). Port 443 allow karne se DB connectivity hi toot jaye gi, aur yeh in-flight data ko encrypt nahi karta.
+* ❌ **Transparent Data Encryption (TDE):** TDE **data-at-rest encryption** ke liye hota hai (disk par stored files ko encrypt karne ke liye). Question mein **in-flight data (in-transit encryption)** poocha gaya hai.
+* ❌ **IAM DB Authentication:** IAM DB auth user login management / authentication token ke liye hota hai, direct network traffic SSL encryption ke liye nahi.
+
+---
+
+### SAA-C03 Data Encryption Cheat Sheet 💡
+
+> * **In-Flight Data Encryption (In-Transit):** Use **SSL/TLS Certificates** (`rds.force_ssl = true`).
+> * **At-Rest Data Encryption (On Disk):** Use **KMS Keys** or **TDE (Transparent Data Encryption)**.
+> 
+> 
+
+---
 28-September-2026
 
 28-September-2026
