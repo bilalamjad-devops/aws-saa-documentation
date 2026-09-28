@@ -1044,6 +1044,19 @@ Toh 90% chance hai ke sahi answer **AWS Elastic Beanstalk** hoga!
 * **`Cache-Control: max-age=0`:** Caching ko completely bypass/disabled kar deta hai $\rightarrow$ Har request direct origin server par jati hai.
 
 ---
+---
+---
+
+
+### SAA-C03 AI/ML Services Cheat Sheet 💡
+
+> * **Conversational Chatbot (Voice & Text):** $\rightarrow$ **Amazon Lex**
+> * **Text-to-Speech (Read out text as speech):** $\rightarrow$ **Amazon Polly**
+> * **Speech-to-Text (Transcribe audio to text):** $\rightarrow$ **Amazon Transcribe**
+> * **Text Analysis / Sentiment Detection:** $\rightarrow$ **Amazon Comprehend**
+> * **Image & Video Analysis:** $\rightarrow$ **Amazon Rekognition**
+> 
+> 
 
 28-September-2026
 
