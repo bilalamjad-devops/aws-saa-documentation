@@ -1034,6 +1034,17 @@ Exam mein jab bhi yeh keywords aayen:
 
 Toh 90% chance hai ke sahi answer **AWS Elastic Beanstalk** hoga!
 
+---
+---
+---
+
+### Summary Cheat Sheet 💡
+
+* **CloudFront Edge Caching:** Tabhi hoti hai jab origin se allow ho.
+* **`Cache-Control: max-age=0`:** Caching ko completely bypass/disabled kar deta hai $\rightarrow$ Har request direct origin server par jati hai.
+
+---
+
 28-September-2026
 
 28-September-2026
