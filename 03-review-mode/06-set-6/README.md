@@ -1475,6 +1475,50 @@ Is question ka correct answer **Amazon FSx for Lustre** hai.
 > 
 
 ---
+---
+---
+
+
+Is question ka correct answer **Use Route 53 to distribute the load to the multiple EC2 instances across all AWS Regions.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Architecture:** Web application multiple AWS Regions (US East, US West, EU Ireland) mein EC2 instances par running hai.
+2. **Goal:** Incoming web traffic (`[www.tutorialsdojo.com](https://www.tutorialsdojo.com)`) ko user ke sab se kareebi (lowest network latency) region ke EC2 instance par route karna hai.
+3. **Key Technique:** **Latency-based Routing Policy** apply karni hai across multiple regions.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Amazon Route 53 (DNS Management)**
+
+* **Global DNS Service:** Route 53 AWS ki highly available DNS (Domain Name System) service hai jo cross-region traffic routing handle karti hai.
+* **Latency Routing Policy:** Route 53 Latency-based Routing Policy use karke user ki request ko us AWS Region mein redirect karti hai jo us end-user ke liye lowest network latency provide kare.
+* **Cross-Region Capabilities:** Load Balancers (ALB/NLB) single region level par traffic distribute karte hain, jabke DNS level (Route 53) par aap global multi-region endpoints set kar sakte hain.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Application Load Balancer (ALB):** ALB **Regional** service hai. Yeh ek region ke multiple AZs mein target groups ko traffic distribute kar sakta hai, lekin multi-region DNS latency routing directly perform nahi karta (jab tak Global Accelerator ya Route 53 sath na use ho).
+* ❌ **Network Load Balancer (NLB):** NLB bhi **Regional** service hai jo Layer 4 (TCP/UDP) traffic handle karti hai, cross-region DNS routing ke liye nahi.
+* ❌ **AWS DataSync:** DataSync storage migration service hai jo S3, EFS, ya On-premises storage ke darmiyan data transfer/copy karti hai. Is ka network traffic routing se koi lena dena nahi.
+
+---
+
+### SAA-C03 Multi-Region Traffic Routing Cheat Sheet 💡
+
+> * **Cross-Region DNS Routing (Latency / Geolocation / Failover):** $\rightarrow$ **Amazon Route 53**
+> * **Cross-Region Network Performance / Fixed Anycast IPs:** $\rightarrow$ **AWS Global Accelerator**
+> * **In-Region HTTP/HTTPS Load Balancing (Layer 7):** $\rightarrow$ **Application Load Balancer (ALB)**
+> * **In-Region Extreme Performance / TCP/UDP Load Balancing (Layer 4):** $\rightarrow$ **Network Load Balancer (NLB)**
+> 
+> 
+
+---
 
 28-September-2026
 
