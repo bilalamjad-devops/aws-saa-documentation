@@ -692,6 +692,33 @@ Maan lijiye aap ke main servers US mein hain lekin aap ke customer Europe mein b
 > * **Security Log Analysis & Root Cause Investigation:** $\rightarrow$ **Amazon Detective**
 > * **Compliance Assessment & Audits:** $\rightarrow$ **AWS Audit Manager**
 > * **Threat Detection (Malware, Anomalies):** $\rightarrow$ **Amazon GuardDuty**
+
+
+---
+---
+---
+
+
+- `By default, data records in Kinesis are only accessible for 24 hours from the time they are added to a stream.`
+
+
+
+### Correct Option Explanation
+
+#### ✅ **Kinesis Data Retention Period Limit**
+
+* **Default Retention Period:** Amazon Kinesis Data Streams ka default data retention period **24 hours (1 day)** hota hai.
+* Agar aap data ko 24 hours ke andar process karke S3 par dump nahi karenge, toh 24 ghante purana data stream se **automatically expire/delete** ho jata hai.
+* Isi liye jab 3rd day par batch run hua, toh Kinesis mein sirf aakhri 24 hours ka data hi bacha hua tha jo S3 mein chala gaya.
+
+---
+
+### SAA-C03 Kinesis Retention Rule 💡
+
+> **Amazon Kinesis Data Streams Retention:**
+> * **Default:** 24 Hours.
+> * **Maximum Configurable:** Up to 365 Days (1 Year) for an additional fee.
+> * *Fix for this scenario:* Stream Retention period ko 3 days (72 hours) ya is se ziada par extend karna padega.
 > 
 > 
 
