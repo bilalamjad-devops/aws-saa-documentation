@@ -1056,7 +1056,48 @@ Toh 90% chance hai ke sahi answer **AWS Elastic Beanstalk** hoga!
 > * **Text Analysis / Sentiment Detection:** $\rightarrow$ **Amazon Comprehend**
 > * **Image & Video Analysis:** $\rightarrow$ **Amazon Rekognition**
 > 
+
+---
+---
+---
+
+Is question ka correct answer **Amazon S3 Standard** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Storage Purpose:** Log files ko **temporarily (ziyada se ziyada 12 ghante)** store karna hai.
+2. **Key Metric:** Cost-effectiveness (Sab se kam kharch) compute karni hai is **short duration (12 hours)** ke liye.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Amazon S3 Standard**
+
+* **No Minimum Retention Period:** S3 Standard mein data storage duration par koi minimum constraint ya penalty charge nahi hota. Agar aap data **12 hours** rakh kar delete kar dete hain, toh aap se sirf unhi 12 ghanton ke proration ki billing li jaye gi.
+* Is waja se 12 hours jaise temporary log storage ke liye **S3 Standard sab se cost-effective** hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Amazon S3 Glacier Deep Archive:** Is class mein **180 days ka minimum storage duration charge** hota hai. Agar aap 12 ghante baad file delete bhi kar dein, tab bhi AWS aap se poore 180 dino ka storage bill charge karega! Is ke ilawa is mein instant retrieval bhi nahi hoti (retrieval takes 12–48 hours).
+* ❌ **Amazon S3 Standard-IA & One Zone-IA:** Infrequent Access storage classes mein **30 days ka minimum storage duration charge** hota hai. 12 ghante ke baad delete karne par bhi poore 30 dino ka bill bharna padega, jo boht costly paray ga.
+
+---
+
+### SAA-C03 S3 Storage Classes Minimum Retention Cheat Sheet 💡
+
+> * **S3 Standard:** **No minimum retention period** (Ideal for temporary / < 30 days data).
+> * **S3 Standard-IA & One Zone-IA:** **30 days minimum** retention charge.
+> * **S3 Glacier Flexible Retrieval:** **90 days minimum** retention charge.
+> * **S3 Glacier Deep Archive:** **180 days minimum** retention charge.
 > 
+> 
+
+---
 
 28-September-2026
 
