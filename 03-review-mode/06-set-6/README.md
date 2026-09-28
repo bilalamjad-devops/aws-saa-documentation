@@ -1328,6 +1328,54 @@ Is question ke correct **TWO** options:
 > 
 
 ---
+---
+---
+
+
+
+<img width="341" height="377" alt="s3_multipart_upload" src="https://github.com/user-attachments/assets/8854447e-a3f1-4e18-8a8f-d5a554feec57" />
+
+
+Is question ka correct answer **Use S3 Multipart Upload API.** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Workload:** Film studio EC2 instance se Amazon S3 bucket mein **5 GB ki bari video files** upload kar raha hai.
+2. **Issue:** Single file upload boht ziada time le raha hai, jis se application performance affect ho rahi hai.
+3. **Goal:** S3 par bari files (5 GB) ki upload speed/performance ko improve karna hai.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **S3 Multipart Upload API**
+
+* **Parallel Uploads:** S3 Multipart Upload API bari files (100 MB se upar, aur 5 GB tak) ko chote chote parts (chunks) mein divide karke **parallelly upload** karti hai.
+* **Throughput Optimization:** Multiple threads ek sath upload hone ki waja se network throughput maximize ho jata hai aur overall upload time boht kam ho jata hai.
+* **Resiliency:** Agar 5 GB file ka ek 100 MB part fail bhi ho jaye, toh poori 5 GB file dubara upload nahi karni parhti — sirf wo specific failed part retry hota hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Enhanced Networking (ENA) on EC2:** ENA EC2 instances ke darmiyan high packets-per-second (PPS) network throughput ke liye hota hai. Yeh S3 API network upload protocol bottlenecks ko solve nahi karta.
+* ❌ **Amazon CloudFront HTTP POST:** CloudFront static/dynamic content **download latency** kam karne ke liye hota hai. Bari 5 GB direct file uploads ke liye CloudFront POST edge network ki bajaye **S3 Transfer Acceleration** (jo backend par multipart upload use karta hai) better hota hai, lekin standard solution **S3 Multipart Upload** hai.
+* ❌ **EBS Provisioned IOPS with LVM Stripe:** EBS disk storage solution hai, S3 cloud storage upload throughput nahi.
+
+---
+
+### SAA-C03 S3 Upload Optimization Cheat Sheet 💡
+
+> * **Files > 100 MB (Recommended) / Files > 5 GB (Mandatory):** Use **S3 Multipart Upload**.
+> * **Long-Distance / Cross-Border High Speed Uploads:** Use **S3 Transfer Acceleration** (uses CloudFront Edge Locations + Multipart Upload).
+> 
+> 
+
+---
+
+28-September-2026
 
 
 28-September-2026
