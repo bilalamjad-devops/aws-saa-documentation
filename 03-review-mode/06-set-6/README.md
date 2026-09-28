@@ -750,6 +750,24 @@ Maan lijiye aap ke main servers US mein hain lekin aap ke customer Europe mein b
 > * **Password Authentication (Redis AUTH):** Requires **In-Transit Encryption** + `--auth-token`.
 > * **Role-Based Access Control (RBAC):** Users and user groups can be created using Redis 6.x+.
 > * **Data Protection at Rest:** Enabled via **KMS Customer Managed / AWS Managed Keys**.
+
+
+---
+---
+---
+
+- `Launch an Amazon Elastic File System (Amazon EFS) with Provisioned Throughput mode and set the performance mode to Max I/O. Configure the EFS file system as the container mount point in the ECS task definition of the ECS cluster.`
+
+
+<img width="1432" height="1135" alt="Amazon+EFS+-+Performance+and+Throughput+mode+-+SAA-C02 (1)" src="https://github.com/user-attachments/assets/d2cf95b1-382b-4abf-9415-1d20f8ed05c3" />
+
+
+
+### SAA-C03 EFS Performance Modes Cheat Sheet 💡
+
+> * **General Purpose Mode:** Default mode for web servers, CMS, and general dev environments (low latency per I/O).
+> * **Max I/O Mode:** High-Performance Computing (HPC), Big Data, and massive parallel container workloads (higher I/O throughput across hundreds of clients).
+> * **Provisioned Throughput:** When application needs high throughput regardless of storage volume size.
 > 
 > 
 
