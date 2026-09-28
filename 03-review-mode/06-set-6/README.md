@@ -1432,6 +1432,49 @@ Is question ke correct **TWO** options hain:
 > 
 
 ---
+---
+---
+
+
+Is question ka correct answer **Amazon FSx for Lustre** hai.
+
+---
+
+### Scenario Breakdown & Key Requirements
+
+1. **Workload:** High Performance Computing (HPC) cluster setup karna hai.
+2. **File System Requirement:** Fast, scalable, high-performance **POSIX-compliant** file system interface chahiye.
+3. **Key Integration Requirement:** **Amazon S3 ke sath natively work kare**, taake S3 ke data ko directly aur fast process kiya ja sake.
+
+---
+
+### Correct Option Explanation
+
+#### ✅ **Amazon FSx for Lustre**
+
+* **HPC & Big Data Specialized:** FSx for Lustre sub-millisecond latencies, millions of IOPS, aur hundreds of GB/s throughput provide karta hai jo High Performance Computing (HPC), machine learning, aur financial modeling ke liye built-in optimized hota hai.
+* **Native S3 Integration:** Yeh S3 buckets ke sath direct, seamless integration support karta hai. Aap FSx for Lustre file system ko S3 bucket se link kar sakte hain — yeh S3 se data read karta hai, HPC compute node par fast processing karta hai, aur results wapas S3 mein write back kar deta hai.
+
+---
+
+### Incorrect Options Breakdown (Elimination)
+
+* ❌ **Amazon Elastic File System (EFS):** EFS ek general-purpose POSIX file system hai (e.g., web hosting, content management). Yeh HPC-level massive parallel throughput demand meet nahi karta aur S3 ke sath direct native data linking feature EFS mein nahi hota.
+* ❌ **Amazon EBS:** EBS block-level storage hai jo ek waqt mein EC2 instances par mount hoti hai, yeh multi-node HPC scalable shared file system nahi hai.
+* ❌ **Amazon FSx for Windows File Server:** Yeh Windows-based workloads (SMB protocol, Active Directory) ke liye hota hai, Linux HPC/POSIX workloads ke liye nahi.
+
+---
+
+### SAA-C03 AWS File Systems Cheat Sheet 💡
+
+> * **HPC + Fast Parallel Storage + Native S3 Integration:** $\rightarrow$ **Amazon FSx for Lustre**
+> * **Linux Shared File Storage (NFS/POSIX) for General Workloads:** $\rightarrow$ **Amazon EFS**
+> * **Windows SMB Shared File Storage / Active Directory:** $\rightarrow$ **Amazon FSx for Windows File Server**
+> * **Enterprise NetApp ONTAP Migration:** $\rightarrow$ **Amazon FSx for NetApp ONTAP**
+> 
+> 
+
+---
 
 28-September-2026
 
