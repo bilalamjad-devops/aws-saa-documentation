@@ -1278,6 +1278,12 @@ Aap chahein toh **5-10 minute ka chhota sa break** le lein, pani peelein ya thod
 
 
 ---
+---
+---
+
+<img width="1070" height="236" alt="rds_sql_ssl_cert (2)" src="https://github.com/user-attachments/assets/8defe1da-0dd7-410b-8536-d0c266d7bfc0" />
+
+
 
 Is question ke correct **TWO** options:
 
@@ -1322,6 +1328,8 @@ Is question ke correct **TWO** options:
 > 
 
 ---
+
+
 28-September-2026
 
 28-September-2026
