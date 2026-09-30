@@ -267,6 +267,68 @@ Security policy ke mutabiq database credentials ko **environment variables** ke 
 
 > **Exam Tip:** ECS / Fargate container ko environment variables ke zariye secure credentials pass karne ke do hi standard tarike hote hain: **AWS Secrets Manager** ya **SSM Parameter Store**. ECS Task Definition ke `secrets` array mein Parameter Store/Secrets Manager ka ARN de diya jata hai.
 
+
+---
+---
+---
+---
+---
+
+
+
+<img width="619" height="375" alt="ManagedPrefixList" src="https://github.com/user-attachments/assets/a1345a05-5d6f-4069-8122-e457cd7103df" />
+
+
+<img width="611" height="401" alt="ResourceShares" src="https://github.com/user-attachments/assets/f127c73a-aa92-433b-b94a-75c018f38c42" />
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+AWS Organizations ke zariye multiple AWS accounts ko manage kiya ja raha hai. Global office locations ke IP ranges (CIDR blocks) change hotay rehte hain (naye add hote hain, purane remove hote hain). Sabhi AWS accounts mein **security group rules ko centrally manage aur update** karna hai.
+
+Requirement: **MOST cost-effective** (sab se sasta aur efficient) design konsa hai?
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1 (Customer-Managed Prefix List + AWS RAM):**
+* **Sahi (Correct):**
+* **Prefix List** mein aap multiple CIDR blocks (IP ranges) ko ek jagah group kar ke name de dete hain.
+* **AWS RAM (Resource Access Manager)** ke zariye aap is Prefix List ko apni poori AWS Organization ya doosre accounts ke sath share kar dete hain.
+* Security Groups mein individual IP addresses ke bajaye **Prefix List ID** add kar di jati hai.
+* Jab bhi kisi office ka IP badalta hai, aap sirf **ek bar Central Prefix List update karte hain**, aur sabhi accounts ke Security Groups mein automatically rules update ho jaate hain.
+* **Cost:** AWS VPC Prefix Lists aur AWS RAM dono **100% FREE** services hain!
+
+
+
+
+2. **Option 2 (AWS Firewall Manager):**
+* **Galat:** Firewall Manager central security groups policy create kar sakta hai, lekin yeh ek **paid service** hai ($100 per policy per month + AWS WAF/Shield costs). Question ne *MOST cost-effective* solution poocha hai, is liye yeh pehla option nahi hai.
+
+
+3. **Option 3 (AWS-managed prefix list + Security Hub + Lambda):**
+* **Galat:** *AWS-managed prefix lists* ko user khud edit nahi kar sakta (woh AWS internal services ke liye hoti hain, jaise S3/DynamoDB prefix lists). Custom IP ranges ke liye *Customer-managed prefix list* banani padti hai. Unnecessary Lambda + EventBridge automation overhead bhi add kar raha hai.
+
+
+4. **Option 4 (Route 53 ARC + Zonal Shift):**
+* **Galat:** Route 53 Application Recovery Controller (ARC) disaster recovery, failover, aur traffic routing control ke liye hota hai. Yeh Security Groups ke CIDR rules ko update ya manage karne ke liye bilkul use nahi hota.
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 1:** **Provision a VPC customer-managed prefix list using the AWS CLI or the Amazon VPC console and add the CIDR blocks to be included in the list. Share the prefix list ID to other AWS accounts using the AWS RAM (Resource Access Manager) API, or the AWS RAM Console. Add the prefix list to the security groups used across the organization.**
+
+> **Exam Tip:** Jab bhi multi-account structure mein **IP/CIDR ranges ko centralize aur reusable** banana ho wo bhi **free/cost-effective** tarike se, combo hamesha **Customer-Managed Prefix List + AWS RAM** hota hai!
+
+
+
 30-September-2026
 
 28-September-2026
