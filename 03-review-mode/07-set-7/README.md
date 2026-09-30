@@ -379,9 +379,59 @@ Migration shuru karne se pehle management ki **do key requirements** hain:
 > **Exam Tip:**
 > * **On-premises server inventory & dependency mapping** = **AWS Application Discovery Service**
 > * **Single dashboard for tracking overall migration progress** = **AWS Migration Hub**
+
+
+
+----
+----
+----
+
+
+<img width="1055" height="712" alt="amazon-s3-object-logging" src="https://github.com/user-attachments/assets/08d63b33-2c44-4ee9-966e-8e0272642654" />
+
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+S3 buckets par aane waali **har access request ko log aur track** karna hai. Specific detailed fields chahiye: requester, bucket name, request time, request action, referrer, turnaround time, aur error code. Is ke sath bucket ki **object-level operations par visibility** bhi chahiye.
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1 (AWS CloudTrail for S3 Data Events):**
+* **Important Context:** CloudTrail S3 Data Events object-level operations (PUT, GET, DELETE) record karta hai, lekin *turnaround time* ya HTTP *referrer* jaise detailed web server metrics CloudTrail ke standard logs mein nahi hotay.
+
+
+2. **Option 2 (S3 Event Notifications for PUT/POST):**
+* **Galat:** Event Notifications sirf Lambda, SQS, ya SNS ko alert bhejte hain jab koi new object upload ho. Yeh access audit logging system nahi hai aur GET requests ko capture nahi karta.
+
+
+3. **Option 3 (Enable server access logging for all required S3 buckets):**
+* **Sahi (Correct):** **Amazon S3 Server Access Logging** direct S3 bucket ke web server logs capture karta hai. Yeh har ek request ki completely detailed information provide karta hai, jisme **requester, bucket name, request time, request action (GET/PUT), referrer, turnaround time, HTTP status, aur error codes** shaamil hotay hain. Complex detailed reporting aur object-level web access analytics ke liye yeh primary built-in feature hai.
+
+
+4. **Option 4 (Requester Pays option):**
+* **Galat:** Requester Pays ka maqsad access tracking/logging nahi balki S3 data transfer aur requests ka bill download karne waale (requester) par daalna hota hai.
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 3:** **Enable server access logging for all required Amazon S3 buckets.**
+
+> **Exam Tip:**
+> * Agar question mein specifically **turnaround time**, **HTTP referrer**, aur **detailed request/error codes** ki exact web server fields mention hon, toh answer **S3 Server Access Logging** hota hai.
+> * Agar question mein general **API auditing, compliance, aur security governance** mention ho, toh answer **AWS CloudTrail (Data Events)** hota hai.
 > 
 >
 
+30-September-2026
 
 30-September-2026
 
