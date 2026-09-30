@@ -117,4 +117,55 @@ Aapko Redshift Cluster par hone waali tamam **API calls (kisi ne cluster delete 
 ---
 
 
+
+<img width="1765" height="1004" alt="amazon_macie_managed_data_identifiers" src="https://github.com/user-attachments/assets/8885a982-0db3-4cc1-80fe-fab421bc62c4" />
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+Consulting firm ko apne Amazon S3 bucket (jo AWS Lake Formation data lake ke sath connect hai) mein se **Personally Identifiable Information (PII)** — jaise passport numbers, credit card numbers, aur taxpayer IDs — ko dhundna (discover karna) hai taake sensitive data lake mein na chala jaye.
+
+Requirement: Sab se **operationally effective** (sab se kam mehnat/fully automated) solution kya hai?
+
+---
+
+### Options Ka Breakdown:
+
+1. **AWS Glue DataBrew:**
+* **Galat:** DataBrew ek visual data preparation tool hai jo data ko clean aur transform (normalize) karne ke liye use hota hai. Yeh automated PII scanning aur discovery ke liye dedicated security service nahi hai.
+
+
+2. **AWS Audit Manager (PCI DSS auditing):**
+* **Galat:** Audit Manager compliance framework controls aur evidence collection ko automate karta hai. Yeh S3 bucket ke andar majood actual file contents/data ko scan karke credit card ya passport numbers extract nahi karta.
+
+
+3. **Amazon S3 Inventory + Amazon Athena:**
+* **Galat:** S3 Inventory aur Athena se aap S3 bucket ki metadata/objects ki list, file size, ya encryption status par SQL queries chala sakte hain. Yeh file ke andar ka text/data scan karke PII detect nahi kar sakte.
+
+
+4. **Amazon Macie (Managed Identifiers ke sath):**
+* **Sahi (Correct):** Amazon Macie ek fully-managed data security aur data privacy service hai jo **Machine Learning** aur **Pattern Matching** use karke S3 buckets ko automatically scan karti hai. Iske built-in **Managed Data Identifiers** sensitive data jaise PII (Passports, SSN, Credit Cards, Financial records) ko instantly discover aur flag kar dete hain.
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 4:** **Utilize Amazon Macie to perform a comprehensive data discovery operation using managed identifiers to detect various data types.**
+
+> **Exam Tip:** Jab bhi question mein **"Amazon S3"** + **"PII / Sensitive Data / Credit Cards / Passports"** ko discover/scan karne ki baat ho, toh 100% answer **Amazon Macie** hi hota hai!
+
+
+30-September-2026
+
+----
+----
+----
+----
+
+
 28-September-2026
