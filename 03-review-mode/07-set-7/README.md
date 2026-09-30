@@ -682,6 +682,64 @@ Requirement: **MOST cost-effective** (sab se sasta) aur efficient tarika konsa h
 > * **50 TB - 100 TB Large Data Transfer + Limited Bandwidth** = **AWS Snowball / Physical Appliance**
 > * **Petabytes (PB) Data** = **AWS Snowmobile / Snowball Edge**
 > * **Direct Connect** tab use hota hai jab **continuous / ongoing high-bandwidth requirement** ho, *one-time migration* ke liye nahi.
+
+
+
+---
+---
+---
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+Ek manufacturing company IoT sensor data ko real-time mein analyze karke process faults detect karna chahti hai.
+
+**Key Requirements:**
+
+1. **Source:** Sensor data Amazon API Gateway REST API par aata hai.
+2. **Real-time Processing:** Data par fauran anomaly detection honi chahiye.
+3. **Strict Ordering (Critical Requirement):** Data **usi sequence (order) mein process hona chahiye jis sequence mein wo bheja gaya tha**.
+4. **Most operationally efficient solution:** Minimal management overhead aur continuous ordered streaming.
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1 (API Gateway -> Kinesis Data Stream -> AWS Lambda):**
+* **Sahi (Correct):**
+* **Amazon Kinesis Data Streams** real-time streaming data ke liye design kiya gaya hai.
+* Kinesis ke andar har *Shard* data ki **strict ordering guarantee (FIFO order)** karta hai based on Partition Key (e.g., Sensor ID).
+* API Gateway direct Kinesis Data Stream se integrate ho sakta hai (bina compute layer ke). Lambda function Kinesis stream se batches read karke ordered sequence mein real-time anomaly detection perform kar sakta hai.
+
+
+
+
+2. **Option 2 (API Gateway Authorizer for ordering):**
+* **Galat:** API Gateway Authorizer (Lambda ya Cognito) sirf authentication aur authorization (access control) ke liye hota hai. Yeh data stream ki ordering ya real-time sequence processing manage nahi karta.
+
+
+3. **Option 3 (Store in S3 -> S3 Event Notification -> Lambda):**
+* **Galat:** S3 Event Notifications asynchronous hotay hain aur ordered event execution/processing guarantee nahi karte. S3 micro-batch real-time streaming ke liye suitable nahi hai.
+
+
+4. **Option 4 (Standard Amazon SQS queue -> Lambda):**
+* **Galat:** **Standard SQS queue** Best-Effort Ordering provide karti hai — yani isme messages out-of-order process ho sakte hain. Ordered processing ke liye SQS FIFO ki zaroorat hoti hai. Standard SQS se strict sequence requirement fail ho jayegi.
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 1:** **Utilize an API Gateway integration to send incoming data to an Amazon Kinesis Data Stream. Attach an AWS Lambda function to the Kinesis stream to process the data.**
+
+> **Exam Tip:**
+> * **Real-time Streaming + Strict Ordering (Sequence)** = **Amazon Kinesis Data Streams** (Partition Key ensures order per shard).
+> * **Standard SQS** = No guaranteed ordering (out-of-order possible).
+> * **SQS FIFO** = Guaranteed ordering, lekin real-time high-throughput streaming analytics ke liye Kinesis pehli choice hoti hai.
 > 
 >
 
