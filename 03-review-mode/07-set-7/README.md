@@ -461,7 +461,77 @@ Aapko **DO (2)** options select karne hain.
 1. **Option A (Partition placement group):**
 * **Galat:** Partition placement groups large distributed / replicated workloads (jaise HDFS, HBase, Cassandra) ke liye hotay hain taake hardware failure se data loss na ho. Sub-millisecond compute-to-compute communication latency ke liye yeh use nahi hota.
 
+---
+---
+---
 
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+AWS Auto Scaling group mein low traffic ki wajah se **Scale-In event** trigger hua hai.
+Current AZ setup:
+
+* `us-west-1a`: 10 instances
+* `us-west-1b`: 8 instances
+* `us-west-1c`: 7 instances
+
+Is me **default Auto Scaling termination policy** use ho rahi hai. Auto Scaling first instance terminate karne ke liye kin **TEEN (3)** steps/rules par amal karega?
+
+---
+
+### AWS Default Termination Policy Order (Kaise Kaam Karti Hai):
+
+1. **Step 1 (Balance AZs):** Sab se pehle Auto Scaling dekhta hai ke kis Availability Zone mein sab se zyada instances hain taake AZ balance barkarar rahe. Us AZ ko select karega jahan sab se zyada instances hon (`us-west-1a` = 10 instances).
+2. **Step 2 (Oldest Launch Configuration / Launch Template):** Selected AZ ke andar dekha jaye ga ke konsa instance **Oldest Launch Template / Launch Configuration** se bana tha.
+3. **Step 3 (Closest to Next Billing Hour):** Agar multiple instances same Launch Template se hon, toh woh instance terminate hoga jo **next billing hour ke sab se kareeb** ho (taake cost wastage kam ho).
+
+---
+
+### Options Ka Breakdown:
+
+1. **Select the instance that is farthest to the next billing hour:**
+* **Galat:** Closest to the next billing hour check hota hai, farthest nahi.
+
+
+2. **Select the instances with the oldest launch template:**
+* **Sahi (Correct 1):** AZ select karne ke baad, Auto Scaling **oldest launch template/configuration** waale instance ko terminate karta hai.
+
+
+3. **Select the instances with the most recent launch template:**
+* **Galat:** Oldest template choose hota hai, recent nahi.
+
+
+4. **Choose the Availability Zone with the most number of instances, which is the us-west-1a Availability Zone in this scenario:**
+* **Sahi (Correct 2):** Sub se pehle Auto Scaling sab se zyada instances waale AZ ko pick karta hai (`us-west-1a` has 10 instances).
+
+
+5. **Choose the Availability Zone with the least number of instances...:**
+* **Galat:** Balance maintain karne ke liye highest instance count waala AZ pehle chuna jata hai.
+
+
+6. **Select the instance that is closest to the next billing hour:**
+* **Sahi (Correct 3):** Agar baaqi factors tie hon, toh woh instance choose hota hai jo **closest to the next billing hour** ho.
+
+
+
+---
+
+### Sahi Jawab (Select THREE):
+
+* **Option 2:** **Select the instances with the oldest launch template.**
+* **Option 4:** **Choose the Availability Zone with the most number of instances, which is the us-west-1a Availability Zone in this scenario.**
+* **Option 6:** **Select the instance that is closest to the next billing hour.**
+
+> **Exam Tip (Default Termination Order):**
+> 1. **AZ with most instances**
+> 2. **Oldest Launch Template / Launch Configuration**
+> 3. **Instance closest to the next billing hour**
+> 4. **Oldest Instance ID** (agar tie na tute)
+> 
+>
 
 
 30-September-2026
