@@ -628,6 +628,65 @@ Dono ka fark samajhne ka aasan tarika yeh hai:
 
 > **Question 13 Ka Context:** Question 13 mein physical media export waala option AWS Snowball / offline physical import-export workflow ko refer kar raha tha, jo internet bandwidth bandwidth issues ko bypass karta hai.
 
+
+---
+---
+---
+
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+Company ko **50 TB data** Amazon S3 se apne on-premises data center shift/download karna hai. Bandwidth constraints ki wajah se internet par direct download boht slow hai.
+
+Requirement: **MOST cost-effective** (sab se sasta) aur efficient tarika konsa hai?
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1 (AWS Lambda Compression + AWS DataSync over Internet):**
+* **Galat:** Lambda function 50 TB data compress karne ke liye timeout ho jayega (Lambda execution limit 15 minutes hoti hai). DataSync internet par bandwidth constraints ki wajah se slow hi rahega.
+
+
+2. **Option 2 (Amazon CloudFront + AWS Global Accelerator):**
+* **Galat:** Global Accelerator aur CloudFront edge network routing improve karte hain, lekin large-scale batch data transfer (50 TB) ke liye outbound internet transfer cost boht zyada ho jayegi. Yeh **cost-effective** nahi hai.
+
+
+3. **Option 3 (AWS Snowball Edge / Physical Device Export):**
+* **Wait! Option text check karein:** Option 3 mein likha hai *"Use AWS Data Transfer Terminal to copy the S3 data to customer-provided storage media..."* — yeh option S3 Export Snowball workflow ki taraf ishara kar raha hai.
+* **Note:** S3 se tens of terabytes (50 TB) data nikalne ke liye physical appliance (jaise **AWS Snowball Edge**) use hota hai, na ke high bandwidth provisioning.
+
+
+4. **Option 4 (AWS Direct Connect + S3 Transfer Acceleration):**
+* **Galat:** **AWS Direct Connect** ko setup hone mein **haftay (weeks ya months)** lag jate hain aur iski dedicated port setup cost $10,000+ tak ja sakti hai. 50 TB ke *one-time transfer* ke liye Direct Connect lagana **most cost-effective bilkul nahi hai**.
+
+
+
+---
+
+### Correct AWS Concept for 50 TB Transfer:
+
+50 TB offline data transfer ke liye standard AWS answer **AWS Snowball** hota hai. Option 3 yahan physical media transport/export method ko denote kar raha hai jo internet bandwidth aur expensive setup cost (Direct Connect) dono se bachata hai.
+
+---
+
+### Sahi Jawab:
+
+**Option 3:** **Use AWS Data Transfer Terminal to copy the S3 data to customer-provided storage media for transport to the data center.**
+
+> **Exam Tip:**
+> * **50 TB - 100 TB Large Data Transfer + Limited Bandwidth** = **AWS Snowball / Physical Appliance**
+> * **Petabytes (PB) Data** = **AWS Snowmobile / Snowball Edge**
+> * **Direct Connect** tab use hota hai jab **continuous / ongoing high-bandwidth requirement** ho, *one-time migration* ke liye nahi.
+> 
+>
+
+30-September-2026
+
 30-September-2026
 
 30-September-2026
