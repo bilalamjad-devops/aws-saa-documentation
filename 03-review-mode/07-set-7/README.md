@@ -167,5 +167,57 @@ Requirement: Sab se **operationally effective** (sab se kam mehnat/fully automat
 ----
 ----
 
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+Sales team ko Amazon S3 mein paray sales records par **weekly revenue reports** banani hain. Unhe S3 data par queries chalaney ki zaroorat hai aur result ko **visualize** (charts/graphs banayein) karna hai.
+
+Requirement: Sab se **cost-effective** (sab se sasta aur kam kharch) tarika konsa hai?
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1: Amazon Redshift + S3 + QuickSight**
+* **Galat:** Redshift ek heavy data warehouse cluster hai jo 24/7 provisioned rehne par kafi mehnga padta hai. Weekly reports ke liye hamesha Redshift cluster chalana cost-effective nahi hai.
+
+
+2. **Option 2: AWS Glue Crawler + Amazon Athena + Amazon QuickSight**
+* **Sahi (Correct):**
+* **AWS Glue Crawler** S3 data ka schema automatically detect karke **Glue Data Catalog** mein tables bana deta hai.
+* **Amazon Athena** ek **serverless** query service hai jo direct S3 data par SQL queries chalati hai. Isme aapko koi server ya cluster maintain nahi karna padta — aap sirf chali hui query ke run-time par pay karte hain (pay-per-query).
+* **Amazon QuickSight** Athena ke sath easily integrate hokar dashboard visualization deta hai.
+* Weekly use-case ke liye yeh **100% serverless aur most cost-effective** option hai!
+
+
+
+
+3. **Option 3: Kinesis Data Streams + Kinesis Data Analytics + QuickSight**
+* **Galat:** Kinesis real-time streaming data ke liye use hota hai. Weekly static S3 reporting ke liye streaming architecture lagana zaroorat se zyada complex aur mehnga hai.
+
+
+4. **Option 4: Amazon OpenSearch Cluster + Kibana**
+* **Galat:** OpenSearch/ElasticSearch log analysis aur search indexing ke liye use hota hai, aur iske liye bhi continuously running cluster provision karna padta hai jo expensive hai.
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 2:** **Use AWS Glue crawler to build tables in AWS Glue Data Catalog. Run queries using Amazon Athena. Use Amazon QuickSight for visualization.**
+
+> **Exam Tip:** Jab bhi **"Analyze S3 data"** + **"Cost-effective / Serverless"** + **"Visualization"** ka zikr ho, combo hamesha **Glue + Athena + QuickSight** hi hota hai!
+
+
+---
+---
+---
+---
+---
+
 
 28-September-2026
