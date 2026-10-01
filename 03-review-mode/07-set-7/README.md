@@ -1007,6 +1007,23 @@ Ek retail website ko AWS par migrate karna hai jiska workload **intermittent, sp
 > **Exam Tip:**
 > * **Country-level Access Control in CloudFront** = **CloudFront Geo Restriction (Allow List / Block List)**
 > * **Custom User Error Messaging** = **CloudFront Custom Error Responses (HTTP 403 / 404 handling)**
+
+
+----
+----
+----
+
+<img width="1110" height="947" alt="aws-cloudtrail-log-file-validation" src="https://github.com/user-attachments/assets/99d9ffc7-1629-4e75-8144-55fb949349b5" />
+
+
+
+### Sahi Jawab:
+
+**Option 1:** **Enable the CloudTrail Log File Validation feature on all trails.**
+
+> **Exam Tip:**
+> * **Verify CloudTrail Log Integrity / Tampering Detection** = **CloudTrail Log File Validation** (Uses SHA-256 hashes & RSA signatures).
+> * **Detect Unusual API Call Spikes / Anomalies** = **CloudTrail Insights**.
 > 
 >
 
