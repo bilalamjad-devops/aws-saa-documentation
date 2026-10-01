@@ -1037,8 +1037,23 @@ Ek retail website ko AWS par migrate karna hai jiska workload **intermittent, sp
 > * **Standardized Service Templates for Containers & Serverless + Developer Custom Components** = **AWS Proton**
 > * **On-premises Containers on Customer Hardware** = **ECS Anywhere / EKS Anywhere**
 > * **Multi-Account Landing Zone Governance** = **AWS Control Tower**
-> 
->
+
+---
+---
+---
+
+<img width="1920" height="1003" alt="NLB-Health-Check-19-06-2023" src="https://github.com/user-attachments/assets/e09c145a-b2f2-4de1-b18f-092e2af009be" />
+
+
+### Correct Answer Option (Tutorials Dojo Verified):
+
+* **Configure the NLB to perform HTTP health checks on the critical paths of the application.**
+
+> **Exam Takeaway:**
+> * **NLB Health Check Protocols:** TCP, HTTP, HTTPS, UDP, aur TLS.
+> * **NLB + HTTP Health Checks:** Network Load Balancer Layer 4 traffic distribute karte huye bhi backend targets ki Application-level (HTTP status code) health testing kar sakta hai!
+
+
 
 30-September-2026
 
