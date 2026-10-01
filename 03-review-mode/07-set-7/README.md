@@ -915,6 +915,63 @@ Easy wording mein inka fark aur rishta samajhne ka tareeqah yeh hai:
 
 > **Key Takeaway:** CloudTrail aapke events **record** karta hai, aur **CloudTrail Lake** un recorded events par **SQL queries** chala kar analysis karne ke liye use hota hai.
 
+
+---
+---
+---
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+Ek retail website ko AWS par migrate karna hai jiska workload **intermittent, sporadic, aur unpredictable** (ghair-yaqeeni aur achanak aane wala traffic peaks) hai.
+
+**Key Requirements:**
+
+1. **Database Type:** **Relational Database** ki zaroorat hai.
+2. **Auto-scaling:** Capacity peak load ke waqt auto-scale ho aur surge khatam hote hi scale down ho jaye.
+3. **Cost-effectiveness:** Sab se **cost-effective aur suitable** solution konsa hai?
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1 (DynamoDB Global Table with Auto Scaling):**
+* **Galat:** DynamoDB ek **NoSQL (Non-Relational)** database hai. Question mein explicitly **Relational Database** manga gaya hai.
+
+
+2. **Option 2 (Amazon Redshift Cluster with Concurrency Scaling):**
+* **Galat:** Amazon Redshift ek **OLAP Data Warehouse** service hai jo analytics aur reporting ke liye use hoti hai. Retail website transactional workloads (OLTP) ke liye SQL relational DB (jaise MySQL/PostgreSQL) zaroori hota hai.
+
+
+3. **Option 3 (Amazon Aurora Provisioned DB Cluster with Burstable Instances):**
+* **Galat:** Burstable instances (e.g., `db.t3` / `db.t4g`) CPU credits utilization par chaltay hain. Continuous ya sharp spikes ke waqt jab credits khatam ho jayein toh performance drop ho jaati hai, aur yeh 24/7 provisioned instance cost charge karti hai chahe traffic zero hi kyun na ho.
+
+
+4. **Option 4 (Amazon Aurora Serverless DB Cluster):**
+* **Sahi (Correct):**
+* **Amazon Aurora Serverless** ek fully managed **Relational Database** (MySQL/PostgreSQL compatible) engine hai.
+* Yeh unpredictable/sporadic workloads ke liye design kiya gaya hai jahan capacity (**ACUs - Aurora Capacity Units**) traffic peak par seconds mein auto-scale up hoti hai aur activity khatam hote hi scale down (ya pause) ho jaati hai.
+* Since aap sirf use kiye gaye capacity units ke paise dete hain, yeh intermittent workloads ke liye **MOST cost-effective** option hai.
+
+
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 4:** **Launch an Amazon Aurora Serverless DB cluster then set the minimum and maximum capacity for the cluster.**
+
+> **Exam Tip:**
+> * **Unpredictable / Intermittent / Sporadic Workload + Relational Database** = **Amazon Aurora Serverless**
+> * **High Performance OLTP + Predictable Traffic** = **Amazon Aurora Provisioned**
+> * **Analytics / Data Warehousing** = **Amazon Redshift**
+> 
+>
 30-September-2026
 
 30-September-2026
