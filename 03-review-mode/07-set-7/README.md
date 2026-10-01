@@ -1068,9 +1068,23 @@ Ek retail website ko AWS par migrate karna hai jiska workload **intermittent, sp
 > * **HPC / Video Rendering + Long-term / Highly Available / Sustained Throughput** = **FSx for Lustre Persistent**
 > 
 >
-30-September-2026
+---
+---
+---
+---
 
-30-September-2026
+### Correct Answer Option:
+
+**Implement Lake Formation tag-based access control to enable authorization and cross-account permissions for the needed datasets to engineering team accounts. Integrate with AWS Security Hub to enhance security monitoring and compliance oversight.**
+
+---
+
+> **Exam Tip:**
+> * **Multi-account Data Lake + Scalable Access Control** = **Lake Formation Tag-Based Access Control (LF-TBAC)**
+> * **Individual Table / Column Level Access (Small Scale)** = **Lake Formation Named Resource Access (Grant Command)**
+> 
+>
+
 
 30-September-2026
 
