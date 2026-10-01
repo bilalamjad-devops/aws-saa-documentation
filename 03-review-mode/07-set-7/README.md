@@ -879,6 +879,9 @@ Requirement: **AWS ki native capabilities ko use karte hue 2nd layer authenticat
 ---
 ---
 
+<img width="1401" height="699" alt="trail-sample" src="https://github.com/user-attachments/assets/d75b7f80-2025-409d-be90-ab03947e134c" />
+
+
 Nahi, **AWS Lake** aur **CloudTrail** do alag services hain, lekin dono aapas mein gheray juda hue hain.
 
 Easy wording mein inka fark aur rishta samajhne ka tareeqah yeh hai:
