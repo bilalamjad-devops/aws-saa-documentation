@@ -740,6 +740,56 @@ Ek manufacturing company IoT sensor data ko real-time mein analyze karke process
 > * **Real-time Streaming + Strict Ordering (Sequence)** = **Amazon Kinesis Data Streams** (Partition Key ensures order per shard).
 > * **Standard SQS** = No guaranteed ordering (out-of-order possible).
 > * **SQS FIFO** = Guaranteed ordering, lekin real-time high-throughput streaming analytics ke liye Kinesis pehli choice hoti hai.
+
+
+----
+----
+----
+
+Is question ka step-by-step breakdown Roman Urdu mein yeh hai:
+
+---
+
+### Question Ka Summary:
+
+Startup ko **50 TB data** apne on-premises data center se **Amazon S3** mein transfer karna hai. On-premises network speed slow hai, jis se bandwidth bottleneck ban raha hai.
+
+Requirement: **50 TB data transfer** ke liye sab se suitable solution konsa hai?
+
+---
+
+### Options Ka Breakdown:
+
+1. **Option 1 (Amazon S3 Transfer Acceleration):**
+* **Galat:** S3 Transfer Acceleration Amazon CloudFront ke Edge Locations ko use karke public internet par transfers fast karta hai. Lekin agar aapka local network bandwidth hi slow ho, toh Transfer Acceleration local bottleneck ko bypass nahi kar sakta.
+
+
+2. **Option 2 (Request an Import Job to Amazon S3 using a Snowball device):**
+* **Sahi (Correct):**
+* **AWS Snowball** ek physical storage appliance hai jo offline large-scale data transfer (tens of terabytes to petabytes) ke liye design ki gayi hai.
+* Slow internet/network connection ko bypass karne ke liye AWS Snowball device courier ke zariye mangwai jaati hai, local high-speed LAN par 50 TB data box mein copy kiya jata hai, aur box S3 mein import karne ke liye AWS wapas ship kar diya jata hai.
+
+
+
+
+3. **Option 3 (AWS Migration Hub Discovery Agent):**
+* **Galat:** Migration Hub Discovery Agent sirf on-premises servers/VMs aur unki dependencies ki inventory collect karta hai. Yeh actual S3 data migration tool nahi hai.
+
+
+4. **Option 4 (AWS Storage Gateway File Gateway):**
+* **Galat:** File Gateway hybrid storage setup ke liye use hota hai jahan local applications NFS/SMB ke zariye S3 data access karti hain. Yeh back-end par internet bandwidth hi use karta hai, isi liye slow network par 50 TB initial batch move karne ke liye suitable nahi hai.
+
+
+
+---
+
+### Sahi Jawab:
+
+**Option 2:** **Request an Import Job to Amazon S3 using a Snowball device in the AWS Snowball Console.**
+
+> **Exam Tip:**
+> * **Large Data (50 TB+) + Slow Network / Limited Bandwidth** = **AWS Snowball**
+> * **Internet Speedup for Ongoing Single File Uploads** = **S3 Transfer Acceleration**
 > 
 >
 
@@ -750,3 +800,5 @@ Ek manufacturing company IoT sensor data ko real-time mein analyze karke process
 30-September-2026
 
 28-September-2026
+
+01-October-2026
