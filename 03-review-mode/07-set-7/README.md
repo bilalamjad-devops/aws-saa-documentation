@@ -1054,7 +1054,20 @@ Ek retail website ko AWS par migrate karna hai jiska workload **intermittent, sp
 > * **NLB + HTTP Health Checks:** Network Load Balancer Layer 4 traffic distribute karte huye bhi backend targets ki Application-level (HTTP status code) health testing kar sakta hai!
 
 
+---
+---
+---
 
+
+### Sahi Jawab:
+
+**Option 2:** **Amazon FSx for Lustre with Persistent file system**
+
+> **Exam Tip (FSx for Lustre Deployment Types):**
+> * **HPC + Temporary / Short-term / Non-replicated (Cost Savings)** = **FSx for Lustre Scratch**
+> * **HPC / Video Rendering + Long-term / Highly Available / Sustained Throughput** = **FSx for Lustre Persistent**
+> 
+>
 30-September-2026
 
 30-September-2026
