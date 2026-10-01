@@ -1024,6 +1024,19 @@ Ek retail website ko AWS par migrate karna hai jiska workload **intermittent, sp
 > **Exam Tip:**
 > * **Verify CloudTrail Log Integrity / Tampering Detection** = **CloudTrail Log File Validation** (Uses SHA-256 hashes & RSA signatures).
 > * **Detect Unusual API Call Spikes / Anomalies** = **CloudTrail Insights**.
+
+---
+---
+---
+
+### Sahi Jawab:
+
+**Option 4:** **Set up AWS Proton for deploying container applications and serverless solutions. Create components from the AWS Proton console and attach them to their respective service instance.**
+
+> **Exam Tip:**
+> * **Standardized Service Templates for Containers & Serverless + Developer Custom Components** = **AWS Proton**
+> * **On-premises Containers on Customer Hardware** = **ECS Anywhere / EKS Anywhere**
+> * **Multi-Account Landing Zone Governance** = **AWS Control Tower**
 > 
 >
 
