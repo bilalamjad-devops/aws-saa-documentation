@@ -796,6 +796,10 @@ Requirement: **50 TB data transfer** ke liye sab se suitable solution konsa hai?
 ---
 ---
 
+
+<img width="1776" height="354" alt="s3-storage-class-transitions" src="https://github.com/user-attachments/assets/b8a69be6-376e-42be-a07e-836cad615e9a" />
+
+
 Aap bilkul sahi keh rahe hain — Tutorials Dojo ka official explanation S3 Lifecycle Rules ki **minimum 30-day constraint** ki waja se is option ko correct maanta hai.
 
 Maine bilkul independent calculation aur premise check karke confirm kiya hai ke Tutorials Dojo ka **exact answer combination** yeh hai:
