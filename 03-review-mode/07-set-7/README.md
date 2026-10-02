@@ -1130,8 +1130,52 @@ Hotel booking company ke paas terabytes mein customer data aara ha hai. Architec
 > * **Amazon ElastiCache:** In-memory caching (Redis/Memcached) for low-latency speed.
 > * **Amazon DynamoDB:** NoSQL Key-Value database (OLTP).
 > * **Amazon RDS:** Relational database (OLTP) for standard transactional workloads.
-> 
->
+
+
+
+---
+---
+---
+
+
+<img width="1268" height="1010" alt="ui_aws_lake_formation_columnar_level_access_control" src="https://github.com/user-attachments/assets/228a6541-32b9-4fa9-93ef-04413320cf9f" />
+
+<img width="1552" height="648" alt="aws_lake_formation_columnar_level_access_control" src="https://github.com/user-attachments/assets/7ebf38ed-85af-492a-bd78-0788dea2c4cd" />
+
+Aapne AWS ke bohot important data engineering concepts ko poocha hai. Aaiye inko aasan Hindi (Latin) mein samajhte hain:
+
+---
+
+### 1. Lake Formation Blueprints (Templates)
+
+Lake Formation mein **Blueprints** hote hain (jo pre-defined templates ki tarah kaam karte hain).
+
+* Yeh AWS infrastructure (jaise VPC ya EC2) deploy karne ke liye nahi, balki **data ingest** (database se S3 data lake mein data lane) ke liye hote hain.
+* Jaise Aurora MySQL se S3 mein incremental data transfer karna ho, toh blueprint ka setup kuch clicks mein data pipeline tayar kar deta hai.
+
+---
+
+### 2. S3 Data Lake Kya Hai?
+
+* **Data Lake** ek central repository hota hai jahan aap apna har tarah ka data (Structured like SQL DB, Semi-structured like JSON/CSV, ya Unstructured like Images/Logs) original format mein store kar sakte hain.
+* Amazon S3 highly durable, scalable aur cheap hai, isliye yeh AWS par Data Lake banane ke liye sabse primary choice hai.
+
+---
+
+### 3. Column-Level Access Control Kya Hai?
+
+Maan lijiye aapke paas ek table hai jisme `Name`, `Email`, `Phone`, aur `CreditCard` columns hain:
+
+* **Marketing Team** ko sirf `Name` aur `Email` dekhne ki ijazat honi chahiye, lekin `CreditCard` chhupa hona chahiye.
+* **Lake Formation Data Filter** se aap specific users/teams ke liye **columns hide** kar sakte hain. Isko Column-Level Security kehte hain.
+
+---
+
+### 4. Amazon QuickSight Kya Hai?
+
+* QuickSight AWS ka **Business Intelligence (BI) aur Data Visualization tool** hai (jaise PowerBI ya Tableau).
+* Yeh S3 Data Lake, Aurora DB, ya Athena se data connect karke dashboards aur graphs banane ke kaam aata hai.
+
 
 
 30-September-2026
@@ -1139,3 +1183,5 @@ Hotel booking company ke paas terabytes mein customer data aara ha hai. Architec
 28-September-2026
 
 01-October-2026
+
+02-October-2026
