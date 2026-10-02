@@ -1111,7 +1111,27 @@ Company ko rozana 10 ghante ki data processing job ke liye sab se cheap (cost-ef
 
 * **Reason:** Job khatam hotay hi cluster terminate karne wala (**Transient**) setup billing bachata hai, **Primary & Core nodes ko On-Demand** par rakhne se data loss nahi hota, aur **Task nodes ko Spot** par chalane se maximum cost saving milti hai.
 
+---
+---
+---
 
+**Question Kya Kehta Hai?**
+Hotel booking company ke paas terabytes mein customer data aara ha hai. Architect ko massive data sets par fast, near real-time analytics aur flexible queries run karni hain taake corporate meeting ke liye insights nikal sake.
+
+**Correct Answer Kya Kehta Hai?**
+**Amazon Redshift**
+
+* **Reason:** Amazon Redshift ek petabyte-scale data warehouse service hai jo massive structured/semi-structured datasets par complex SQL queries aur fast analytics perform karne ke liye hi design ki gayi hai.
+
+---
+
+> **Quick Cheat-Sheet:**
+> * **Amazon Redshift:** Data Warehousing & Fast Analytics on Massive Data (Terabytes/Petabytes).
+> * **Amazon ElastiCache:** In-memory caching (Redis/Memcached) for low-latency speed.
+> * **Amazon DynamoDB:** NoSQL Key-Value database (OLTP).
+> * **Amazon RDS:** Relational database (OLTP) for standard transactional workloads.
+> 
+>
 
 
 30-September-2026
