@@ -89,5 +89,35 @@ Is issue ko solve karne ke liye hum kaam ko 2 hisson mein baant (decouple kar) d
 
 * Jab bhi **"Instant Acknowledgment"**, **"High Traffic Spikes"**, ya **"Throttling Errors"** ka zikr ho $\rightarrow$ **SQS Queue ka buffer** use karke architecture ko 2 Lambda functions mein decouple kiya jata hai.
 
+----
+----
+----
 
+**Question Kya Kah Raha Hai?**
+Company **Amazon EKS (Kubernetes)** par apne microservices chala rahi hai. Unhe incoming website requests ko **URL path ke mutabiq** (e.g., `/orders`, `/products`) alag-alag microservices par route karna hai, aur setup mein **LEAST amount of effort/overhead** hona chahiye.
+
+---
+
+**Correct Answer:**
+**Provision an Application Load Balancer (ALB) using the AWS Load Balancer Controller.**
+
+---
+
+**Key Concepts & Exam Elimination Rules:**
+
+1. **Path-Based Routing = ALB / Ingress:**
+* Kubernetes mein Layer 7 (HTTP/HTTPS) path-based routing ke liye **ALB (Application Load Balancer)** ka istemaal hota hai.
+* **AWS Load Balancer Controller** eik simple Kubernetes `Ingress` resource se AWS mein automatically ALB create aur manage kar deta hai (native AWS Integration + Least Setup Effort).
+
+
+2. **NLB (Network Load Balancer) Kyun Galat Hai?**
+* NLB Layer 4 (TCP/UDP) par kaam karta hai. Isko URL paths (`/orders`, `/products`) ki samajh nahi hoti.
+
+
+3. **NGINX Ingress Controller Kyun Galat Hai?**
+* NGINX Ingress controller path-based routing toh kar sakta hai, lekin iske liye aapko khud extra software install, manage, scale, aur patch karna padta hai (**High Operational Effort** compared to managed ALB controller).
+
+
+4. **AWS Lambda Proxy Kyun Galat Hai?**
+* EKS pod microservices ko route karne ke liye Lambda ko proxy ke taur par use karna completely unnecessary complex architecture hai.
 03-October-2026
