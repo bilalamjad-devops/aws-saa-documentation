@@ -97,5 +97,78 @@ Haan, bilkul sahi samjhe aap!
 * **RMAN option:** Oracle RMAN backup/recovery tool hai, RDS managed High Availability (Multi-AZ failover) ki jagah nahi le sakta.
 
 ---
+---
+---
+
+
+**Apache Parquet** ek open-source, **columnar (column-based)** file format hai jo big data processing aur analytics ke liye optimized hai.
+
+Jab hum normal files (jaise CSV ya JSON) store karte hain, toh data **row-by-row** store hota hai. Parquet mein data **column-by-column** store hota hai.
+
+---
+
+### CSV vs Apache Parquet (Main Differences)
+
+| Feature | CSV (Row-oriented) | Apache Parquet (Columnar) |
+| --- | --- | --- |
+| **Storage Layout** | Data row-wise store hota hai | Data column-wise store hota hai |
+| **Compression** | Less efficient (Large file size) | High compression (Smaller file size) |
+| **Query Speed** | Slow (Poori file read karni parti hai) | Fast (Sirf required columns read hote hain) |
+| **AWS Cost** | Higher S3/Athena cost | Up to **80-90% lower S3 & Athena costs** |
+
+---
+
+### Key Benefits (AWS Analytics mein yeh kyun prefer hota hai?)
+
+1. **High Compression Ratio:**
+Pura data highly compressed hota hai, jis se 2 GB ki CSV file convert hone ke baad aksar **300 MB - 500 MB** tak shrink ho jati hai (Storage cost reduced).
+2. **Column Projection (Fast Queries):**
+Agar aap Amazon Athena ya AWS Glue se query chalate hain:
+```sql
+SELECT user_id FROM customer_data;
+
+```
+
+
+* CSV mein poori file read hogi.
+* Parquet mein Athena **sirf `user_id` wala column read karega**, baaki saara data skip kar dega. Is se query seconds mein execute hoti hai aur scanned data kam hone ki wajah se Athena cost drop ho jati hai.
+
+
+3. **Built-in Schema & Metadata:**
+Parquet file ke andhar hi data types (integer, string, boolean) ki details stored hoti hain, isliye explicit data type casting ki zaroorat nahi parti.
+
+---
+---
+---
+
+### Keywords Scan 🔍
+
+1. **"Oracle database"** + **"remains available in case of database server failure"** (Same-engine High Availability)
+* **Trigger:** **Amazon RDS for Oracle with Multi-AZ deployments** (Multi-AZ synchronous replication aur automatic failover provide karta hai database failure ke aginst).
+
+
+2. **"Migrate the Oracle database to AWS"** (Heterogeneous/Homogeneous DB Migration)
+* **Trigger:** **AWS Database Migration Service (AWS DMS)** (Live/active databases ko minimal downtime ke sath migrate karne ke liye standard tool hai).
+
+
+
+---
+
+### Correct Options
+
+1. **Create an Oracle database in Amazon RDS with Multi-AZ deployments.**
+2. **Migrate the Oracle database to AWS using the AWS Database Migration Service**
+
+---
+
+### Elimination Rules ❌
+
+* **AWS Schema Conversion Tool (SCT):** SCT sirf *heterogeneous* migrations (e.g., Oracle to Aurora PostgreSQL/MySQL) mein schema translate karne ke liye use hota hai. Agar aap Oracle se Oracle pe hi migrate kar rahe hain, toh SCT ki zaroorat nahi parti.
+* **Single-instance Amazon Aurora:** Aurora Oracle engines support nahi karta (Aurora sirf MySQL & PostgreSQL compatible hai), aur single instance High Availability requirement meet nahi karta.
+* **RMAN option:** Oracle RMAN backup/recovery tool hai, RDS managed High Availability (Multi-AZ failover) ki jagah nahi le sakta.
+
+---
+
+06-October-2026
 
 03-October-2026
