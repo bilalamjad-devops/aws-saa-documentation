@@ -168,6 +168,63 @@ Parquet file ke andhar hi data types (integer, string, boolean) ki details store
 * **RMAN option:** Oracle RMAN backup/recovery tool hai, RDS managed High Availability (Multi-AZ failover) ki jagah nahi le sakta.
 
 ---
+---
+---
+
+Relational Databases (RDS) me data **Tables, Rows, aur Columns** ki shakal me store hota hai (jaise Excel spreadsheet me hota hai).
+
+DynamoDB (NoSQL) me data ka structure bilkul alag hota hai:
+
+### DynamoDB Storage Hierarchy
+
+1. **Table:** Collections ka group (jaise RDS me Table hoti hai).
+2. **Items:** Individual records (RDS me jinhein hum **Rows** kehte hain).
+3. **Attributes:** Individual data fields (RDS me jinhein hum **Columns** kehte hain).
+
+---
+
+### RDS vs DynamoDB Data Example
+
+#### 1. RDS / Excel (Rigid Schema)
+
+Har Row me bilkul same Columns hona lazmi hain:
+
+| CustomerID (Primary Key) | Name | Email | Phone |
+| --- | --- | --- | --- |
+| 101 | Ali | ali@email.com | 03001234567 |
+| 102 | Bilal | bilal@email.com | *NULL* |
+
+---
+
+#### 2. DynamoDB (JSON / Key-Value Pairs)
+
+Har **Item** apne aap me independent JSON object ki tarah hota hai. Har item ke attributes different ho sakte hain:
+
+```json
+// Item 1
+{
+  "CustomerID": "101",
+  "Name": "Ali",
+  "Email": "ali@email.com",
+  "Phone": "03001234567"
+}
+
+// Item 2 (New field "Address" added instantly without altering schema)
+{
+  "CustomerID": "102",
+  "Name": "Bilal",
+  "Email": "bilal@email.com",
+  "Address": "Kunjah, Gujrat"
+}
+
+```
+
+---
+
+### Key Takeaway 💡
+
+* **RDS:** Rigid Table Format (Excel sheet).
+* **DynamoDB:** **JSON-like Key-Value & Document Format** (Har record ke paas apni unique fields ho sakti hain).
 
 06-October-2026
 
