@@ -226,6 +226,70 @@ Har **Item** apne aap me independent JSON object ki tarah hota hai. Har item ke 
 * **RDS:** Rigid Table Format (Excel sheet).
 * **DynamoDB:** **JSON-like Key-Value & Document Format** (Har record ke paas apni unique fields ho sakti hain).
 
+---
+---
+---
+
+
+### Keywords Scan 🔍
+
+1. **"gather real-time data from multiple sources"** + **"anonymized prior to landing in a NoSQL database"**
+* **Trigger:** Data stream directly process honi chahiye **pehle (prior)** transform/anonymize ho, phir NoSQL (DynamoDB) mein write honi chahiye.
+
+
+2. **"Ingest real-time data"** + **"AWS Lambda function to anonymize"** + **"store in Amazon DynamoDB"**
+* **Trigger:** **Kinesis Data Streams $\rightarrow$ Lambda (In-flight transformation/Anonymization) $\rightarrow$ DynamoDB**.
+
+
+
+---
+
+### Correct Answer
+
+**Ingest real-time data using Amazon Kinesis Data Stream. Use an AWS Lambda function to anonymize the PII, then store it in Amazon DynamoDB.**
+
+---
+
+### Elimination Rules ❌
+
+* **DynamoDB Streams option:** Un-anonymized sensitive PII data pehle hi DynamoDB (NoSQL) database mein land ho jaata hai, jo requirement (*"anonymized prior to landing in a NoSQL database"*) ko violate karta hai.
+* **Amazon S3 data lake option:** PII pehle S3 mein plain store hoti hai aur unnecessary intermediate storage/latency add karti hai real-time pipeline ke liye.
+* **Amazon Data Firehose to Redshift option:** Destination requirement NoSQL database (DynamoDB) hai, Jabke Redshift ek relational data warehouse hai.
+
+---
+---
+---
+
+**Anonymize** ka matlab hota hai **pehchan chupana** ya **sensitive information ko identity removal ke zariye hide/mask karna**.
+
+Data protection aur privacy (PII) context mein iska matlab hai kisi person ki personal details ko aisi shape mein convert kar dena jisse us bande ki exact identity track na ki ja sake.
+
+---
+
+### Real-world Example:
+
+Suppose ek patient ka record yeh hai:
+
+| Name | CNIC / SSN | Disease | Prescription |
+| --- | --- | --- | --- |
+| **Hafiz Bilal** | **34201-XXXXXXX-X** | Diabetes | Metformin |
+
+---
+
+### Data Anonymization Ke Baad:
+
+Sensitive fields (Name, CNIC, Phone, Address) ko hashing, masking, ya remove karke badal diya jata hai:
+
+| Patient_ID (Hashed) | Age Group | Disease | Prescription |
+| --- | --- | --- | --- |
+| **User_98f2a1** | 20-25 | Diabetes | Metformin |
+
+### Advantage 💡
+
+Ab machine learning models ya analytics algorithms disease aur prescription ko study kar sakte hain, lekin kisi ko yeh pata nahi chalega ki yeh specific data kis banday ka hai.
+
+06-October-2026
+
 06-October-2026
 
 03-October-2026
