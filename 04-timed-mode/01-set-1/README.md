@@ -65,4 +65,37 @@ Haan, bilkul sahi samjhe aap!
 * **Amazon Kendra:** Enterprise search engine (AI-powered search) hai.
 * **Amazon Polly:** Text-to-speech service hai (voice generation ke liye).
 
+---
+---
+---
+
+
+### Keywords Scan 🔍
+
+1. **"Oracle database"** + **"remains available in case of database server failure"** (Same-engine High Availability)
+* **Trigger:** **Amazon RDS for Oracle with Multi-AZ deployments** (Multi-AZ synchronous replication aur automatic failover provide karta hai database failure ke aginst).
+
+
+2. **"Migrate the Oracle database to AWS"** (Heterogeneous/Homogeneous DB Migration)
+* **Trigger:** **AWS Database Migration Service (AWS DMS)** (Live/active databases ko minimal downtime ke sath migrate karne ke liye standard tool hai).
+
+
+
+---
+
+### Correct Options
+
+1. **Create an Oracle database in Amazon RDS with Multi-AZ deployments.**
+2. **Migrate the Oracle database to AWS using the AWS Database Migration Service**
+
+---
+
+### Elimination Rules ❌
+
+* **AWS Schema Conversion Tool (SCT):** SCT sirf *heterogeneous* migrations (e.g., Oracle to Aurora PostgreSQL/MySQL) mein schema translate karne ke liye use hota hai. Agar aap Oracle se Oracle pe hi migrate kar rahe hain, toh SCT ki zaroorat nahi parti.
+* **Single-instance Amazon Aurora:** Aurora Oracle engines support nahi karta (Aurora sirf MySQL & PostgreSQL compatible hai), aur single instance High Availability requirement meet nahi karta.
+* **RMAN option:** Oracle RMAN backup/recovery tool hai, RDS managed High Availability (Multi-AZ failover) ki jagah nahi le sakta.
+
+---
+
 03-October-2026
