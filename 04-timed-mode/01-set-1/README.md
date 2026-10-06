@@ -37,5 +37,32 @@ Haan, bilkul sahi samjhe aap!
 * **EBS Provisioned IOPS (io1) for cold storage:** EBS volumes bohot expensive hote hain, archival/cold storage ke liye ideal nahi hain.
 * **Amazon EFS:** General-purpose NFS file system hai, lekin FSx for Lustre jitni extreme parallel read/write throughput HPC/ML workloads ke liye provide nahi karta.
 
+---
+---
+---
+
+
+<img width="2560" height="1312" alt="amazon-macie-findings-samples (1)" src="https://github.com/user-attachments/assets/7023bf66-601f-43bd-bf52-250db910d032" />
+
+### Keywords Scan 🔍
+
+1. **"personally identifiable information (PII)"** & **"privacy of its S3 buckets, beyond the object listing that S3 Inventory provides"**
+* **Trigger:** **Amazon Macie** (AWS ka dedicated security service jo Machine Learning aur pattern matching use karke S3 mein stored PII aur sensitive data ko automatically discover, classify, aur protect karta hai).
+
+
+
+---
+
+### Correct Answer
+
+**Set up and configure Amazon Macie to monitor their S3 data.**
+
+---
+
+### Elimination Rules ❌
+
+* **Amazon Fraud Detector:** Online payment fraud ya fake account detection ke liye hota hai, S3 storage scanning/PII compliance ke liye nahi.
+* **Amazon Kendra:** Enterprise search engine (AI-powered search) hai.
+* **Amazon Polly:** Text-to-speech service hai (voice generation ke liye).
 
 03-October-2026
