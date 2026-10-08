@@ -448,6 +448,43 @@ Isi liye Question 21 mein **"minimize development changes"** aur **"easier to ma
 * **Amazon Inspector:** EC2 instances, ECR container images, aur Lambda functions par vulnerability scanning aur software security assessment karta hai.
 * **AWS IAM:** Identity, users, roles, aur permissions access manage karne ke liye hota hai, compliance reports ke liye nahi.
 
+---
+---
+---
+
+### Keywords Scan 🔍
+
+1. **"Microsoft Windows Server ... high availability across multiple AZs"**
+* **Trigger:** Windows workloads ke liye storage configuration.
+
+
+2. **"low-latency access to BLOCK storage ... via iSCSI protocol"**
+* **Trigger:** **Amazon FSx for NetApp ONTAP** (jo Multi-AZ block storage via iSCSI protocol capability deta hai Windows/Linux dono ke liye).
+
+
+
+---
+
+### Correct Answer
+
+**Configure the trading application on Amazon EC2 Windows Server instances across two Availability Zones. Use Amazon FSx for NetApp ONTAP to create a Multi-AZ file system and access the data via iSCSI protocol.**
+
+---
+
+### Roman Urdu Explanation 💡
+
+* **FSx for NetApp ONTAP (iSCSI = Block Storage):** Requirement mein explicitly **Block Storage** pucha gaya hai. FSx ONTAP akeli aisi fully managed Multi-AZ file service hai jo **iSCSI block protocol** support karti hai, jisse low-latency block-level access milta hai.
+* **FSx for Windows File Server (SMB = File Storage):** Yeh file storage (SMB protocol) hai, block storage nahi.
+
+---
+
+### Elimination Rules ❌
+
+* **FSx for Windows File Server:** SMB-based **File** storage hai, **Block** storage nahi.
+* **Amazon EFS:** Linux-native NFS storage hai (Windows par natively support/recommend nahi hota) aur file storage hai.
+* **Amazon S3:** Object storage hai, block storage require karne wali Windows trading applications ke liye suitable nahi hai.
+
+
 08-October-2026
 
 
