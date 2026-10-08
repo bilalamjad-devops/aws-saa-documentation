@@ -412,6 +412,42 @@ Beanstalk ek **Platform as a Service (PaaS)** hai. Iska matlab yeh hai ke:
 
 Isi liye Question 21 mein **"minimize development changes"** aur **"easier to manage"** ke liye Elastic Beanstalk sab se perfect answer tha.
 
+
+---
+---
+---
+
+### Keywords Scan 🔍
+
+1. **"assess whether the services ... meet common security and regulatory standards"**
+* **Trigger:** AWS ke official compliance agreements aur regulatory reports (SOC, PCI-DSS, ISO, etc.) download karne ka central portal.
+
+
+2. **"report of all compliance-related documents for their account"**
+* **Trigger:** **AWS Artifact**.
+
+
+
+---
+
+### Correct Answer
+
+**Use AWS Artifact to view the security reports as well as other AWS compliance-related information.**
+
+---
+
+### Roman Urdu Explanation 💡
+
+* **AWS Artifact:** Yeh AWS ka central repository (portal) hai jahan se aap AWS ki **security compliance reports** (jaise SOC 1/2/3, PCI-DSS) aur **agreements** (jaise BAA/HIPAA) directly download aur review kar sakte hain audit purpose ke liye.
+
+---
+
+### Elimination Rules ❌
+
+* **AWS Security Hub:** Resource configurations aur security alerts (findings) ko aggregate karta hai, compliance certification documents download nahi karta.
+* **Amazon Inspector:** EC2 instances, ECR container images, aur Lambda functions par vulnerability scanning aur software security assessment karta hai.
+* **AWS IAM:** Identity, users, roles, aur permissions access manage karne ke liye hota hai, compliance reports ke liye nahi.
+
 08-October-2026
 
 
