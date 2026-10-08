@@ -347,6 +347,74 @@ Teeno SSE variants ka breakdown:
 * **SSE-C (Server-Side):** Key aapki apni hoti hai, lekin aap data **aur** key dono S3 ko bhejte hain. Encryption S3 ke servers par hoti hai.
 * **Client-Side Encryption:** Key aur encryption dono aapke apne local application/server par hoti hain. Unencrypted data ya key kabhi AWS par nahi jaati.
 
+---
+---
+---
+
+
+Is question mein yeh baatein batai gayi hain aur poocha gaya hai:
+
+### Scenario (Kahaani Kya Hai?):
+
+1. **Current Setup:** Ek online learning company ka **.NET Application** (Windows Server par) aur backend par **Oracle Database** chal raha hai unke apne local (on-premises) data center mein.
+2. **Goal (Pohnchna Kahan Hai?):** Unko yeh poora system AWS Cloud par **migrate (shift)** karna hai taaki High Availability mil sake.
+3. **Conditions (Khas Hidayat):**
+* **"Minimize development changes":** Code mein koi badi tabdeeli ya dobara mehnat na karni pade (refactoring na ho).
+* **"Easier to manage":** Naya environment chalana aur maintain karna aasan ho (low management overhead).
+
+
+
+---
+
+### Sawal Kya Poocha Hai?
+
+In 5 options mein se **kaunse DOW (2) steps** lene chahiye jo application aur database dono ko bina kisi code change ke aur aasani se AWS par shift kar dein?
+
+---
+
+### Solution Summarized:
+
+* **Application ke liye:** **AWS Elastic Beanstalk** (kisi code badlao ke bina .NET application ko khud manage aur scale kar leta hai).
+* **Database ke liye:** **Amazon RDS for Oracle (Multi-AZ) via AWS DMS** (bina engine badle database ko fully-managed High Availability environment mein shift kar deta hai).
+
+---
+---
+---
+
+Haan, bilkul sahi samjhe aap! **AWS Elastic Beanstalk** mein aapki application piche multiple EC2 instances par hi run hoti hai.
+
+---
+
+### Beanstalk Kaise Kaam Karta Hai? ⚙️
+
+Beanstalk ek **Platform as a Service (PaaS)** hai. Iska matlab yeh hai ke:
+
+1. **Underlying Infrastructure EC2 Hi Hota Hai:**
+* Beanstalk khud se kuch naya compute engine nahi banata. Woh background mein **Auto Scaling Group (ASG)**, **Load Balancer (ALB)**, aur **EC2 Instances** hi create aur configure karta hai.
+* Agar traffic barhega, toh Beanstalk Auto Scaling ke zariye automatic aur EC2 instances add kar dega.
+
+
+2. **Aapka Management Overhead Zero Ho Jata Hai:**
+* **Manual Setup Nahi Karna Parta:** Aapko khud se Load Balancer configure karne, Auto Scaling Rules banane, OS patch karne, ya IIS/Web Server install karne ki zaroorat nahi hoti.
+* **Simple Code Deployment:** Aap sirf apna `.NET` application code upload karte hain, aur Beanstalk baaki sab (provisioning, load balancing, auto-scaling, health monitoring) khud handle kar leta hai.
+
+
+
+---
+
+### Summary Table
+
+| Feature | Direct EC2 Setup | Elastic Beanstalk Setup |
+| --- | --- | --- |
+| **Compute Engine** | Multiple EC2 Instances | Multiple EC2 Instances |
+| **Setup & Maintenance** | Manual (High Effort) | Automated (Low Effort / "Easier to manage") |
+| **Code Changes Required?** | No | **No** (Exact same .NET app runs) |
+
+Isi liye Question 21 mein **"minimize development changes"** aur **"easier to manage"** ke liye Elastic Beanstalk sab se perfect answer tha.
+
+08-October-2026
+
+
 06-October-2026
 
 06-October-2026
