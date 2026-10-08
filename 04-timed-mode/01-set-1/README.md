@@ -329,9 +329,28 @@ Ek company ko aisa **Relational Database (SQL)** chahiye jo:
 
 
 ---
+---
+---
+
+Nahi, **SSE-C** mein **C** ka matlab **Customer-Provided Keys** hota hai (**Server-Side Encryption with Customer-Provided Keys**).
+
+Teeno SSE variants ka breakdown:
+
+* **SSE-S3:** Server-Side Encryption with Amazon S3 Managed Keys.
+* **SSE-KMS:** Server-Side Encryption with AWS Key Management Service Keys.
+* **SSE-C:** Server-Side Encryption with **Customer-Provided Keys**.
+
+---
+
+### Key Difference (SSE-C vs Client-Side Encryption)
+
+* **SSE-C (Server-Side):** Key aapki apni hoti hai, lekin aap data **aur** key dono S3 ko bhejte hain. Encryption S3 ke servers par hoti hai.
+* **Client-Side Encryption:** Key aur encryption dono aapke apne local application/server par hoti hain. Unencrypted data ya key kabhi AWS par nahi jaati.
 
 06-October-2026
 
 06-October-2026
 
 03-October-2026
+
+08-October-2026
