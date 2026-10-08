@@ -484,6 +484,36 @@ Isi liye Question 21 mein **"minimize development changes"** aur **"easier to ma
 * **Amazon EFS:** Linux-native NFS storage hai (Windows par natively support/recommend nahi hota) aur file storage hai.
 * **Amazon S3:** Object storage hai, block storage require karne wali Windows trading applications ke liye suitable nahi hai.
 
+---
+---
+---
+
+### Keywords Scan 🔍
+
+1. **"Amazon Aurora database ... Once a vehicle has been sold, its data must be removed ... forwarded to a distributed processing system"**
+* **Trigger:** Aurora MySQL ka native database-level trigger / function jo database code se seedha **AWS Lambda** ko invoke karta hai.
+
+
+
+---
+
+### Correct Answer
+
+**Use an Aurora MySQL native function to invoke an AWS Lambda function whenever a vehicle listing is deleted. Configure the Lambda function to send the data to an Amazon SQS queue for the distributed processing system to consume.**
+
+---
+
+### Roman Urdu Explanation 💡
+
+* **Aurora Native Lambda Invocation:** Aurora MySQL ke paas `aws_lambda_fnc_stored_procedure` ka native feature hota hai. Jab bhi database row delete hoti hai, DB trigger **Lambda function ko seedha invoke** karta hai jo deleted data ka payload (car details) SQS queue mein daal deta hai, taaki distributed processing system usse background mein process kar sake.
+* **RDS Event Subscriptions Kyu Nahi?** RDS Event Subscriptions sirf **infrastructure events** (jaise DB reboot, failover, snapshot backup) ko capture karti hain — database ke **inside row-level data changes (INSERT, UPDATE, DELETE)** ko detect nahi kar sakti.
+
+---
+
+### Elimination Rules ❌
+
+* **RDS Event Subscription to SNS/Lambda:** DB ke andar row-level data deletion detect nahi kar sakti, sirf database instance state changes track karti hai.
+* **RDS Event Subscription to SQS:** Again, infrastructure management events ke liye hoti hai, table data events ke liye nahi.
 
 08-October-2026
 
