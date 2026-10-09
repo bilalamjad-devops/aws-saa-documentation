@@ -615,7 +615,48 @@ CORS S3 bucket ko yeh permission dene ka permission letter hota hai jo browser k
 
 * **Browser blocks JavaScript request between 2 different URLs/domains** $\rightarrow$ **Enable CORS** on S3 Bucket.
 
+---
+---
+---
 
+### Keywords Scan 🔍
+
+1. **"no object can be overwritten or deleted by ANY user ... root user must also be restricted"**
+* **Trigger:** **S3 Object Lock in Compliance Mode** (Compliance mode mein root account user smaet koi bhi IAM user/role lock period ke dauran object ko delete ya overwrite nahi kar sakta).
+
+
+2. **"for a period of one year only"**
+* **Trigger:** **Retention Period of 1 year** (Retention period fixed duration specified karti hai, jabke Legal Hold open-ended lock hota hai jab tak usko explicitly remove na kiya jaye).
+
+
+
+---
+
+### Correct Answer
+
+**Enable S3 Object Lock in compliance mode with a retention period of one year.**
+
+---
+
+### Roman Urdu Explanation 💡
+
+* **S3 Object Lock - Compliance Mode vs Governance Mode:**
+* **Compliance Mode:** Absolute WORM (Write Once, Read Many) protection deta hai. Is mode mein retention period ke doran **Root Account User** bhi data ko alter, overwrite, ya delete nahi kar sakta.
+* **Governance Mode:** Is mode mein special IAM permissions (`s3:BypassGovernanceRetention`) wale users retention settings ko alter kar sakte hain ya objects delete kar sakte hain. Is waja se root user restrict nahi hota.
+
+
+* **Retention Period vs Legal Hold:**
+* **Retention Period:** Ek specific duration (e.g., 1 year) set karti hai jiske baad objects purge/delete ho sakte hain.
+* **Legal Hold:** Ek boolean flag (ON/OFF) hota hai jiski koi expiration date/time interval nahi hoti. Isko manually remove karna padta hai.
+
+
+
+---
+
+### Elimination Rules ❌
+
+* **Governance mode options:** Governance mode mein root user/bypassing roles objects delete kar sakte hain, jo strict requirement ko fail kar deta hai.
+* **Compliance mode with legal hold:** Legal hold temporal duration (1 year retention interval) enforce karne ke liye nahi, balki ongoing legal audits/investigations ke liye ON/OFF toggle ki tarah use hota hai.
 
 
 
