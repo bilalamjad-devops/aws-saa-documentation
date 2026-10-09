@@ -584,8 +584,43 @@ S3 permissions mein **`Get`** aur **`List`** ke darmayan yeh main farq hota hai:
 * **"See what files exist"** $\rightarrow$ **`s3:List*`**
 * **"Download/Read file data"** $\rightarrow$ **`s3:Get*`**
 
-08-October-2026
+---
+---
+---
+---
 
+Aasan aur fast words mein samjho:
+
+### Masla (Problem):
+
+Aap ki website ka domain (URL) hai: `s3-website-us-east-1.amazonaws.com`.
+
+Lekin aap ka JavaScript code kisi doosre domain (`s3.amazonaws.com`) par request bhej raha hai.
+
+Web browser ki security rule (Same-Origin Policy) yeh kehti hai: **"Agar 2 domains alag hain, toh JavaScript ko doosri domain se data read karne ki permission NAHI milegi!"** Is waja se browser ne request block kar di.
+
+---
+
+### Hal (Solution):
+
+Aap S3 bucket par **CORS (Cross-Origin Resource Sharing)** enable karte hain.
+
+CORS S3 bucket ko yeh permission dene ka permission letter hota hai jo browser ko kehta hai:
+
+*"Haan, is specific website URL ko mere paas request bhejne do, main isko allow karta hoon."*
+
+---
+
+### Quick Cheat Sheet 💡
+
+* **Browser blocks JavaScript request between 2 different URLs/domains** $\rightarrow$ **Enable CORS** on S3 Bucket.
+
+
+
+
+
+
+08-October-2026
 
 06-October-2026
 
