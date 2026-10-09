@@ -552,6 +552,38 @@ Teeno options ka farq quick check kar lein:
 * **KMS AWS Managed:** View access, zero deletion control.
 * **Customer Managed Key (Custom Key Store / CloudHSM):** Full control + instant removal capability.
 
+
+
+
+---
+---
+---
+
+S3 permissions mein **`Get`** aur **`List`** ke darmayan yeh main farq hota hai:
+
+---
+
+### Key Difference 💡
+
+| Action | S3 Permission | Easy Example |
+| --- | --- | --- |
+| **`s3:List*`** | Bucket ke **andar ke contents/files ke naam dekhna** (Folder Directory kholna). | Window mein folder khol kar dekhna ke andar kitni aur konsi files (e.g., `photo.jpg`, `doc.pdf`) pari hain. |
+| **`s3:Get*`** | Kisi specific **file ka data read ya download karna** (File open karna). | `photo.jpg` par double click karke usko open karna ya computer mein download karna. |
+
+---
+
+### Roman Urdu Explanation
+
+* **`s3:ListBucket` (List):** Is se aapko sirf yeh pata chalta hai ke bucket mein konsi files exist karti hain (Metadata/Filenames view). Is permission se aap file ka andar ka data download nahi kar sakte.
+* **`s3:GetObject` (Get):** Is se aap actual file/object ko **read ya download** kar sakte hain. Lekin agar aapke paas `List` permission nahi hai, toh aapko exact file ka link/path (`arn:aws:s3:::bucket/photo.jpg`) pata hona chahiye downloads ke liye.
+
+---
+
+### Exam Rule Shortcut 🔍
+
+* **"See what files exist"** $\rightarrow$ **`s3:List*`**
+* **"Download/Read file data"** $\rightarrow$ **`s3:Get*`**
+
 08-October-2026
 
 
