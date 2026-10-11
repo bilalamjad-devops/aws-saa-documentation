@@ -117,6 +117,41 @@ Aap se **2 cheezein** maangi gayi hain:
 * **NACL Rules Wali Option:** NACL (Network Access Control List) IP addresses aur CIDR blocks par filtering karta hai, domain names (`dynamodb.us-east-1.amazonaws.com`) par nahi.
 
 ---
+---
+---
+---
+
+**Haan, bilkul sahi pakda aap ne! 🎯**
+
+AWS mein **VPC Gateway Endpoints** sirf **2 services** ke liye exist karte hain:
+
+1. **Amazon S3**
+2. **Amazon DynamoDB**
+
+---
+
+### In Dono Ke Liye Gateway Endpoint Kyun Hota Hai? 💡
+
+AWS ki baaki tamaam services (jaise RDS, SQS, SNS, KMS wagerah) ke liye **Interface Endpoints (PrivateLink)** use hote hain, jin par ghante ke hisab se charges lagte hain.
+
+Lekin **S3** aur **DynamoDB** ke Gateway Endpoints:
+
+* **Bilkul FREE hain** (is ke koi hourly charges nahi hote).
+* Direct aap ke VPC ke **Route Table** mein ek rasta (route) add kar dete hain.
+
+---
+
+### Quick Comparison Summary ⚡
+
+| Service | Endpoint Type | Kaam Kya Karta Hai? | Cost |
+| --- | --- | --- | --- |
+| **Amazon S3** | **Gateway Endpoint** | VPC ke traffic ko bina internet S3 tak pohanchata hai | **FREE** |
+| **Amazon DynamoDB** | **Gateway Endpoint** | VPC ke traffic ko bina internet DynamoDB tak pohanchata hai | **FREE** |
+| **Baaki Sab AWS Services** | **Interface Endpoint** | Private ENI (Network Card) ke zariye connectivity deta hai | Paid (Per hour + Data) |
+
+Isliye SAA-C03 exam mein jab bhi **S3** ya **DynamoDB** ke liye private, cost-effective VPC connection ki baat ho, hamesha pehla khayal **Gateway Endpoint** ka aana chahiye!
+
+---
 
 
 10-October-2026
