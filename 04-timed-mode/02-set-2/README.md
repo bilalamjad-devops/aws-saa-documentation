@@ -153,5 +153,41 @@ Isliye SAA-C03 exam mein jab bhi **S3** ya **DynamoDB** ke liye private, cost-ef
 
 ---
 
+Bilkul, isko question aur answer dono ke lihaz se aasan Urdu mein alag alag samajhte hain!
+
+---
+
+### 1. Question Mein Kya Kaha Ja Raha Hai? ❓
+
+* **System Setup:** Ek web application hai jo serverless code (**AWS Lambda**) use karti hai. Yeh Lambda function aage ja kar ek relational database (**Amazon RDS MySQL**) se connect hota hai data parhne ya likhne ke liye.
+* **Masla (Problem):** Jab website par traffic boht zyada barhta hai (**Peak Load**), toh hazaron Lambda functions ek sath active ho jate hain. Har Lambda function database ke sath apna ek naya connection kholne ki koshish karta hai.
+* **Result:** Database ke paas limited capacity hoti hai, isliye jab limit se zyada connections aate hain toh database crash hone lagta hai aur error deta hai: **"Too many connections"**.
+* **Poocha Kya Hai?** Is masle ko hal karne ke liye sab se behtareen AWS solution kya hai?
+
+---
+
+### 2. Answer Mein Kya Kaha Ja Raha Hai? 💡
+
+> **Provision an RDS Proxy between the Lambda function and RDS database instance**
+
+* **Matlab:** Lambda function aur RDS Database ke **darmiyan mein ek RDS Proxy laga do**.
+* **Yeh RDS Proxy Kya Karega?**
+* Yeh Lambda se aane wale hazaron connections ko direct database par nahi jane deta.
+* Yeh raste mein khada ho kar saare connections ko **pool (manage aur reuse)** karta hai.
+* Database ko sirf utne hi connections deta hai jitni database ki bardasht (capacity) hai. Baaki requests ko line mein rakhta hai jab tak pehle wale connections free na ho jayein.
+
+
+
+---
+
+### Summary Table ⚡
+
+| Key Component | Kaam |
+| --- | --- |
+| **Problem** | Lambda hazaron connections ek sath bhej kar RDS Database ko overload kar raha hai. |
+| **RDS Proxy (Answer)** | Lambda aur RDS ke beech mein baith kar connections ko queue/pool karta hai taake database overload na ho. |
+
+---
+
 
 10-October-2026
