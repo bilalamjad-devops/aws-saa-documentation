@@ -104,6 +104,20 @@ Socho ek bakery hai jahan tray par **garam biscuits (data records)** continuous 
 | **Kubernetes (k8s)** | **Amazon EKS** | ❌ No (Kubernetes API compatible) |
 
 ---
+---
+---
+---
+---
+
+### RDS Retention Limits Cheat Sheet ⚡
+
+| Backup Mechanism | Max Retention Limit | Best Use Case |
+| --- | --- | --- |
+| **RDS Native Automated Backup** | **35 Days** | Short-term point-in-time recovery (PITR) |
+| **AWS Backup Service** | **Unlimited** (Customable 90 days, 1 year, etc.) | Long-term compliance & centralized enterprise backups |
+| **Manual DB Snapshots** | **Indefinite** (Until manually deleted) | Pre-deployment or explicit point-in-time state locks |
+
+---
 
 14-October-2026
 
