@@ -118,6 +118,18 @@ Socho ek bakery hai jahan tray par **garam biscuits (data records)** continuous 
 | **Manual DB Snapshots** | **Indefinite** (Until manually deleted) | Pre-deployment or explicit point-in-time state locks |
 
 ---
+---
+---
+
+### CloudFront Security Cheat Sheet ⚡
+
+| Security Requirement | AWS Feature to Use |
+| --- | --- |
+| **Block Direct S3 Access** | **Origin Access Control (OAC)** / OAI |
+| **Restrict Access to Specific Users / Clients** | **CloudFront Signed URLs** or **Signed Cookies** |
+| **Block Traffic by Country / IP / Bad Bots** | **AWS WAF** (Web Application Firewall) |
+
+---
 
 14-October-2026
 
