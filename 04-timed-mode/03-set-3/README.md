@@ -91,6 +91,19 @@ Socho ek bakery hai jahan tray par **garam biscuits (data records)** continuous 
 | **SQL Queries on S3 Data** | **Amazon Athena** |
 
 ---
+---
+---
+
+### AWS Database Compatibility Mapping ⚡
+
+| On-Premises Service | AWS Fully Managed Equivalent | Code Change Required? |
+| --- | --- | --- |
+| **MongoDB** | **Amazon DocumentDB** | ❌ No (MongoDB compatible) |
+| **Cassandra** | **Amazon Keyspaces** | ❌ No (CQL compatible) |
+| **Redis / Memcached** | **Amazon ElastiCache** | ❌ No (Redis/Memcached compatible) |
+| **Kubernetes (k8s)** | **Amazon EKS** | ❌ No (Kubernetes API compatible) |
+
+---
 
 14-October-2026
 
