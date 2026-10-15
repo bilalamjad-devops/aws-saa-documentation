@@ -42,6 +42,18 @@ AWS S3 Glacier mein **"Expedited Retrieval"** ka matlab hi yahi hai ke yeh aap k
 2. **Underlying Host Change:** Stop/Start karne se AWS instance ko kisi naye physical host server par launch kar sakta hai (AWS underlying physical host machine change kar deta hai).
 
 ---
+---
+---
+
+### Comparison Table 📊
+
+| Feature | Active-Active | Active-Passive |
+| --- | --- | --- |
+| **Kaam karne ka tareeqa** | Saare servers aik sath live traffic handle karte hain. | Aik server chal raha hota hai, dusra sirf backup ke liye baitha hota hai. |
+| **Resource Usage** | 100% utilization (Paisa zaya nahi hota). | Backup server idle rehta hai jab tak failover na ho. |
+| **Best For** | High availability & global scaling. | Disaster Recovery (DR) backups. |
+
+---
 
 14-October-2026
 
