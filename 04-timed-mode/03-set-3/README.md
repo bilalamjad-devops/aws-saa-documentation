@@ -31,7 +31,17 @@
 
 AWS S3 Glacier mein **"Expedited Retrieval"** ka matlab hi yahi hai ke yeh aap ki data nikalne ki request ko **Fast-Track (Urgent)** lane mein daal deta hai, taake 3-5 ghante (Standard Time) ke bajaye sirf **1 se 5 minutes** mein data mil jaye!
 
+---
+---
+---
 
+
+#### Answer Kya Keh Raha Hai? 💡
+
+1. **Instance Store Data Loss:** Instance Store volumes **ephemeral (temporary)** hotay hain. Jab instance stop hota hai, wo jis physical hypervisor server par chal raha hota hai us se detached ho jata hai, aur uska sara data permanantly delete (erase) ho jata hai.
+2. **Underlying Host Change:** Stop/Start karne se AWS instance ko kisi naye physical host server par launch kar sakta hai (AWS underlying physical host machine change kar deta hai).
+
+---
 
 14-October-2026
 
