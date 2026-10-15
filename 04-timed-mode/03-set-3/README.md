@@ -54,6 +54,21 @@ AWS S3 Glacier mein **"Expedited Retrieval"** ka matlab hi yahi hai ke yeh aap k
 | **Best For** | High availability & global scaling. | Disaster Recovery (DR) backups. |
 
 ---
+---
+---
+
+
+### AWS Managed AI Services Cheat Sheet ⚡
+
+| AWS AI Service | What it Does | Analogy / Simple Purpose |
+| --- | --- | --- |
+| **Amazon Transcribe** | Speech $\rightarrow$ Text | Kaan (Suntay hi text likhnay wala) |
+| **Amazon Polly** | Text $\rightarrow$ Speech | Munh (Text ko bol ke sunanewala) |
+| **Amazon Translate** | Language Translation | Mutarjim / Translator |
+| **Amazon Comprehend** | Text Analytics & Sentiment | Dhimag (Jazbaat aur topic samajhne wala) |
+| **Amazon Rekognition** | Image & Video Analysis | Aankhein (Chehre/Objects dekhne wala) |
+
+---
 
 14-October-2026
 
