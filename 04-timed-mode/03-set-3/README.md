@@ -131,6 +131,20 @@ Socho ek bakery hai jahan tray par **garam biscuits (data records)** continuous 
 
 ---
 
+---
+
+### Quick Comparison Table ⚡
+
+| Feature | Systems Manager Parameter Store (`SecureString`) | AWS Secrets Manager |
+| --- | --- | --- |
+| **Pricing (Standard)** | **Free** (No monthly fee per parameter) | $0.40 per secret / month |
+| **Automatic Rotation** | Manual / Custom Lambda | **Built-in automated rotation** (e.g., RDS passwords) |
+| **Best For** | General config data, environment variables, API keys | Credentials requiring frequent automated rotation |
+
+---
+
 14-October-2026
 
 15-October-2026
+
+17-October-2026
