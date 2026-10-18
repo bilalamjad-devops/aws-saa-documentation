@@ -148,6 +148,9 @@ Socho ek bakery hai jahan tray par **garam biscuits (data records)** continuous 
 * **By Default Multi-AZ:** Standard RDS ke bar aks, Amazon Aurora ka storage layer **automatically Multi-AZ** hota hai. Iska data 3 alag-alag Availability Zones (AZs) mein **6 copies** ki surat mein replicate hota hai.
 * **Writer & Readers:** Ek Aurora cluster mein ek primary **Writer instance** hota hai aur aap multiple **Reader instances** alag-alag AZs mein rakh sakte hain. Agar primary writer down ho jaye, toh Aurora khud-b-khud kisi bhi reader ko naya writer bana deta hai (**Automatic Failover**).
 
+<img width="1600" height="704" alt="aurora-serverless-v2-13Oct2026" src="https://github.com/user-attachments/assets/0c692e99-c8f9-41f9-a558-6eefc861ea2f" />
+
+
 14-October-2026
 
 15-October-2026
