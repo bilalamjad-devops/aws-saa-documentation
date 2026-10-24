@@ -27,7 +27,15 @@
 * **Short Polling (`ReceiveMessageWaitTimeSeconds` = 0):** Isme SQS foran return kar deta hai, chahe queue khali ho. Is se bohot saari empty responses generate hoti hain jo API calls aur CPU cycles waste karti hain.
 * **Long Polling (`ReceiveMessageWaitTimeSeconds` > 0):** Isme SQS wait karta hai (maximum 20 seconds tak) ke jab tak koi message queue mein na aa jaye. Agar message nahi hota, toh yeh foran reply karne ke bajaye thori der wait karta hai, jisse empty responses ki tadad dramatic tareeqay se kam ho jati hai, CPU waste nahi hota, aur cost bhi bachti hai.
 
+---
+---
+---
 
+### Asan Alfaz Mein Wazahat (Explanation) 🔍
+
+* **AWS Network Firewall:** Yeh ek fully managed service hai jo aap ko apne VPCs par network protections deploy karne ki ijazat deti hai. Iske zariye aap custom rule groups (Stateless aur Stateful rules) bana kar VPC ke andar aane wale (ingress) aur bahar jane wale (egress) traffic ko live inspect aur filter kar sakte hain. Isko implement karne ke liye VPC ke route tables ko update kiya jata hai taake traffic firewall se hokar guzrey.
+
+---
 
 
 23-October-2026
