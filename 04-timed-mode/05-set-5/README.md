@@ -6,5 +6,19 @@
 
 * **CloudTrail Data Events:** Sawal mein pucha gaya hai ke **"each data access must be audited at all levels"**. CloudTrail ke andar **Management Events** sirf bucket creation ya settings change (control plane) ko track karte hain, jabki individual objects par hone wali data access (jaise `GetObject` ya `PutObject`) ko track karne ke liye **Data Events** enable karne parte hain.
 
+---
+---
+---
+
+
+### Asan Alfaz Mein Wazahat (Explanation) 🔍
+
+* **Amazon Aurora:** Yeh AWS ka high-performance, fully managed relational database service hai jo MySQL aur PostgreSQL ke sath compatible hai.
+* Yeh **OLTP** workloads aur **ACID compliance** ko mukammal support karta hai.
+* Sab se main wajah yeh hai ke data pehle hi **50 TB** hai aur mazeed barhega. Standard databases kemukabilay, **Aurora automatically storage ko scale karta hai (upto 128 TB)** baghair kisi manual intervention ke, jo is massive scale ke liye perfect hai.
+
+
 
 23-October-2026
+
+24-October-2026
