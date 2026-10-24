@@ -17,6 +17,17 @@
 * Yeh **OLTP** workloads aur **ACID compliance** ko mukammal support karta hai.
 * Sab se main wajah yeh hai ke data pehle hi **50 TB** hai aur mazeed barhega. Standard databases kemukabilay, **Aurora automatically storage ko scale karta hai (upto 128 TB)** baghair kisi manual intervention ke, jo is massive scale ke liye perfect hai.
 
+---
+---
+---
+
+### Asan Alfaz Mein Wazahat (Explanation) 🔍
+
+* **Short Polling vs. Long Polling:**
+* **Short Polling (`ReceiveMessageWaitTimeSeconds` = 0):** Isme SQS foran return kar deta hai, chahe queue khali ho. Is se bohot saari empty responses generate hoti hain jo API calls aur CPU cycles waste karti hain.
+* **Long Polling (`ReceiveMessageWaitTimeSeconds` > 0):** Isme SQS wait karta hai (maximum 20 seconds tak) ke jab tak koi message queue mein na aa jaye. Agar message nahi hota, toh yeh foran reply karne ke bajaye thori der wait karta hai, jisse empty responses ki tadad dramatic tareeqay se kam ho jati hai, CPU waste nahi hota, aur cost bhi bachti hai.
+
+
 
 
 23-October-2026
