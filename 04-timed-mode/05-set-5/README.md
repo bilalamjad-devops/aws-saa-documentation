@@ -52,6 +52,9 @@ What can be used to configure the EC2 instances without having to establish an R
 ---
 ---
 
+<img width="956" height="817" alt="Amazon EBS encryption-19MAR2026 (2)" src="https://github.com/user-attachments/assets/6fa8011f-ac9f-4dd1-b41e-7bf8f93f2bfc" />
+
+
 ### Asan Alfaz Mein Wazahat (Explanation) 🔍
 
 * **AWS KMS (Key Management Service):** Amazon EBS ki encryption mukammal tor par **AWS KMS** par depend karti hai.
