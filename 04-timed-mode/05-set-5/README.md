@@ -48,6 +48,17 @@ What can be used to configure the EC2 instances without having to establish an R
 - EC2Config
 - AWS App Runner
 
+---
+---
+---
+
+### Asan Alfaz Mein Wazahat (Explanation) 🔍
+
+* **AWS KMS (Key Management Service):** Amazon EBS ki encryption mukammal tor par **AWS KMS** par depend karti hai.
+* Aap ya toh AWS ki taraf se di gayi default key (**Amazon-managed key**, jiska alias `aws/ebs` hota hai) use kar sakte hain.
+* Ya phir apni khud ki custom keys (**Customer-managed keys / your own keys**) KMS mein create kar ke EBS volume encryption ke liye select kar sakte hain.
+
+
 23-October-2026
 
 24-October-2026
