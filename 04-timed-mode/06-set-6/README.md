@@ -137,6 +137,21 @@ Jab aap ko apni website par **100% High Availability (Failover)** chahiye ho, ta
 
 
 ---
+---
+---
+
+### Asan Alfaz Mein Wazahat (Explanation) 🔍
+
+* **Option 1 (EventBridge + ACM/AWS Health Events + SNS):**
+* AWS Certificate Manager (ACM) khud automatic events generate karta hai jab koi certificate expiration ke qareeb hota hai.
+* Aap **Amazon EventBridge** mein ek rule bana sakte hain jo in ACM expiration events ko detect kare, aur seedha **Amazon SNS** (Simple Notification Service) ke zariye security team ko alert email/notification bhej de.
+
+
+* **Option 2 (AWS Config + EventBridge + SNS):**
+* AWS Config ke pas ek built-in managed rule hota hai (`acm-certificate-expiration-check`) jo ACM certificates ki expiration date ko monitor karta hai.
+* Jab AWS Config kisi certificate ko flag karta hai ke woh expire hone wala hai, toh **EventBridge** us event ko pakar kar **SNS** ke zariye team ko notify kar deta hai.
+
+
 
 
 25-October-2026
