@@ -140,6 +140,12 @@ Jab aap ko apni website par **100% High Availability (Failover)** chahiye ho, ta
 ---
 ---
 
+
+<img width="1017" height="655" alt="td-example-eventbridge-rule-for-acm-01-08-25 (1)" src="https://github.com/user-attachments/assets/371b5162-8d39-45bd-b020-0c962c9b6377" />
+
+<img width="1017" height="411" alt="td-daystoexpiry-metric-01-08-25 (1)" src="https://github.com/user-attachments/assets/5bfc6efb-cdff-44c5-baa6-eb39189de9f9" />
+
+
 ### Asan Alfaz Mein Wazahat (Explanation) 🔍
 
 * **Option 1 (EventBridge + ACM/AWS Health Events + SNS):**
