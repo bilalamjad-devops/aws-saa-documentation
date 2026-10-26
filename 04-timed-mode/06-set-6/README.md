@@ -147,12 +147,25 @@ Jab aap ko apni website par **100% High Availability (Failover)** chahiye ho, ta
 * Aap **Amazon EventBridge** mein ek rule bana sakte hain jo in ACM expiration events ko detect kare, aur seedha **Amazon SNS** (Simple Notification Service) ke zariye security team ko alert email/notification bhej de.
 
 
-* **Option 2 (AWS Config + EventBridge + SNS):**
-* AWS Config ke pas ek built-in managed rule hota hai (`acm-certificate-expiration-check`) jo ACM certificates ki expiration date ko monitor karta hai.
-* Jab AWS Config kisi certificate ko flag karta hai ke woh expire hone wala hai, toh **EventBridge** us event ko pakar kar **SNS** ke zariye team ko notify kar deta hai.
+Bilkul theek samjhe aap! Is poore concept ka **main takeaway** yeh hai:
+
+### 🎯 Key Takeaway:
+
+1. **CloudWatch `DaysToExpiry` Metric:**
+* **ACM (AWS Certificate Manager) khud** Amazon CloudWatch mein `DaysToExpiry` metric publish karta hai (din mein do baar) taake yeh pata chal sakay ke certificate expire hone mein kitne din baqi hain.
+
+
+2. **ACM Events & EventBridge:**
+* ACM apnay expiration events directly **Amazon EventBridge** (jisay pehle CloudWatch Events kehte thay) ko emit karta hai.
 
 
 
+Isi wajah se, TutorialsDojo ke sawal mein yeh dono tareeqay theek maane gaye hain:
+
+* **Tareeqa 1 (Metrics/Scheduled):** CloudWatch ki `DaysToExpiry` metric ya scheduled EventBridge rule ke zariye check karna.
+* **Tareeqa 2 (Event-driven):** ACM ke apnay native expiration events ko EventBridge ke zariye pakar kar SNS par alert bhej dena.
+
+---
 
 25-October-2026
 
