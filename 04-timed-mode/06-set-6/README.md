@@ -230,6 +230,41 @@ We can use read replica. we can use the same region or another region
 
 
 ---
+---
+---
+
+Yahan in teeno security terms ki full forms aur unka chota sa matlab hai:
+
+---
+
+### 1. SSL — **Secure Sockets Layer**
+
+* **Kya hai?** Yeh ek purana security protocol hai jo internet par data ko encrypt (secure) karne ke liye banaya gaya tha taake koi beech mein data chori na kar sakay.
+* *Note:* Aaj kal iska modern aur secure version **TLS** use hota hai, lekin purane naam ki wajah se log abhi bhi aam tor par "SSL" hi kehte hain.
+
+### 2. TLS — **Transport Layer Security**
+
+* **Kya hai?** Yeh SSL ka bilkul naya, behtar aur updated version hai. Jab bhi aap kisi website par HTTPS dekhte hain ya database ke sath secure connection banatay hain (**in-flight data encryption**), toh yeh **TLS** protocol hi hota hai jo data ko raste mein secure rakhta hai.
+
+### 3. CA — **Certificate Authority**
+
+* **Kya hai?** Yeh ek trusted organization ya entity hoti hai (jaise AWS Certificate Manager, Let's Encrypt, DigiCert) jo digital certificates **issue** karti hai. CA yeh guarantee deta hai ke jis server ya website se aap connect ho rahe hain, woh bilkul asli aur secure hai (jaise hum ne pichle sawal mein RDS ke liye Amazon RDS Root CA certificate download kiya tha).
+
+---
+
+**TDE** stands for **Transparent Data Encryption**.
+
+### Breakdown 💡
+
+* **Transparent:** Is ka matlab hai ke application level par koi code change nahi karna parta — encryption aur decryption database engine background mein khud ba khud handle kar leta hai.
+* **Data Encryption:** Yeh database files, backups, aur transaction logs ko storage level par encrypt karta hai.
+
+### Key Distinction for SAA-C03 🎯
+
+* **TDE = Data at Rest Encryption:** Database mein stored/saved data ko encrypt karne ke liye use hota hai.
+* **SSL/TLS = Data in Transit / In-Flight Encryption:** Network par web server aur database ke darmiyan travel karne wale data ko encrypt karne ke liye use hota hai.
+
+---
 
 
 
