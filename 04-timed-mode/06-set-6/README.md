@@ -202,7 +202,7 @@ Chaliye aap ke points ko mazeed pakka kar letay hain:
 * Aap **Different Region** mein bhi bana sakte hain (Cross-Region Read Replica).
 * *Lekin:* RDS ki cross-region replication asynchronous binlogs ki wajah se slow hoti hai (seconds ki lag hoti hai).
 
-
+We can use read replica. we can use the same region or another region
 
 ### 4. Aurora aur Cross-Region Replicas ⚡
 
