@@ -210,6 +210,22 @@ We can use read replica. we can use the same region or another region
 * *Farq sirf speed ka hai:* Aurora ka storage engine distributed hota hai, is liye jab aap Aurora ki **Cross-Region Replica** banate hain, toh replication lag **1 second se bhi kam (< 1 second)** hoti hai.
 
 ---
+---
+---
+
+
+
+### 3. Keyword Scanning Cheat Sheet 🔑
+
+| Question Keyword / Phrase | Direct Exam Mapping | Logic / Wajah |
+| --- | --- | --- |
+| **"In-flight data" / "Data in transit"** | **SSL/TLS Encryption (`rds.force_ssl` + Root CA)** | Jab bhi data network par chal raha ho, usay secure karne ke liye SSL/TLS parameters aur RDS Root CA certificate ki zaroorat hoti hai. |
+| **"Transparent Data Encryption (TDE)"** | **Data at Rest (Ghalat option)** | TDE sirf database ke andar stored/saved data ko encrypt karta hai, chalte hue data (in-flight) ko nahi. |
+
+
+---
+
+
 
 
 25-October-2026
