@@ -342,6 +342,46 @@ Which combination of actions best satisfies the given set of requirements while 
 | **`mysqldump` / Manual Snapshot & Restore (Trap Options)** | **Slow & Inefficient** | Large databases (1TB+) ke liye dumps ya manual snapshots banana aur restore karna slow aur resource-heavy hota hai. |
 
 ---
+---
+---
+
+### 1. Sawal Kya Keh Raha Hai? (Question Breakdown) ❓
+
+* **Scenario:** Aisi application ke liye compute resources set karne hain jahan workloads ko **high, sequential read aur write access** chahiye bohot baray data sets par jo **local storage** par paray hain.
+* **Sahi Jawab (Correct Answer):** **Storage Optimized Instances**
+* **Wazahat:** Jab bhi sawal mein **"local storage"**, **"high read/write IOPS"**, ya **"massive data sets on disk"** ka zikr ho, toh foran **Storage Optimized instances** (jaise `i3`, `i4i`, ya `d3`) select karni hain kyun ke inke sath high-speed local NVMe SSDs ya HDDs jude hote hain.
+
+---
+
+### 2. EC2 Instance Families ka Asaan Farq (Compute vs Storage vs Memory vs General Purpose) 🧩
+
+Aap ka yeh sawal bohot ahem hai! Exam mein instance family pehchanne ke liye yeh cheat sheet hamesha yaad rakhein:
+
+#### 1. General Purpose (M, T family) ⚖️
+
+* **Kab use hoti hai?** Jab aap ko **balanced** performance chahiye ho—na CPU bohot zyada chahiye ho, na memory.
+* **Kiske liye best hai?** Web servers, small/medium databases, application servers, aur dev/test environments.
+* **Asaan misal:** Ek aam laptop ya office PC jo har tarah ke normal kaam (browsing, coding, word editing) aram se kar leta hai.
+
+#### 2. Compute Optimized (C family) 🚀
+
+* **Kab use hoti hai?** Jab aap ki app ko **heavy CPU processing** chahiye ho, lekin RAM ya storage normal ho.
+* **Kiske liye best hai?** High-performance computing (HPC), batch processing, media transcoding (video rendering), gaming servers, aur scientific modeling.
+* **Asaan misal:** Ek high-end gaming PC ya video editing rig jismein processor (CPU) sab se taqatwar hota hai.
+
+#### 3. Memory Optimized (R, X, Z family) 🧠
+
+* **Kab use hoti hai?** Jab app ka saara data ya bohot bara data **RAM (Memory)** ke andar load hona ho taake speed ultra-fast ho.
+* **Kiske liye best hai?** In-memory databases (jaise Redis, Memcached), big data analytics (Apache Spark, Hadoop), aur large enterprise databases (SAP HANA).
+* **Asaan misal:** Ek aisa supercomputer jismein RAM 512 GB ya 1 TB ho taake poora data memory mein hi khul jaye aur disk par na jana pare.
+
+#### 4. Storage Optimized (I, D, H family) 💾
+
+* **Kab use hoti hai?** Jab app ko local disk par **bohot baray data sets** ke sath fast read/write karni ho. Inke sath physical high-speed NVMe SSDs attached hote hain.
+* **Kiske liye best hai?** NoSQL databases (Cassandra, MongoDB), distributed file systems, data warehousing, aur jo sawal mein pucha gaya: **high sequential read/write on local storage**.
+* **Asaan misal:** Ek heavy duty data server jismein dher sari fast SSD hard drives lagi hon jo foran data read/write kar sakein.
+
+---
 
 26-October-2026
 
