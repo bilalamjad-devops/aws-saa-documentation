@@ -265,6 +265,24 @@ Yahan in teeno security terms ki full forms aur unka chota sa matlab hai:
 * **SSL/TLS = Data in Transit / In-Flight Encryption:** Network par web server aur database ke darmiyan travel karne wale data ko encrypt karne ke liye use hota hai.
 
 ---
+---
+---
+
+Yahan par aik chota sa technical farq samjhna zaroori hai! Asal mein data flow is tarah nahi hota ke naya data gateway par rahe aur purana S3 par jaye.
+
+Balkay asli kahani yeh hai:
+
+### Asal Storage Kahan Hoti Hai? 🗄️
+
+* **Asal (Permanent) Storage hamesha Amazon S3 hoti hai.** Aap jo bhi data backup bhejte hain, woh foran cloud par S3 bucket mein save ho jata hai. S3 hi aap ka main database/storage hai.
+
+### Phir Storage Gateway kya karta hai? ⚡
+
+* **Local Cache (Temporary Storage):** AWS Storage Gateway aap ke on-premises server par aik **local cache disk** (SSD/HDD) banata hai.
+* Jab aap pichle **48 ghante ka data** mangte hain, toh gateway usay cloud se download nahi karta balkay apne **local cache** se foran utha kar de deta hai (is liye delay nahi hota).
+* Jab data 48 ghante se zyada purana ho jata hai aur local cache mein space ki zaroorat parti hai, toh purani files local cache se khatam ho jati hain (lekin S3 par hamesha safe rehti hain). Agar koi us purane data ko mang le, toh gateway thori der laga kar S3 se fetch kar ke le aata hai (jo ke sawal ki requirement ke mutabiq tolerable tha).
+
+---
 
 
 
