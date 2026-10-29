@@ -567,6 +567,94 @@ Aaiye in sab ko asaan lafzon mein mukammal tarike se samjhte hain:
 | **Main Purpose** | Flexibility | Avoiding capacity shortage / Interruption | Cost reduction | License compliance / BYOL |
 
 ---
+---
+---
+
+64. Question
+
+A company plans to launch an application that tracks the GPS coordinates of delivery trucks in the country. The coordinates are transmitted from each delivery truck every five seconds. The must be able to process coordinates from multiple consumers in real-time. The aggregated data will be analyzed in a separate reporting application.
+Which AWS service should you use for this scenario?
+
+- Amazon Simple Queue Service
+- Amazon AppStream
+- Amazon Elastic MapReduce (EMR)
+- `Amazon Kinesis`
+
+### 1. Sawal Kya Keh Raha Hai? (Question Breakdown) ❓
+
+* **Scenario:** Ek delivery tracking application banani hai jo poore mulk mein chalne waale delivery trucks ke GPS coordinates track karegi.
+* **Requirements:**
+1. High frequency data: Har truck **har 5 second** baad real-time location data bhej raha hai.
+2. Multiple consumers **real-time** mein is streaming data ko process kar sakein.
+3. Aggregated data ko aage ek reporting application mein analyze kiya jaye.
+
+
+
+---
+
+### 2. Sahi Jawab Kya Keh Raha Hai? (Correct Answer) 💡
+
+* **Option:** *Amazon Kinesis*
+* **Wazahat:**
+* **Amazon Kinesis (Kinesis Data Streams):** Fast aur continuous real-time data streams (jaise IoT sensors, GPS tracking, financial transactions) ko high scale par ingest aur process karne ke liye design kiya gaya hai.
+* Kinesis Data Streams multiple consumers (jaise Lambda, EC2 applications, ya analytics engines) ko real-time data concurrent tarike se read/process karne ki ijazat deta hai.
+
+
+
+*Kyunki baqi options ghalat hain:*
+
+* *Amazon SQS:* SQS queue standard messaging ke liye hai, lekin **multiple independent consumers** ek hi message ko real-time mein pub-sub style mein stream nahi kar sakte (ek consumer queue se message pick karke delete kar deta hai).
+* *Amazon AppStream:* Desktop applications ko browser mein stream/host karne ki service hai.
+* *Amazon Elastic MapReduce (EMR):* Massive batch big data analytics (Hadoop/Spark) ke liye hota hai, low-latency real-time stream ingestion ke liye nahi.
+
+---
+
+### 3. Keyword Scanning Cheat Sheet 🔑
+
+| Question Keyword / Phrase | Direct Exam Mapping | Logic / Wajah |
+| --- | --- | --- |
+| **"Real-time streaming data" + "GPS coordinates every 5 seconds" + "Multiple consumers"** | **Amazon Kinesis** | High-frequency IoT/location streaming streams ko real-time capture aur multiple consumers tak bhejne ke liye Kinesis standard service hai. |
+| **"Amazon SQS" (Trap Option)** | **Single Consumer Message Queuing** | SQS queuing ke liye hoti hai, concurrent pub-sub streaming analytics ke liye nahi. |
+| **"Amazon EMR"** | **Batch Big Data Analytics** | EMR batch analytics ke liye structured hai, real-time streaming ingestion endpoint nahi hai. |
+
+---
+---
+---
+
+
+**Nahi**, Amazon AppStream 2.0 YouTube ki tarah video content stream karne ke liye **nahi** hota.
+
+Dono mein farq yeh hai:
+
+---
+
+### 1. YouTube Streaming (Passive Video Content 📺)
+
+* **Kya hota hai?** Yeh Pre-recorded video ya Live Stream (jaise matches, webinars, vlogs) hoti hai.
+* **User Interactivity:** Zero. User sirf **Play, Pause, ya Seek** kar sakta hai, video ke andar moojood content ko control nahi kar sakta.
+* **AWS Equivalent:** **Amazon IVS (Interactive Video Service)** ya **AWS Elemental MediaLive / CloudFront**.
+
+---
+
+### 2. Amazon AppStream 2.0 (Interactive Software Application 🖱️)
+
+* **Kya hota hai?** Yeh poori **Interactive Desktop Application** ko Stream karta hai.
+* **User Interactivity:** 100%. User screen par click karta hai, type karta hai, 3D models rotate karta hai, ya software ke features run karta hai.
+* **Example:** Aap ke paas aik sasta/low-spec laptop hai, lekin aap ko **AutoCAD** ya **SolidWorks** (jo bohot heavy 3D software hain) chalana hai. AppStream AWS ke powerful GPU instance par woh software chalayega aur aap ke browser par uski screen aur mouse/keyboard inputs stream karega.
+
+---
+
+### Quick Comparison Table 📊
+
+| Feature | YouTube / Live Streaming | Amazon AppStream 2.0 |
+| --- | --- | --- |
+| **Stream Content** | Broadcast Video (MP4 / HLS) | Software Desktop Application GUI |
+| **Input** | None (Only Watch) | Mouse clicks, Keyboard typing, File creation |
+| **Analogy** | TV / Netflix dekhna | Cloud PC / Remote Desktop par game ya software khelna |
+
+---
+
+26-October-2026
 
 26-October-2026
 
