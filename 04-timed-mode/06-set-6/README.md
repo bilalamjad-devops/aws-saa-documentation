@@ -454,6 +454,60 @@ Aap ka yeh sawal bohot ahem hai! Exam mein instance family pehchanne ke liye yeh
 | **"AWS DataSync" (Trap Option)** | **Storage Migration** | DataSync sirf files/storage ko sync ya migrate karne ke liye hai. |
 
 ---
+---
+---
+
+
+51. Question
+
+A healthcare company has developed an AWS Lambda function to handle requests from a third-party analytics service. When new patient data is available, the service sends an HTTP POST request to a webhook intended to trigger the Lambda function.
+
+What would be the MOST operationally efficient solution to ensure that the service can call the Lambda function?
+
+- `Generate a Lambda Function URL and use it as the webhook for the third-party analytics service.`
+- Attach an Amazon SQS queue to the Lambda function. Use the SQS queue URL as the webhook.
+- Create an API Gateway endpoint for the Lambda function. Provide the endpoint as a webhook to the third-party analytics service.
+- Launch an EC2 instance that acts as a proxy for the Lambda function. Give the instance’s public IP as a webhook to the third-party analytics service.
+
+<img width="1024" height="321" alt="lambda-function-url-06-19-23 (1)" src="https://github.com/user-attachments/assets/4f3acddc-684b-43a9-b54a-f588d4e2ee45" />
+
+### 1. Sawal Kya Keh Raha Hai? (Question Breakdown) ❓
+
+* **Scenario:** Ek healthcare company ne ek AWS Lambda function banaya hai jo third-party analytics service ki requests handle karega. Jab bhi naya patient data aata hai, woh service aik **HTTP POST request** (webhook) bhejti hai jo Lambda function ko trigger karegi.
+* **Requirements:** Sab se **operationally efficient solution** konsa hai jis se third-party service asani se Lambda function ko call kar sake?
+
+---
+
+### 2. Sahi Jawab Kya Keh Raha Hai? (Correct Answer) 💡
+
+* **Option:** *Generate a Lambda Function URL and use it as the webhook for the third-party analytics service.*
+* **Wazahat:**
+* **Lambda Function URL** aik dedicated, built-in HTTPS endpoint hota hai jo aap direct kisi bhi Lambda function ke liye generate kar sakte hain. Iske liye beech mein kisi API Gateway ya extra resource ko configure karne ki koi zaroorat nahi parti.
+* Kyunki third-party service ko seedha HTTP POST webhook ke liye ek URL chahiye, Lambda Function URL sab se asan, fast, aur **least operational overhead** (minimum management) wala tareeqa hai.
+
+
+
+*Kyunki baqi options ghalat ya zyada complex hain:*
+
+* *Amazon SQS queue:* SQS HTTP POST webhooks ko direct accept nahi kar sakta kyunki webhooks HTTP requests bhejte hain, queue nahi.
+* *API Gateway:* Pehle API Gateway ek zamane mein standard tareeqa tha, lekin jab se AWS ne **Lambda Function URLs** introduce kiye hain, tab se simple webhook setups ke liye API Gateway ki complexity (aur extra cost) ki zaroorat nahi parti.
+* *EC2 instance proxy:* EC2 instance chalana, usko maintain karna, patching karna aur security manage karna bohot zyada operational overhead create karta hai.
+
+---
+
+### 3. Keyword Scanning Cheat Sheet 🔑
+
+| Question Keyword / Phrase | Direct Exam Mapping | Logic / Wajah |
+| --- | --- | --- |
+| **"HTTP POST request to a webhook" + "Trigger the Lambda function" + "Most operationally efficient"** | **Lambda Function URL** | Jab direct HTTPS endpoint chahiye ho kisi single Lambda function ke liye bina API Gateway ke, toh Function URL sab se efficient hai. |
+| **"API Gateway" (Traditional Choice)** | **More Complex & Costly** | API Gateway tab use hota hai jab advanced features (throttling, API keys, request validation) chahiye hon, simple webhook ke liye overkill hai. |
+| **"EC2 instance as a proxy" (Trap Option)** | **High Operational Overhead** | EC2 manage karna padta hai, jabke serverless options mein management zero hoti hai. |
+
+---
+
+26-October-2026
+
+27-October-2026
 
 26-October-2026
 
