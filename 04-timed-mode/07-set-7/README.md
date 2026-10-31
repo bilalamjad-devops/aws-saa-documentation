@@ -422,6 +422,15 @@ Immediately think:
 
 **Job Bookmark = "Glue, remember what you already processed."**
 
+---
+---
+---
+
+### 🧠 One-Line Memory
+
+> **Stateless App + Traffic stuck on 1 EC2 instance ➔ Disable ALB Sticky Sessions**
+
+
 29-October-2026
 
 30-October-2026
