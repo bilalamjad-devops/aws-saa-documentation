@@ -283,6 +283,144 @@ Aap ne poori baat ko bilkul ek line mein sum up kar diya:
 Yeh rule yaad rakh liya toh Route 53 ke exam questions mein kabhi ghalat nahi hoga!
 
 ---
+---
+---
+
+Yes — this question is actually testing one very specific **AWS Glue feature**.
+
+### 🎯 What is the question saying?
+
+The bank has:
+
+```text
+S3
+ ↓
+XML financial data
+```
+
+Every day, **new data is added**.
+
+But their Glue ETL job does this:
+
+```text
+Day 1:
+100 files → process all 100
+
+Day 2:
+20 new files added
+
+Glue processes:
+120 files ❌
+```
+
+So Glue is **processing old data again and again**.
+
+The bank wants:
+
+```text
+Day 1:
+100 files → process 100
+
+Day 2:
+20 new files → process ONLY 20 ✅
+
+Day 3:
+10 new files → process ONLY 10 ✅
+```
+
+This saves **processing time and resources**.
+
+---
+
+### ✅ Correct answer: Enable job bookmarks
+
+**AWS Glue Job Bookmarks** allow Glue to **remember what data it has already processed**.
+
+Think of a bookmark like a **bookmark in a book** 📖.
+
+If you read pages 1–100 today, you put a bookmark at page 100.
+
+Tomorrow:
+
+> "Continue from where I stopped."
+
+Similarly:
+
+```text
+First run:
+S3 files 1–100
+       ↓
+Glue processes them
+       ↓
+Bookmark remembers them
+
+Next run:
+S3 files 1–100 + 101–120
+                  ↑
+          Process only new data
+```
+
+So:
+
+> **Job Bookmark = remembers previously processed data and helps process only new/changed data.**
+
+---
+
+### ❌ Why the other answers?
+
+**Glue Data Quality**
+
+Used to check whether data is **valid/accurate/complete**.
+
+Example:
+
+> Is `customer_id` present?  
+> Is age within an expected range?
+
+It doesn't solve repeated processing.
+
+---
+
+**FindMatches ML Transform**
+
+Used to find **matching/duplicate records**.
+
+Example:
+
+```text
+John Smith, 123 Main St
+John Smith, 123 Main Street
+```
+
+It can identify that they may represent the same person.
+
+Not for tracking previously processed files.
+
+---
+
+**NumberOfWorkers = 3**
+
+Only changes the **amount of compute capacity**.
+
+It doesn't tell Glue:
+
+> "Don't process the old files."
+
+---
+
+### 🔥 SAA shortcut
+
+When you see:
+
+> **Glue keeps processing the same old data + want only new/changed data**
+
+Immediately think:
+
+**👉 Glue Job Bookmarks** ✅
+
+### 🧠 One-line memory
+
+**Job Bookmark = "Glue, remember what you already processed."**
 
 29-October-2026
 
