@@ -249,6 +249,9 @@ What is the most efficient solution to meet these requirements with minimal oper
 
 <img width="1268" height="1010" alt="ui_aws_lake_formation_columnar_level_access_control (2)" src="https://github.com/user-attachments/assets/b5811aa2-7ec8-413a-843d-9be2c020b8b0" />
 
+<img width="1552" height="648" alt="aws_lake_formation_columnar_level_access_control (2)" src="https://github.com/user-attachments/assets/394da3ff-7e08-4cce-8770-5a27854c6947" />
+
+
 Koi baat nahi! Aayein isay bhi bohot aasan daily-life example se samajhte hain:
 
 ---
