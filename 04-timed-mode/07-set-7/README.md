@@ -197,7 +197,39 @@ Yeh hamesha background mein chal raha hota hai aur AWS ki **Best Practices** ke 
 > Jab bhi exam sawal mein **"Service Limits"** aur **"AWS Best Practices"** ke lafz ek sath aayein, toh 99% cases mein jawab **AWS Trusted Advisor** hota hai.
 
 ---
+---
+---
 
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek VPC ke andar AWS resources hain aur Solutions Architect yeh ensure karna chahta hai ke resources apne **service limits (quotas)** ko cross na karein.
+2. **Requirement:** Ek aisa system chahiye jo **AWS best practices** ke mutabiq recommendations de aur service limits ki monitoring kare.
+
+---
+
+### 🔍 Keyword Scanning (Sawal se Sahi Jawab Tak)
+
+* **Keywords in Question:** `"service limits"`, `"recommendations"`, `"AWS best practices"`.
+* **Matching AWS Feature:**
+* **AWS Trusted Advisor:** Yeh ek aisi managed service hai jo aapke poore AWS environment ko inspect karti hai aur **5 categories** (Cost Optimization, Security, Fault Tolerance, Performance, aur **Service Limits**) mein best practice recommendations deti hai. Service limits/quotas check karne ke liye Trusted Advisor sab se best tool hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **AWS Cost Explorer:** Yeh sirf costs aur spending trends ko analyze karne ke liye hota hai, service limits ya best practices recommendations ke liye nahi.
+* **Amazon Inspector:** Yeh EC2 instances, containers, aur Lambda functions mein security vulnerabilities aur network reachability scan karta hai.
+* **AWS Budgets:** Yeh cost aur usage limits set karne aur alert generate karne ke liye hota hai jab aapka budget exceed hone lagta hai, resource service limits (jaise VPC limits ya EC2 limits) ke liye nahi.
+
+---
+
+### ✅ Correct Answer:
+
+* **AWS Trusted Advisor**
+
+---
 
 29-October-2026
 
