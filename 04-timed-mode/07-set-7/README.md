@@ -91,6 +91,61 @@ Is pooray sawal ka maqsad **Disaster Recovery (Backup/DR)** setup karna hai:
 > Jab bhi exam mein **"FSx for NetApp ONTAP"** ka **Disaster Recovery (DR)** ya **Replication** pucha jaye, toh hamesha **NetApp SnapMirror** ko select karna hai!
 
 ---
+---
+---
+
+13. Question
+
+A company faces performance degradation due to intermittent traffic spikes in its application. The application is deployed across multiple EC2 instances within an Auto Scaling group and is fronted by a Network Load Balancer (NLB). The operations team found out that HTTP errors are not being detected by the NLB. As a result, clients are continuously routed to unhealthy targets and are never replaced, which impacts the availability of the application.
+
+Which solution could resolve the issue with the least amount of development overhead?
+
+- Configure CloudFront as a content delivery network (CDN) in front of the NLB to reduce the load on the instances and improve performance.
+- `Configure the NLB to perform HTTP health checks on the critical paths of the application.`
+- Use an Application Load Balancer (ALB) in place of the NLB. Enable HTTP health checks using the application's path.
+- Increase the NLB's idle timeout to allow more time for requests to be processed, reducing the occurrence of intermittent HTTP/s errors.
+
+<img width="1920" height="1003" alt="NLB-Health-Check-19-06-2023 (2)" src="https://github.com/user-attachments/assets/1d57f9b7-07db-4bba-a199-6de95eae51dd" />
+
+
+No problem! Aayein isko ek simple real-world example se step-by-step samajhte hain:
+
+---
+
+### 1. Masla Kya Tha? (The Problem)
+
+Maan lein aapki ek dukaan (application) hai aur aapne bahar ek guard (**NLB**) bithaya hua hai.
+
+* Pehle guard sirf yeh dekhta tha ke **dukaan ka darwaza khula hai ya nahi** (TCP Port Check).
+* Darwaza khula hota tha, toh guard customer ko andar bhej deta tha.
+* Lekin andar **dukaan ka counter kharab ho chuka tha** (HTTP 500 Error). Customer andar jata tha, kharab service milti thi, aur wapas chala jata tha.
+* Guard ko nahi pata chalta tha ke counter kharab hai, kyunki usne sirf darwaza khula dekha tha!
+
+---
+
+### 2. Solutions Ka Comparison
+
+Aapke paas is masley ko hal karne ke do tarike hain:
+
+| Tareeqa | Kya Karna Parega? | Mehnat (Overhead) |
+| --- | --- | --- |
+| **Option A (Guard badal kar naya Guard lana - ALB)** | Pura NLB hatao, naya ALB lagao, DNS badlo, security groups naye sir se set karo. | **Boht Zyada Mehnat** (High Overhead) |
+| **Option B (Purane Guard ko Training do - NLB HTTP Check)** | Guard (NLB) wahi rahega, bas usko bolo: *"Ab se sirf darwaza mat dekhna, andar ja kar counter (HTTP Path) bhi check karna ke service mil rahi hai ya nahi."* | **Boht Kam Mehnat** (Least Overhead) |
+
+---
+
+### 🔑 Core Takeaway (Exam Rule)
+
+AWS NLB ke paas yeh feature hota hai ke woh **HTTP Health Check** kar sakta hai.
+
+Jab hum bas NLB ki setting mein ja kar Health Check ko `TCP` se badal kar `HTTP` (path e.g. `/health`) kar dete hain, toh:
+
+1. NLB HTTP errors ko detect karna shuru kar deta hai.
+2. Unhealthy server par traffic bhejna band kar deta hai.
+3. Aur is kaam ke liye humein **poora Load Balancer replace nahi karna parta**, jis se hamara time aur mehnat dono bachti hain (**Least Development Overhead**).
+
+---
+
 
 
 29-October-2026
