@@ -145,7 +145,58 @@ Jab hum bas NLB ki setting mein ja kar Health Check ko `TCP` se badal kar `HTTP`
 3. Aur is kaam ke liye humein **poora Load Balancer replace nahi karna parta**, jis se hamara time aur mehnat dono bachti hain (**Least Development Overhead**).
 
 ---
+---
+---
 
+
+21. Question
+
+A Solutions Architect must ensure that AWS resources in an Amazon VPC do not exceed their service limits. To achieve this, the architect requires a system that provides recommendations to ensure resource usage aligns with AWS best practices.
+
+Which service is the MOST effective for this task?
+
+- AWS Cost Explorer
+- `AWS Trusted Advisor`
+- Amazon Inspector
+- AWS Budgets
+
+<img width="1844" height="787" alt="TD_AWS_Trusted_Advisor_14Nov2024 (1)" src="https://github.com/user-attachments/assets/31477f5f-051c-43ad-94fa-69f8a7f3e1df" />
+
+
+Aayein isko ek simple example se samajhte hain:
+
+---
+
+### 1. Masla Kya Hai? (The Problem)
+
+Har AWS account mein har resource ki ek **limit (quota)** hoti hai (jaise ek VPC mein kitne Elastic IPs ho sakte hain ya kitne EC2 instances chal sakte hain).
+
+Agar aapki limit poori ho jaye aur aap naya resource banane ki koshish karein, toh AWS error de deta hai.
+
+---
+
+### 2. Solution: AWS Trusted Advisor
+
+**AWS Trusted Advisor** aap ke account ke **Personal Doctor ya Inspector** ki tarah hai.
+
+Yeh hamesha background mein chal raha hota hai aur AWS ki **Best Practices** ke mutabiq aapko alert karta hai. Is ke paas ek khas **Service Limits Check** hota hai jo aapko pehle hi bata deta hai:
+
+> *"Suno! Aapki Elastic IP limit 80% tak poori ho chuki hai, is se pehle ke aapka kaam ruke, limit barhane ki request bhej do."*
+
+---
+
+### 3. Baaqi Options Kyun Galat Hain?
+
+* **AWS Cost Explorer / AWS Budgets:** Yeh dono sirf **paise (cost/bills)** ki monitoring karte hain. Inka resource ki technial limit se koi taalluq nahi.
+* **Amazon Inspector:** Yeh sirf **security vulnerabilities (hacking aur viruses)** scan karta hai, service limits check nahi karta.
+
+---
+
+### 🔑 Exam Tip:
+
+> Jab bhi exam sawal mein **"Service Limits"** aur **"AWS Best Practices"** ke lafz ek sath aayein, toh 99% cases mein jawab **AWS Trusted Advisor** hota hai.
+
+---
 
 
 29-October-2026
