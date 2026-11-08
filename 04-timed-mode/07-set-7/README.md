@@ -230,6 +230,65 @@ Yeh hamesha background mein chal raha hota hai aur AWS ki **Best Practices** ke 
 * **AWS Trusted Advisor**
 
 ---
+---
+---
+
+
+22. Question
+
+An organization seeks to enhance its customer experience by integrating and visualizing its diverse data sources. The organization has a robust Amazon S3 data lake, governed by AWS Lake Formation, containing detailed purchase histories. Additionally, they store operational data, including real-time inventory and sales information, in an Amazon Aurora MySQL database.
+
+The goal is to create a dynamic visualization in Amazon QuickSight, joining the data lake content with the Aurora database. The company requires stringent column-level authorization, allowing its marketing team to access only specific columns in the database for targeted promotions and customer insights.
+
+What is the most efficient solution to meet these requirements with minimal operational overhead?
+
+- Leverage AWS Glue Elastic Views to create a materialized view of the Aurora database in Amazon S3. Implement an S3 bucket policy for column-level access control for QuickSight users, and use Amazon S3 as the data source in QuickSight.
+- Utilize AWS Glue Studio to transfer data from the Aurora database to the S3 data lake. Apply an IAM policy to QuickSight users for column-level access control, and then use Amazon S3 as the data source in QuickSight.
+- `Employ a Lake Formation blueprint to incrementally ingest data from the Aurora database to the S3 data lake, then enforce column-level access control by creating a Lake Formation data filter with the specified columns. Set up Amazon QuickSight to use Amazon Athena as its data source.`
+- Configure an Amazon EMR job to ingest data directly from the Aurora database to QuickSight's SPICE engine, filtering to include only the necessary columns.
+
+<img width="1268" height="1010" alt="ui_aws_lake_formation_columnar_level_access_control (2)" src="https://github.com/user-attachments/assets/b5811aa2-7ec8-413a-843d-9be2c020b8b0" />
+
+Koi baat nahi! Aayein isay bhi bohot aasan daily-life example se samajhte hain:
+
+---
+
+### 1. Masla Kya Hai? (The Problem)
+
+Company ke paas do alag-alag jagah par data pada hai:
+
+1. **Amazon S3** par purana customer data.
+2. **Aurora Database** par inventory ka data.
+
+Marketing team ko inn dono data ko milakar **QuickSight** mein graphs dekhne hain.
+
+Lekin masla yeh hai ke Marketing team ko **saare columns nahi dikhane** (jaise secret prices ya personal details wale columns chupane hain). Isay kehte hain **Column-Level Access Control**.
+
+---
+
+### 2. Sahi Jawab (AWS Lake Formation) Kyun Hai?
+
+AWS ne data lakes ko secure karne ke liye ek special service banayi hai jiska naam hai **AWS Lake Formation**. Iska kaam hi data lake ki **security aur governance** sambhalna hai.
+
+* **Blueprints:** Aurora se automatic data S3 data lake mein lane ke liye kisi coding ki zaroorat nahi parti, Lake Formation ka **Blueprint** feature yeh kaam direct kar deta hai.
+* **Data Filters:** Is feature ke zariye aap easily tick kar sakte hain ke: *"Marketing team sirf Column A aur Column B dekh sakti hai, baaki hide kar do."*
+* **Athena + QuickSight:** QuickSight data ko Athena ke zariye read karta hai, aur Athena auto-check karta hai ke Lake Formation ne kya permissions di hain.
+
+---
+
+### 3. Baaqi Options Kyun Galat Hain?
+
+* **S3 Bucket Policy (Option 1):** S3 bucket policy yeh toh bata sakti hai ke kis file ko download karna hai, lekin file ke **andar ke columns ko hide nahi kar sakti**.
+* **IAM Policy (Option 2):** IAM policy bhi AWS services ki permissions deti hai, yeh kisi database file ke **andar individual columns nahi chupa sakti**.
+* **Amazon EMR (Option 4):** EMR chalana bohot mushkil aur costly kaam hai, jabke Lake Formation bina kisi mehnat ke easily ho jata hai.
+
+---
+
+### 🔑 Exam Tip:
+
+> Jab bhi exam mein **"S3 Data Lake"**, **"QuickSight / Athena"**, aur **"Column-level / Row-level security"** ki baat ho, toh hamesha **AWS Lake Formation (Data Filters)** hi sahi jawab hota hai!
+
+---
 
 29-October-2026
 
