@@ -38,6 +38,57 @@ AWS kehta hai: *"Aapko apni purani machine utha kar AWS par laane ki zaroorat na
 ---
 ---
 
+9. Question
+
+A startup company running applications on multiple Amazon EC2 instances is utilizing Amazon FSx for NetApp ONTAP for its shared storage on its primary region. File shares in the region are configured over NFS and CIFS protocols.
+
+As part of resiliency requirements, the company needs to implement a storage disaster recovery (DR) solution in a secondary region using the same protocol as the primary region.
+
+Which of the following satisfies the given requirements with the LEAST amount of management overhead?
+
+- Launch an FSx instance in both source and destination regions, then establish connectivity with a VPC peering connection. Set up an AWS DataSync agent near your source data. Configure AWS DataSync service to replicate data from the source to the destination.
+- Using on-demand data replication, set up an automated snapshot schedule of the Amazon FSx file system to an S3 bucket. Use the CopySnapshotAndUpdateVolume API to copy the snapshot to the destination region. Use the CreateVolume API to create a volume on the destination and mount the new volume to the destination file system.
+- Provision an FSx instance in both source and destination regions, then establish connectivity with a VPC peering connection. Using AWS Backup, create a volume backup from the source region. Copy the backup volume to the destination region and restore using the Amazon FSx console.
+- `Create an FSx for ONTAP instance in both source and destination regions, then establish connectivity with a VPC peering connection. Configure NetApp SnapMirror to replicate data between the two instances.`
+
+<img width="565" height="467" alt="CreateAmazonFSxForNetAppONTAP (2)" src="https://github.com/user-attachments/assets/6f07e50e-4f7a-4673-8234-23c3ab11d6b0" />
+
+
+Aasan lafzon mein samajhte hain:
+
+---
+
+### 1. Simple Example (Real-World Analogy)
+
+Is pooray sawal ka maqsad **Disaster Recovery (Backup/DR)** setup karna hai:
+
+* Imagine karo aapki main file drive **Region A (Karachi)** mein chal rahi hai.
+* Aap chahte ho ke sab files automatically **Region B (Lahore)** wale server par copy hoti rahein taake agar Karachi ka data center tabah bhi ho jaye, toh Lahore se kam foran shuru ho sakay.
+
+---
+
+### 2. NetApp ONTAP Kya Hai?
+
+* **NetApp** ek mashhoor storage software company ka naam hai.
+* **ONTAP** unka flagship **Storage Operating System / Engine** hai jo file systems, fast data storage, aur enterprise features (deduplication, fast snapshots, compression) handle karta hai.
+* **AWS FSx for NetApp ONTAP:** AWS ne NetApp ke sath partnership karke unka pura ONTAP software system AWS cloud par fully-managed service ke tor par de diya hai.
+
+---
+
+### 3. SnapMirror Kya Hai Aur Kyun Use Hua?
+
+* **SnapMirror** NetApp ONTAP ka apna **built-in (native) feature** hai.
+* Iska kaam hi sirf yeh hai ke ek NetApp storage server se data ko doosre NetApp storage server par **automatically replicate (copy)** karta rahe.
+* **Kyun Choose Kiya?** Kyunki yeh feature storage engine ke andar **pehle se built-in (pehle se bana hua)** hota hai. Humein koi alag se software/agent install nahi karna parta, na manual script likhni parti hai — bus ek click par replication shuru ho jati hai (minimal overhead).
+
+---
+
+### 💡 AWS Exam Tip (Rule of Thumb):
+
+> Jab bhi exam mein **"FSx for NetApp ONTAP"** ka **Disaster Recovery (DR)** ya **Replication** pucha jaye, toh hamesha **NetApp SnapMirror** ko select karna hai!
+
+---
+
 
 29-October-2026
 
