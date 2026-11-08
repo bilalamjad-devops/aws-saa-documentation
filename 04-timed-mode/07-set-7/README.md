@@ -53,6 +53,9 @@ Which of the following satisfies the given requirements with the LEAST amount of
 
 <img width="565" height="467" alt="CreateAmazonFSxForNetAppONTAP (2)" src="https://github.com/user-attachments/assets/6f07e50e-4f7a-4673-8234-23c3ab11d6b0" />
 
+<img width="1552" height="505" alt="AmazonFSxForNetAppONTAP (1)" src="https://github.com/user-attachments/assets/8451d299-6966-46f6-b0a6-dffb33bdd560" />
+
+
 
 Aasan lafzon mein samajhte hain:
 
