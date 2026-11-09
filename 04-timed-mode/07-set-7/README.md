@@ -339,6 +339,156 @@ Aayein isay step-by-step bohot simple lafzon mein samajhte hain:
 | **Supported Storage** | **Amazon EFS** | EBS support nahi hota, aur EFS high performance deta hai. |
 
 ---
+---
+---
+
+28. Question
+
+A serverless application has been launched on the DevOps team’s AWS account. Users from the development team’s account must be granted permission to invoke the Lambda function that runs the application. The solution must use the principle of least privilege access.
+
+Which solution will fulfill these criteria?
+
+
+- On the function’s execution role, add a permission that includes the lambda:InvokeFunction as action and arn:aws:iam::[DEV AWS Account Number]:root as principal.
+- On the function’s execution role, add a permission that includes the lambda:* as action and arn:aws:iam::[DevOps AWS Account Number]:root as principal.
+- On the function’s resource-based policy, add a permission that includes the lambda:* as action and arn:aws:iam::[DevOps AWS Account Number]:root as principal.
+- `On the function’s resource-based policy, add a permission that includes the lambda:InvokeFunction as action and arn:aws:iam::[DEV AWSAccount Number]:root as principal.`
+
+### 🎯 What is the question saying?
+
+There are **2 AWS accounts**:
+
+- **DevOps account** → contains the Lambda function
+- **Development account** → developers need permission to **invoke** that Lambda
+
+The requirement is:
+
+> Developers from another AWS account should be able to call the Lambda, with **least privilege**.
+
+So we need to answer **two things**:
+
+1. **Where do we give the permission?**
+2. **What exact permission do we give?**
+
+---
+
+### ✅ Correct answer
+
+**Option 4:**
+
+> On the Lambda function’s **resource-based policy**, allow `lambda:InvokeFunction` for `arn:aws:iam::[DEV AWS Account Number]:root`.
+
+### 🔑 Why?
+
+Lambda has a **resource-based policy** specifically for saying:
+
+> "Who is allowed to invoke this Lambda?"
+
+For cross-account access, the Lambda resource policy can trust another AWS account.
+
+Conceptually:
+
+```text
+Development Account
+        │
+        │ lambda:InvokeFunction
+        ▼
+   Lambda Function
+   (DevOps Account)
+        │
+        └── Resource-based policy
+              │
+              └── Allows Dev Account
+```
+
+And **least privilege** means:
+
+```text
+lambda:InvokeFunction
+```
+
+not:
+
+```text
+lambda:*
+```
+
+Because developers only need to **invoke** the function, not perform every Lambda action.
+
+---
+
+### 🧠 What is a resource-based policy?
+
+Think of it like this:
+
+**Identity-based policy** = permission attached to the **person/role**
+
+> "What can this user do?"
+
+**Resource-based policy** = permission attached to the **AWS resource**
+
+> "Who can access this resource?"
+
+For Lambda cross-account access, the Lambda's **resource-based policy** is the important part.
+
+---
+
+### ❌ Why the other options are wrong?
+
+**Option 1 — Execution role ❌**
+
+The Lambda **execution role** answers:
+
+> "What can the Lambda do?"
+
+Example:
+
+```text
+Lambda → S3
+Lambda → DynamoDB
+Lambda → CloudWatch
+```
+
+It does **not** grant other accounts permission to invoke the Lambda.
+
+---
+
+**Option 2 — Execution role + `lambda:*` ❌**
+
+Wrong policy type **and** too much permission.
+
+---
+
+**Option 3 — Resource policy + `lambda:*` ❌**
+
+Correct policy type, but violates **least privilege**.
+
+Developers only need:
+
+```text
+lambda:InvokeFunction
+```
+
+not every Lambda action.
+
+---
+
+### 🔥 Exam shortcut
+
+Remember this:
+
+> **Who can invoke my Lambda? → Lambda resource-based policy**
+
+> **What can my Lambda access? → Lambda execution role**
+
+And:
+
+> **Least privilege → exact action, not `service:*`**
+
+So:
+
+**Cross-account Lambda invocation → Resource-based policy + `lambda:InvokeFunction`** ✅
+
 
 29-October-2026
 
