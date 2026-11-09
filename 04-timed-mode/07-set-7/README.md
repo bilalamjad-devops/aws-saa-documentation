@@ -556,6 +556,9 @@ Which security measure should the solutions architect employ?
 - Use the CloudTrail Processing Library when doing audit compliance.
 - Enable CloudTrail Insights events.
 
+<img width="1110" height="947" alt="aws-cloudtrail-log-file-validation (2)" src="https://github.com/user-attachments/assets/1e6536c0-ce54-4afc-87a6-c4591b267b10" />
+
+
 ### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
 
 1. **Setup:** Company ne apne internal tools AWS par shift kiye hain. Audit compliance ke liye multiple **AWS CloudTrail** trails chal rahe hain jo saari API calls ko record karte hain. Logs Amazon S3 mein AWS KMS (SSE-KMS) encryption ke sath save ho rahe hain.
