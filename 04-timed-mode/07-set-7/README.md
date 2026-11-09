@@ -854,7 +854,87 @@ Think:
 
 And one correction to my previous answer: **Option 3's wording saying to create a VPC endpoint for RDS is technically incorrect.** If this is exactly how the TutorialsDojo question is written, I'd treat that answer carefully rather than memorizing the wording.
 
+---
+---
+---
 
+
+Yes — **you remember correctly**, but there is an important distinction.
+
+### 🔑 The 2 endpoint types you are thinking of
+
+For **VPC endpoints**, AWS has two main types:
+
+1. **Gateway Endpoint**
+   - Supports **S3**
+   - Supports **DynamoDB**
+   - Example:
+   ```text
+   EC2/ECS → Gateway Endpoint → S3
+   ```
+
+2. **Interface Endpoint**
+   - Uses **ENIs + private IPs**
+   - Supports many AWS services, such as:
+     - Secrets Manager
+     - Systems Manager
+     - CloudWatch
+     - ECR
+     - etc.
+
+So your memory is:
+
+> **Gateway endpoints → S3 + DynamoDB** ✅
+
+That's correct.
+
+---
+
+### ⚠️ But look carefully at Option 3
+
+It says:
+
+> "Configure two VPC endpoints for **RDS for MySQL database and S3**."
+
+This is actually a **problem with the answer wording**.
+
+There is **no normal VPC endpoint for an RDS database**.
+
+RDS is already a resource **inside your VPC**. You normally control access to it using its **Security Group**.
+
+So the intended design should conceptually be:
+
+```text
+ECS
+ │
+ ├──────────────► RDS
+ │                 ▲
+ │              Security Group
+ │
+ └──► S3 Gateway Endpoint ──► S3
+          ▲
+       Bucket Policy
+       aws:SourceVpce
+```
+
+### 🧠 For your exam memory
+
+Don't memorize Option 3 as:
+
+> "RDS endpoint + S3 endpoint"
+
+Instead remember:
+
+> **S3 → VPC Endpoint**  
+> **RDS → Security Group**
+
+And:
+
+> **S3 + DynamoDB → Gateway Endpoint** ✅
+
+> **Most other AWS services → Interface Endpoint** ✅
+
+So yes, **your S3/DynamoDB memory is right**. The RDS wording in that answer is confusing/technically questionable.
 
 29-October-2026
 
