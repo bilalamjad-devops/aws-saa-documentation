@@ -936,6 +936,135 @@ And:
 
 So yes, **your S3/DynamoDB memory is right**. The RDS wording in that answer is confusing/technically questionable.
 
+
+
+---
+---
+---
+
+
+44. Question
+
+A company operates several business applications on virtual machines (VMs) in an on-premises data center. Due to increasing demand, the existing infrastructure can no longer provide sufficient computing capacity to support business expansion.
+
+The company plans to migrate its non-critical workloads to AWS using a lift-and-shift strategy to preserve the existing application configurations and minimize migration time.
+
+Which of the following should the migration team perform to meet the given requirements? (Select THREE.)
+
+- Use AWS Schema Conversion Tool (AWS SCT) to assess the source virtual machines.
+- Configure AWS Elastic Disaster Recovery (AWS DRS) to continuously replicate the source virtual machines to AWS.
+- `Allow the initial data replication to finish, launch test instances in AWS, and perform acceptance testing to validate application functionality.`
+- `Configure AWS Transform MGN and install the AWS Replication Agent on the source virtual machines to enable continuous replication.`
+- `Verify that replication is synchronized, stop operational services on the source virtual machines, and launch cutover instances in AWS.`
+- Initiate a recovery drill to validate application functionality before launching recovery instances for production use.
+
+Yes — **you are correct**, and I need to correct my previous answer. I checked the exact Tutorials Dojo question, and the three answers are indeed **3, 4, and 5**. [Tutorials Dojo](https://portal.tutorialsdojo.com/quizzes/timed-mode-diagnostic-test-aws-certified-solutions-architect-associate/?utm_source=chatgpt.com)
+
+The important thing is that **AWS has recently renamed the service**.
+
+### ✅ Correct answers
+
+**3.** Allow initial replication to finish → launch test instances → acceptance testing.
+
+**4.** Configure **AWS Transform MGN** and install the **AWS Replication Agent**.
+
+**5.** Verify replication is synchronized → stop source services → launch cutover instances.
+
+These exactly match the AWS Transform MGN migration workflow. AWS documentation describes: install the Replication Agent → initial sync → test instances → acceptance testing → confirm no lag → stop source services → launch cutover. [AWS Documentation](https://docs.aws.amazon.com/de_de/mgn/latest/ug/migration-workflow-gs.html?utm_source=chatgpt.com)
+
+### 🔥 The part that confused us
+
+I previously said:
+
+> "AWS DRS is the correct service."
+
+That was **wrong for this question**.
+
+**AWS DRS** = Disaster Recovery Service.
+
+**AWS Transform MGN** = **lift-and-shift / rehost migration** service.
+
+And AWS has recently renamed **AWS Application Migration Service (MGN)** to **AWS Transform MGN**. AWS itself confirms that AWS Transform MGN was formerly called AWS Application Migration Service. [Amazon Web Services, Inc.](https://aws.amazon.com/transform/faq/?utm_source=chatgpt.com)
+
+### 🧠 Remember this for SAA
+
+| Requirement | Think |
+|---|---|
+| **Lift-and-shift / rehost VMs to AWS** | **AWS Transform MGN** |
+| **Continuous replication during migration** | **MGN Replication Agent** |
+| **Test before migration** | **Test instances** |
+| **Final migration** | **Cutover instances** |
+| **Disaster recovery** | **AWS DRS** |
+
+So for this question:
+
+**Lift-and-shift → MGN → Replicate → Test → Cutover** ✅
+
+Your correction was absolutely right.
+
+----
+----
+
+Yes. **AWS DRS and AWS Transform MGN are different services.** The names are confusing because both involve replication.
+
+### 🔑 Simple distinction
+
+| Service | Main purpose | Think |
+|---|---|---|
+| **AWS Transform MGN** | **Migrate** servers to AWS | 🏠 Move house |
+| **AWS DRS** | **Disaster recovery** | 🚑 Emergency backup |
+
+### 1. AWS Transform MGN
+
+Used when your goal is:
+
+> "I have on-premises VMs. I want to move them to AWS."
+
+Flow:
+
+**On-prem VM → Replication → Test → Cutover → AWS**
+
+That's exactly the question you just asked.
+
+---
+
+### 2. AWS DRS
+
+Used when your goal is:
+
+> "My primary server/data center might fail. I need a continuously replicated recovery environment in AWS."
+
+Flow:
+
+**Primary server → Continuous replication → AWS recovery environment → Recover when needed**
+
+It is for **business continuity / disaster recovery**, not primarily for permanently migrating the server.
+
+### 🔥 Exam shortcut
+
+If you see:
+
+**"Migrate / lift-and-shift / rehost on-prem servers to AWS"**
+
+→ **AWS Transform MGN** ✅
+
+If you see:
+
+**"Disaster recovery / recover after failure / RPO / RTO / recovery environment"**
+
+→ **AWS DRS** ✅
+
+So yes:
+
+> **Transform MGN ≠ DRS**. They are separate services with different purposes.
+
+----
+----
+----
+----
+
+
+
 29-October-2026
 
 30-October-2026
