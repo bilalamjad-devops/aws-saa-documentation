@@ -595,6 +595,176 @@ Which security measure should the solutions architect employ?
 
 > Jab bhi exam sawal mein **CloudTrail** ke sath **"tamper"**, **"tampering"**, **"integrity"**, ya **"modified log files"** ke lafz aayein, toh 100% sahi jawab **CloudTrail Log File Validation** hi hoga!
 
+----
+----
+----
+
+
+43. Question
+
+A startup company is developing a new application in AWS. The architecture is a web application with an Amazon Elastic Container Service (Amazon ECS) cluster that uses ECS Service Auto Scaling, an Amazon S3 bucket where the application assets are stored, and a managed Amazon RDS for MySQL Database. The database layer of the web application contains personally identifiable information (PII) data. As part of compliance requirements, data in both the RDS for MySQL database and the S3 bucket should be securely accessed only by the ECS cluster.
+
+How should the system be designed to satisfy this requirement?
+
+- Provision a new AWS Key Management Service (AWS KMS) customer-managed key to encrypt both the S3 bucket and the RDS for MySQL database. Ensure that the KMS key policy includes encrypt and decrypt permissions for the ECS task execution role. Then, configure an S3 bucket policy to specify the ECS task execution role as a user, allowing access to the encrypted data.
+- Create and configure an RDS Proxy for the RDS for MySQL database to use the appropriate database endpoint and port for the RDS for MySQL database. Define an Identity Access Management (IAM) role that grants permission to the ECS task execution role to access the RDS Proxy. Update the ECS task definition to assume this role. Define an IAM policy that allows S3 actions to the IAM role in the S3 bucket. Attach the IAM policy to the IAM role.
+- `Configure two VPC endpoints for RDS for MySQL database and S3. Add an allow rule for the RDS for MySQL security group to grant access from subnets where the ECS cluster will generate tasks. Add an S3 bucket policy to deny access to the resources that match StringNotEquals of aws:SourceVpce list with the VPC endpoint ID.`
+- Configure a VPC endpoint to establish a private connection between the VPC and the RDS for MySQL database. Update the RDS for MySQL security group to only allow access from subnets of the ECS cluster. Add an S3 bucket policy to restrict access to the ECS task execution role, with an exception allowing public internet access to the S3 bucket.
+
+### 🎯 What is the question saying?
+
+There are **3 components**:
+
+```text
+ECS Cluster
+   │
+   ├── needs S3 assets
+   │
+   └── needs RDS MySQL
+          │
+          └── contains PII
+```
+
+The requirement is:
+
+> **Only the ECS cluster should be able to access both S3 and RDS.**
+
+The key word is **securely accessed only by ECS**.
+
+---
+
+### ✅ Correct answer: Option 3
+
+> Configure VPC endpoints for RDS and S3, restrict RDS access using security groups, and use an S3 bucket policy with `aws:SourceVpce` to allow access only through the specified VPC endpoint.
+
+### 🔑 Why?
+
+There are **two different access problems**:
+
+#### 1. RDS → use Security Group
+
+RDS is inside the VPC.
+
+You want:
+
+```text
+ECS Tasks ───────► RDS
+     Allowed
+```
+
+The RDS Security Group can allow database traffic **only from the ECS tasks' security group/subnets**.
+
+So random internet clients cannot directly access the database.
+
+#### 2. S3 → use VPC Endpoint + Bucket Policy
+
+S3 is an AWS service outside your VPC.
+
+An **S3 VPC endpoint** gives the ECS workloads a private path:
+
+```text
+ECS
+ │
+ ▼
+S3 VPC Endpoint
+ │
+ ▼
+S3 Bucket
+```
+
+Then the bucket policy can say:
+
+> "Only allow requests coming through this specific VPC endpoint."
+
+That's what this condition does:
+
+```text
+aws:SourceVpce
+```
+
+---
+
+### 🧠 Important concept: VPC Endpoint
+
+A VPC endpoint lets resources in your VPC access supported AWS services **without needing to go through the public internet/NAT Gateway**.
+
+For S3, this is very common in exam questions.
+
+```text
+Without endpoint:
+
+ECS → NAT/Internet → S3
+
+With S3 endpoint:
+
+ECS → S3 VPC Endpoint → S3
+```
+
+---
+
+### ❌ Why Option 1 is wrong?
+
+It focuses on **KMS encryption**.
+
+Encryption is good for protecting PII, but the question's main requirement is:
+
+> **Only ECS can access the data.**
+
+KMS controls **encryption/decryption**, not the complete network access restriction.
+
+Also, the **ECS task execution role** is primarily for ECS infrastructure actions such as pulling images/logging, not automatically the application's S3/RDS permissions.
+
+---
+
+### ❌ Why Option 2 is wrong?
+
+RDS Proxy is useful for things like:
+
+- connection pooling
+- managing database connections
+- improving scalability
+
+But it doesn't solve the requirement of **restricting access to both S3 and RDS**.
+
+---
+
+### ❌ Why Option 4 is wrong?
+
+It says to allow **public internet access** to S3.
+
+That directly contradicts:
+
+> "securely accessed only by the ECS cluster."
+
+So definitely wrong.
+
+---
+
+### 🔥 Exam shortcut
+
+When you see:
+
+**ECS → RDS + S3, private/secure access only**
+
+Think:
+
+```text
+RDS → Security Group
+S3  → VPC Endpoint + Bucket Policy
+```
+
+And remember:
+
+> **Security Group controls network access to RDS.**  
+> **S3 Bucket Policy controls who/from where can access S3.**  
+> **VPC Endpoint provides private connectivity to S3.**
+
+**Correct = Option 3.**
+
+
+
+
+
 29-October-2026
 
 30-October-2026
