@@ -354,6 +354,10 @@ Which solution will fulfill these criteria?
 - On the function’s resource-based policy, add a permission that includes the lambda:* as action and arn:aws:iam::[DevOps AWS Account Number]:root as principal.
 - `On the function’s resource-based policy, add a permission that includes the lambda:InvokeFunction as action and arn:aws:iam::[DEV AWSAccount Number]:root as principal.`
 
+<img width="1152" height="674" alt="aws-lambda-iam-policy-secure-access" src="https://github.com/user-attachments/assets/2f83339f-162a-40c3-b567-b0d8456e883d" />
+
+
+
 ### 🎯 What is the question saying?
 
 There are **2 AWS accounts**:
