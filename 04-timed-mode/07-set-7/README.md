@@ -493,6 +493,54 @@ So:
 
 **Cross-account Lambda invocation → Resource-based policy + `lambda:InvokeFunction`** ✅
 
+---
+---
+---
+
+
+33. Question
+
+A company has a mission-critical, public-facing containerized application running on an Amazon Elastic Kubernetes Service (Amazon EKS) cluster that has a microservices architecture.
+
+There is a requirement to implement a fully managed centralized application logging solution that automatically collects metrics and application logs. The company also requires a dashboard to easily monitor the application metrics.
+
+Which of the following can meet the above requirements with the LEAST amount of operational overhead?
+
+- Use Amazon OpenSearch Service with an integration to an Amazon EKS cluster to collect and store application logs and metrics. Use OpenSearch Dashboards to monitor and visualize the application’s performance.
+- `Set up and configure Amazon Managed Service for Prometheus metrics collection for the EKS cluster by installing the Prometheus agent on all EKS pods. Launch a dashboard in Amazon Managed Grafana to visualize metrics and logs in Amazon EKS.`
+- Use Amazon CloudWatch Container Insights with the Amazon EKS cluster. Use the CloudWatch dashboard to view the application logs and metrics.
+- Install and set up the Amazon CloudWatch agent on the Amazon EKS cluster to collect the metrics. Use the CloudWatch dashboard to view the application logs.
+
+<img width="1352" height="983" alt="container_insights_aws (1)" src="https://github.com/user-attachments/assets/d099de5b-1a92-40a9-ad57-58af230dfeab" />
+
+
+Bhai, aapne bilkul theek point uthaya hai! TutorialDojo (jo SAA-C03 ki tayari ke liye best platform hai) ke kuch sawaalon mein Prometheus aur Grafana wala option bhi correct diya jata hai.
+
+Lekin is sawal mein ek chota sa **catch (farq)** hai jo option ko galat ya sahi banata hai. Aaiye isay Roman Urdu mein detail se samjhte hain:
+
+---
+
+### 🔍 TutorialDojo ke us Sawal aur is Sawal ka Asal Farq
+
+Agar aap TutorialDojo wale option ko ghaur se padhein, toh wahan do baatein hain:
+
+1. **Metrics** ke liye Prometheus aur Grafana use hote hain (yeh bilkul theek hai, Prometheus EKS metrics ke liye industry standard hai).
+2. Lekin **Logs** ko dekhne ke liye Prometheus ya Grafana direct use nahi hote! Grafana logs dikha sakta hai agar uske sath Loki ya OpenSearch jaisa tool attached ho, lekin standard Prometheus/Grafana setup **metrics** ke liye hota hai, logs ke liye nahi.
+
+Asal mein **Amazon CloudWatch Container Insights** ek aisi aisi built-in managed feature hai jo **aik hi click par metrics aur logs dono** baghair kisi extra tool ke provide kar deti hai, is liye isme **Least Operational Overhead** hai.
+
+---
+
+### ⚖️ Kab Prometheus/Grafana aur kab Container Insights?
+
+| Scenario | Best Choice | Kyun? |
+| --- | --- | --- |
+| **Agar sirf Kubernetes/EKS Metrics chahiyein** (aur aap open-source Prometheus/Grafana standard use karna chahte hain) | **Amazon Managed Service for Prometheus (AMP) + Amazon Managed Grafana (AMG)** | Yeh Kubernetes community ka favorite tool hai. |
+| **Agar least operational overhead ke sath Metrics + Logs dono ek sath chahiyein** bina extra agents ke | **Amazon CloudWatch Container Insights** | AWS ka native managed solution hai, koi extra software manage nahi karna parta. |
+
+TutorialDojo ka maqsad aapko alag-alag architectures sikhana hota hai, lekin exam ki requirement (**Least Operational Overhead** + **Metrics + Logs dono**) ko dekhte hue CloudWatch Container Insights sab se aasan aur fast choice banta hai!
+
+---
 
 29-October-2026
 
