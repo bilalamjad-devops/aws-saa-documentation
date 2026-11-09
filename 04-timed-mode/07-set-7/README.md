@@ -761,7 +761,98 @@ And remember:
 
 **Correct = Option 3.**
 
+---
+---
+---
 
+
+Exactly. The key is to understand **where the service lives**.
+
+### 1. S3 and DynamoDB
+
+S3 and DynamoDB are **regional AWS services**, not resources sitting inside your VPC.
+
+So AWS provides a way for your VPC resources to reach them privately:
+
+```text
+Your VPC
+  │
+  ├── ECS / EC2
+  │
+  ▼
+VPC Endpoint
+  │
+  ├── S3
+  └── DynamoDB
+```
+
+For these two, AWS provides **Gateway Endpoints**.
+
+**Exam shortcut:**
+
+> **Gateway Endpoint = S3 + DynamoDB**
+
+---
+
+### 2. RDS / Aurora
+
+RDS and Aurora are different.
+
+When you create RDS/Aurora, you place the database in your **VPC** using a DB subnet group.
+
+```text
+Your VPC
+│
+├── Private Subnet
+│     └── RDS / Aurora
+│
+└── ECS
+      │
+      └──────► RDS / Aurora
+```
+
+You **don't need a VPC endpoint to reach your own RDS database**.
+
+Instead, control access using:
+
+**Security Groups**.
+
+For example:
+
+```text
+ECS Security Group
+        │
+        │ TCP 3306
+        ▼
+RDS Security Group
+```
+
+RDS SG:
+
+> Allow MySQL 3306 **from ECS Security Group**
+
+That's the normal design.
+
+---
+
+### 🔥 Very important distinction
+
+Think:
+
+| Service | Where is it? | How do you privately access it? |
+|---|---|---|
+| **S3** | AWS regional service | S3 VPC Endpoint |
+| **DynamoDB** | AWS regional service | DynamoDB VPC Endpoint |
+| **RDS** | Your VPC | Security Group |
+| **Aurora** | Your VPC | Security Group |
+
+### 🧠 SAA shortcut
+
+**S3/DynamoDB → VPC Endpoint**
+
+**RDS/Aurora → Security Group**
+
+And one correction to my previous answer: **Option 3's wording saying to create a VPC endpoint for RDS is technically incorrect.** If this is exactly how the TutorialsDojo question is written, I'd treat that answer carefully rather than memorizing the wording.
 
 
 
