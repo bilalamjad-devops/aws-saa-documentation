@@ -1079,6 +1079,7 @@ Which of the solutions will fulfill these requirements? (Select TWO.)
 - Establish an AWS FSx for Windows File Server file system in us-east-2, and opt for a Multi-AZ deployment type. Configure a Lambda function that sets a daily backup and includes a rule to replicate the backup to us-west-1.
 
 
+
 ### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
 
 1. **High Availability & Low RTO:** Amazon FSx for Windows File Server ke zariye data storage setup karni hai. Disruptions se bachne aur **Low RTO (10 minutes)** maintain karne ke liye high-availability deployment chahiye.
@@ -1127,6 +1128,8 @@ Is question mein **Select TWO** options choose karne hain:
 
 > 1. **FSx High Availability:** Low RTO aur instant failover ke liye hamesha **Multi-AZ** use hota hai.
 > 2. **AWS Backup Vault Lock:** Agar requirement ho ke *root account including koi bhi user* delete na kar sake, toh **Compliance Mode** select hota hai. Agar root account ko permission deni ho override karne ki, toh **Governance Mode** choose hota hai.
+
+<img width="1920" height="1080" alt="AWS-FSx-for-Window-FS-04-13-2024 (1)" src="https://github.com/user-attachments/assets/2fc8fd66-cc3e-4e8c-9062-1baad34750d9" />
 
 
 ----
