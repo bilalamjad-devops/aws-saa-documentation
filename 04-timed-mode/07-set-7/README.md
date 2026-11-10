@@ -1136,8 +1136,64 @@ Is question mein **Select TWO** options choose karne hain:
 ----
 ----
 
+51. Question
+
+A manufacturing company is utilizing an on-premises network-attached storage (NAS) system to support file sharing for their latency-sensitive high-performance computing (HPC) workloads. In a direction to move the system to the cloud, a solutions architect is consulted to maintain the same low-latency performance in the company’s on-premises network.
+
+The company requires a solution that can provide multi-protocol access to data from the file system that supports Network File System (NFS), Server Message Block (SMB), and Internet Small Computer System Interface (iSCSI) protocols.
+
+Which options achieve these requirements with the LOWEST latency? (Select TWO.)
+
+- Optimize performance by using a partition placement group when deploying the compute-optimized EC2 instances.
+- Connect an Amazon FSx for OpenZFS file system to the EC2 instances.
+- `Group compute-optimized EC2 instances together within a cluster placement group.`
+- `Associate an Amazon FSx for NetApp ONTAP file system to the EC2 instances.`
+- Mount an Amazon FSx for Windows File Server to the EC2 instances.
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek manufacturing company hai jo apne on-premises NAS (Network-Attached Storage) system par **latency-sensitive High-Performance Computing (HPC)** workloads chala rahi hai.
+2. **Requirements:**
+* Storage ko cloud par move karna hai aur **lowest latency** maintain karni hai.
+* File system aisa hona chahiye jo **multi-protocol access** support kare, yaani **NFS**, **SMB**, aur **iSCSI** teeno protocols ek sath chal sakein.
+* Isme **Select TWO** options choose karne hain.
 
 
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Multi-Protocol Support (NFS, SMB, iSCSI):**
+* AWS mein sirf **Amazon FSx for NetApp ONTAP** ek aisi fully managed storage service hai jo NFS, SMB, aur iSCSI teeno protocols ko ek sath natively support karti hai. (OpenZFS sirf NFS support karta hai aur Windows File Server sirf SMB support karta hai).
+
+
+* **Lowest Latency for HPC Workloads:**
+* HPC (High-Performance Computing) aur latency-sensitive workloads ke liye EC2 instances ko aapas mein bilkul qareeb rakhna padta hai taake network latency kam se kam ho. Iske liye **Cluster Placement Group** use hota hai (partition placement group nahi, kyunki partition spread ke liye hota hai jabki cluster tight low-latency network ke liye hota hai).
+
+
+
+---
+
+### ✅ Correct 2 Options:
+
+1. **Group compute-optimized EC2 instances together within a cluster placement group.**
+2. **Associate an Amazon FSx for NetApp ONTAP file system to the EC2 instances.**
+
+---
+
+### 🏢 Aasan Alfaz Mein Samjhein (Real-World Analogy)
+
+* **FSx for NetApp ONTAP (Multi-Protocol King):** Yeh ek aisi universal machine hai jo har tarah ki bhasha (NFS, SMB, iSCSI) bol sakti hai jo purana on-prem NAS bolta tha.
+* **Cluster Placement Group (Speed & Low Latency):** Agar aapka race track (network) lambha ho ga toh gaadi der se pahuchegi. Isiliye saari compute machines ko ek hi jagah tight block (**Cluster Placement Group**) mein rakha jata hai taake data lightning speed aur minimum latency ke sath transfer ho sake!
+
+
+<img width="422" height="230" alt="AmazonFSx (1)" src="https://github.com/user-attachments/assets/51254916-3323-4075-96b8-f93b88ebbb6e" />
+
+<img width="420" height="305" alt="Placement Groups (2)" src="https://github.com/user-attachments/assets/efac3826-08b1-4005-aedd-d49652f7f5cb" />
+
+
+---
 
 29-October-2026
 
