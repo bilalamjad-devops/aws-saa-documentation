@@ -1063,6 +1063,77 @@ So yes:
 ----
 ----
 
+47. Question
+
+A merchandising company is planning to enhance its storage capabilities for Amazon EC2 instances by using Amazon FSx for Windows File Server. The company’s EC2 instance in the us-east-2 region has a Server Message Block (SMB) file share mounted as a volume. The company has set a Recovery Time Objective (RTO) of 10 minutes to mitigate the risks associated with disruptions.
+
+Moreover, the company aims to have a backup copy of this file system in the us-west-1 region and must ensure that users cannot delete or alter the data for 5 years to meet compliance and governance standards.
+
+Which of the solutions will fulfill these requirements? (Select TWO.)
+
+
+- Launch an AWS FSx for Windows File Server file system in us-east-2 with a Single-AZ 2 deployment type. Use AWS Backup to establish a daily backup plan, including a backup rule to copy the backup to us-west-1.
+- `Configure an AWS FSx for Windows File Server file system in us-east-2 with a Multi-AZ deployment type. Utilize AWS Backup to establish a daily backup plan with a rule replicating the backup to us-west-1.`
+- Set up AWS Backup Vault Lock in governance mode for a target vault in us-east-2 and configure the minimum retention duration of 5 years.
+- `Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.`
+- Establish an AWS FSx for Windows File Server file system in us-east-2, and opt for a Multi-AZ deployment type. Configure a Lambda function that sets a daily backup and includes a rule to replicate the backup to us-west-1.
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **High Availability & Low RTO:** Amazon FSx for Windows File Server ke zariye data storage setup karni hai. Disruptions se bachne aur **Low RTO (10 minutes)** maintain karne ke liye high-availability deployment chahiye.
+2. **Cross-Region Backup:** Us-east-2 se us-west-1 region mein daily backup copy honi chahiye.
+3. **Compliance Requirement:** Backups ko **5 saal tak kisi bhi user se delete ya alter (change) hone se bachana hai** (WORM - Write Once, Read Many protection).
+
+---
+
+### 🔍 Keyword Scanning & Correct Options Analysis
+
+Is question mein **Select TWO** options choose karne hain:
+
+#### 1. Availability / Multi-AZ Selection:
+
+* **Multi-AZ Deployment:** Single-AZ mein outage aane par recovery time zyaada hota hai. High Availability (HA) aur fast failover (low RTO) ke liye **Multi-AZ FSx for Windows File Server** zaroori hai.
+* **AWS Backup vs Lambda:** AWS Backup ek native managed service hai jo daily schedule aur Cross-Region replication built-in handle kar leti hai (bina kisi custom Lambda code ke).
+* **👉 Correct Choice 1:** *Configure an AWS FSx for Windows File Server file system in us-east-2 with a Multi-AZ deployment type. Utilize AWS Backup to establish a daily backup plan with a rule replicating the backup to us-west-1.*
+
+#### 2. Compliance / Vault Lock Selection:
+
+* **Compliance Mode vs Governance Mode:**
+* **Governance Mode:** Isme privileged users (root account ya specific IAM users) retention settings ko modify ya delete kar sakte hain.
+* **Compliance Mode:** Isme **KOI BHI USER** (yahan tak ke AWS Root Account bhi) backups ko delete ya modify nahi kar sakta jab tak duration (5 years) poori na ho jaye.
+
+
+* **👉 Correct Choice 2:** *Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.*
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Single-AZ 2 (Option 1):** Single-AZ multi-AZ failover provide nahi karta, is se high availability aur strict RTO requirement meet nahi hoti.
+* **Governance Mode (Option 3):** Governance mode mein privileged users files/backups ko alter ya delete kar sakte hain, jabke requirement hai ke *users cannot delete or alter*. Is ke liye Compliance Mode zaroori hai.
+* **Lambda Function (Option 5):** Backups aur Cross-Region replication ke liye custom Lambda script likhna unnecessary **operational overhead** create karta hai jab ke AWS Backup native managed solution deta hai.
+
+---
+
+### ✅ Correct Answer (Select TWO):
+
+1. **Configure an AWS FSx for Windows File Server file system in us-east-2 with a Multi-AZ deployment type. Utilize AWS Backup to establish a daily backup plan with a rule replicating the backup to us-west-1.**
+2. **Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.**
+
+---
+
+### 🔑 Key Exam Takeaways:
+
+> 1. **FSx High Availability:** Low RTO aur instant failover ke liye hamesha **Multi-AZ** use hota hai.
+> 2. **AWS Backup Vault Lock:** Agar requirement ho ke *root account including koi bhi user* delete na kar sake, toh **Compliance Mode** select hota hai. Agar root account ko permission deni ho override karne ki, toh **Governance Mode** choose hota hai.
+
+
+----
+----
+----
+
+
 
 
 29-October-2026
