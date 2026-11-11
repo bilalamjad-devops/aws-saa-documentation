@@ -1248,6 +1248,61 @@ Maan lein aap ki ek bari company hai jiske poori dunya mein **50 alag-alag dafta
 * **Route 53 ARC (Option 2):** Yeh traffic aur disaster recovery ke liye hota hai, iska security groups ya office IP addresses se koi taluq hi nahi hai!
 
 ---
+---
+---
+
+
+6. Question
+
+A merchandising company is planning to enhance its storage capabilities for Amazon EC2 instances by using Amazon FSx for Windows File Server. The company’s EC2 instance in the us-east-2 region has a Server Message Block (SMB) file share mounted as a volume. The company has set a Recovery Time Objective (RTO) of 10 minutes to mitigate the risks associated with disruptions.
+
+Moreover, the company aims to have a backup copy of this file system in the us-west-1 region and must ensure that users cannot delete or alter the data for 5 years to meet compliance and governance standards.
+
+Which of the solutions will fulfill these requirements? (Select TWO.)
+
+
+- Establish an AWS FSx for Windows File Server file system in us-east-2, and opt for a Multi-AZ deployment type. Configure a Lambda function that sets a daily backup and includes a rule to replicate the backup to us-west-1.
+- Set up AWS Backup Vault Lock in governance mode for a target vault in us-east-2 and configure the minimum retention duration of 5 years.
+- `Configure an AWS FSx for Windows File Server file system in us-east-2 with a Multi-AZ deployment type. Utilize AWS Backup to establish a daily backup plan with a rule replicating the backup to us-west-1.`
+- Launch an AWS FSx for Windows File Server file system in us-east-2 with a Single-AZ 2 deployment type. Use AWS Backup to establish a daily backup plan, including a backup rule to copy the backup to us-west-1.
+- `Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.`
+
+
+<img width="1920" height="1080" alt="AWS-FSx-for-Window-FS-04-13-2024 (2)" src="https://github.com/user-attachments/assets/d0283f5f-0295-4e48-b2c4-32ca09aa042b" />
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+*(Note: Yeh sawaal humne thodi der pehle bhi discuss kiya tha, yeh bilkul waisa hi concept hai!)*
+
+1. **High Availability & Low RTO:** Amazon FSx for Windows File Server ke zariye data storage setup karni hai, aur **10 minutes ka low RTO** achieve karne ke liye high availability (`Multi-AZ`) zaroori hai.
+2. **Cross-Region Backup:** `us-east-2` region se data ka backup `us-west-1` region mein copy hona chahiye.
+3. **Compliance Requirement:** Backups ko **5 saal tak koi bhi user delete ya alter na kar sake** (WORM protection).
+
+---
+
+### 🔍 Correct Options Analysis (Select TWO)
+
+* **Choice 1 (Multi-AZ + AWS Backup):**
+* `Configure an AWS FSx for Windows File Server file system in us-east-2 with a Multi-AZ deployment type. Utilize AWS Backup to establish a daily backup plan with a rule replicating the backup to us-west-1.`
+* **Kyun Sahi Hai?** Multi-AZ deployment se fast failover milta hai (low RTO), aur AWS Backup ka native rule use karke hum bina kisi complex Lambda code ke cross-region backup (`us-west-1` mein) set kar sakte hain.
+
+
+* **Choice 2 (Vault Lock in Compliance Mode):**
+* `Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.`
+* **Kyun Sahi Hai?** Jab requirement ho ke *koi bhi user (yahan tak ke Root Account bhi)* 5 saal se pehle data delete na kar sake, toh **Compliance Mode** use hota hai. (Governance mode mein root user override kar sakta hai, is liye compliance mode correct hai).
+
+
+
+---
+
+### ✅ Correct Answer:
+
+1. **Configure an AWS FSx for Windows File Server file system in us-east-2 with a Multi-AZ deployment type. Utilize AWS Backup to establish a daily backup plan with a rule replicating the backup to us-west-1.**
+2. **Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.**
+
+---
+
 
 29-October-2026
 
