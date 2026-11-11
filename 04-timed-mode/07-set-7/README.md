@@ -1302,6 +1302,73 @@ Which of the solutions will fulfill these requirements? (Select TWO.)
 2. **Enable Vault Lock in compliance mode for a designated vault in the us-east-2 region on AWS Backup. Configure the data retention period to be a minimum of 5 years.**
 
 ---
+---
+---
+
+10. Question
+
+An external audit of a financial technology startup found some glaring issues in its IT practices, one being the use of unencrypted Amazon EBS volumes in some of its workloads. To improve its security posture, the startup must ensure all data at rest is encrypted using AWS Key Management Service (AWS KMS).
+
+Which solution provides the ability to control rotation of the encryption keys with the LEAST operational overhead?
+
+- Use an AWS managed key to encrypt the EBS volumes. Configure key rotation.
+- `Provision a customer managed key. Encrypt the EBS volumes using the provisioned key.`
+- Provision an AWS owned key. Encrypt the EBS volumes using the provisioned key.
+- Generate a key material and import it to AWS KMS to create an external KMS key. Encrypt the EBS volumes using the created key.
+
+
+KMS (Key Management Service) aur encryption keys wale sawal shuru mein thore confusing lagte hain, lekin agar hum inka **concept** samajh lein toh AWS exam ka yeh sab se aasan topic ban jata hai!
+
+Aaiye in sab key types ko ek bohot hi aasan misaal se samajhte hain.
+
+---
+
+### 🔑 AWS KMS Keys Ki 4 Qismein (Asal Farq)
+
+Sochiye ke KMS ek locker room hai jahan alag-alag tarah ki chaabiyan (Keys) milti hain:
+
+1. **AWS Owned Keys:**
+* Yeh AWS ki apni keys hoti hain jo multi-account services ke liye background mein use hoti hain. Aapko na inka access milta hai, na control, aur na hi aap inhein dekh sakte hain.
+
+
+2. **AWS Managed Keys (`aws/ebs`, `aws/s3`):**
+* Yeh AWS aapke account mein khud banata hai (jaise hi aap default encryption on karte hain).
+* **Masla:** Isme AWS khud key rotate karta hai, lekin **aapko koi control nahi milta** ke rotation kab ya kaise ho.
+
+
+3. **Customer Managed Keys (CMK):** $\leftarrow$ **(Yeh Sahi Jawab Hai!)**
+* Yeh keys **aap khud (customer)** apne account mein banate hain.
+* Isme aapko **poora control** milta hai (policies, permissions, deleting, etc.), aur aap sirf **ek click par automatic key rotation enable kar sakte hain** (AWS khud har saal background mein rotate karta hai). Isiliye isme **least operational overhead** (kam se kam mehnat) aur maximum control hota hai!
+
+
+4. **External / Imported Keys:**
+* Isme key material aap apni company ke on-premises data center se la kar manually AWS mein import karte hain.
+* **Masla:** Jab bhi rotation karni ho, aapko baar-baar khud naya key material generate kar ke manual import karna parta hai, jis mein **bohot zyada operational overhead (mehnat)** hoti hai.
+
+
+
+---
+
+### 🔍 Sawal Ki Requirements Kya Thin?
+
+Sawal mein do shartein thin:
+
+1. **Control rotation:** Key rotation ko control karne ki ability honi chahiye.
+2. **Least operational overhead:** Mehnat aur complexity kam se kam honi chahiye.
+
+* **AWS Managed Key** mein control nahi milta.
+* **External Key** mein manual import ki wajah se overhead bohot zyada hota hai.
+* **Customer Managed Key (CMK)** mein aapko **control bhi milta hai** aur AWS khud automatic rotation sambhal leta hai is liye **overhead bhi minimum** hota hai!
+
+---
+
+### ✅ Correct Answer:
+
+* **Provision a customer managed key. Encrypt the EBS volumes using the provisioned key.**
+
+---
+
+
 
 
 29-October-2026
