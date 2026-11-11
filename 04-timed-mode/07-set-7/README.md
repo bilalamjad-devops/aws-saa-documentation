@@ -1617,6 +1617,21 @@ Koi baat nahi! Is sawal ko bilkul aasan aur step-by-step misaal se tod kar samaj
 * Kyunki Standard-IA ke liye 30 din ka rule hota hai aur yeh data ko milli-seconds mein (yani within minutes) wapas de sakta hai. (Isiliye doosri option theek hai).
 
 
+Yes — **for this TD question, you are correct.** The intended answers are:
+
+✅ **1. S3 Standard → Glacier Flexible Retrieval after 7 days**  
+✅ **4. S3 Standard → Standard-IA after 7 days**
+
+The key is that **this question is testing the lifecycle transition rule as TD currently expects it**, not the older 30-day restriction you remembered.
+
+### Quick exam memory
+
+- **Standard-IA:** infrequent access + **millisecond retrieval** → good here.
+- **Glacier Flexible Retrieval:** archival + **minutes to hours retrieval** → also good here.
+- **Deep Archive:** **hours** to retrieve → not suitable when audit needs retrieval within minutes.
+
+🧠 **For this TD question:**
+**7 days + infrequent access → Standard-IA OR Glacier Flexible Retrieval.**
 
 ---
 ---
