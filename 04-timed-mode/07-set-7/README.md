@@ -1563,8 +1563,65 @@ Which of the following services gives the Architect the ability to store huge am
 * **Amazon Redshift (Company HQ Analytics Center):** Pichle 5 saal ka poora saalana data ek jagah jama karke yeh analyze karne ke liye hota hai ke *"Sab se zyada log kis maheene mein hotel book karte hain?"*
 
 ---
+---
+---
 
 
+
+37. Question
+
+A company has both an on-premises data center and AWS cloud infrastructure. Multimedia assets, such as graphics, audio, and videos, are primarily stored in an on-premises storage server, with an Amazon S3 Standard storage class bucket used for backup. The data is heavily utilized for only one week (7 days), but after that period, it is infrequently accessed by customers. The Solutions Architect is tasked with saving storage costs in AWS while maintaining the ability to retrieve a subset of media assets within minutes for an annual data audit, which will be conducted on cloud storage.
+
+Which of the following are valid options that the Solutions Architect can implement to meet the above requirement? (Select TWO.)
+
+- `Set a lifecycle policy in the bucket to transition the data from Standard storage class to Glacier Flexible Retrieval after one week (7 days).`
+- Set a lifecycle policy in the bucket to transition the data to the S3 Glacier Deep Archive storage class after one week (7 days).
+- Set a lifecycle policy in the bucket to transition to S3 Standard-IA after 30 days.
+- `Set a lifecycle policy in the bucket to transition the data to S3 Standard-IA storage class after one week (7 days).`
+- Set a lifecycle policy in the bucket to transition the data to the S3 One Zone-Infrequent Access storage class after 30 days.
+
+
+
+Koi baat nahi! Is sawal ko bilkul aasan aur step-by-step misaal se tod kar samajhte hain, taake aapko rule hamesha ke liye yaad ho jaye.
+
+---
+
+### 📦 Sawaal Ki 2 Badi Shartein (Requirements)
+
+1. **Pehli Shart (Time limit):** Data 7 din tak bohot use hota hai, uske baad uska use kam ho jata hai.
+2. **Doosri Shart (Retrieval time):** Saalaana audit ke liye data **"chund minuton (within minutes)"** ke andar wapas milna chahiye.
+
+---
+
+### 🔑 2 Golden Rules (Jo Sawaal Ko Solve Karte Hain)
+
+#### **Rule No. 1: S3 Glacier Deep Archive Kyun Galat Hai?**
+
+* Agar aap data ko **S3 Glacier Deep Archive** mein bhejte hain, toh yaad rakhein ke wahan se data wapas nikalne mein **12 se 15 ghante** lagte hain.
+* Lekin sawaal mein bola gaya hai ke data **"within minutes" (mintun mein)** chahiye. Isiliye Deep Archive wala option galat ho gaya!
+
+#### **Rule No. 2: Standard-IA Ka 30-Din Ka Rule**
+
+* AWS ka rule hai ke aap S3 Standard se data ko **Standard-IA (Infrequent Access)** mein sirf tab move kar sakte hain jab data ko S3 mein rakhe hue kam se kam **30 din** guzar chuke hon.
+* Aap sirf **7 din baad** data ko Standard-IA mein move **nahi** kar sakte. Isiliye 7 din wali Standard-IA option bhi galat ho gayi!
+
+---
+
+### ✅ Phir Sahi Options Kaun Si Hain?
+
+1. **Glacier Flexible Retrieval (7 din baad):**
+* Kyunki Glacier Flexible mein **Expedited Retrieval** ka feature hota hai jo data ko **1 se 5 minuton** mein wapas la sakta hai, aur isay 7 din baad move karna AWS allow karta hai. (Isiliye pehli option theek hai).
+
+
+2. **S3 Standard-IA (30 din baad):**
+* Kyunki Standard-IA ke liye 30 din ka rule hota hai aur yeh data ko milli-seconds mein (yani within minutes) wapas de sakta hai. (Isiliye doosri option theek hai).
+
+
+
+---
+---
+---
+---
 
 
 29-October-2026
@@ -1574,3 +1631,5 @@ Which of the following services gives the Architect the ability to store huge am
 31-October-2026
 
 8-November-2026
+
+11-November-2026
