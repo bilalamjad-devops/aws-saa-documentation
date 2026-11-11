@@ -1638,6 +1638,54 @@ The key is that **this question is testing the lifecycle transition rule as TD c
 ---
 ---
 
+51. Question
+
+A healthcare company has migrated its Electronic Health Record (EHR) system to AWS and is now seeking to protect its production VPC from a wide range of potential threats. The company requires a solution to monitor both incoming and outgoing VPC traffic and block any malicious connections.
+
+As a Solution Architect, how will you meet these requirements?
+
+- `Create custom security rules in AWS Network Firewall to detect and filter traffic passing to and from the production VPC.`
+- Use AWS Traffic Mirroring to capture traffic from ENIs on EC2 instances in a production VPC. Send this traffic on an EC2 instance or container for flow analysis and filtering.
+- Implement AWS GuardDuty for traffic monitoring and use AWS Lambda for automated detection and response to security incidents.
+- Use AWS Firewall Manager to create security policies for AWS Web Application Firewall (WAF).
+
+Donon services ka role alag hai: **AWS Network Firewall** actual traffic ko rokne/allow karne ka kaam karta hai, jabke **AWS Firewall Manager** multiple security rules aur accounts ko ek jagah se manage karne ka centralized administration tool hai.
+
+---
+
+### 🛡️ 1. AWS Network Firewall (Traffic Filter Engine)
+
+Yeh aapke **VPC ke border par laga dedicated firewall** hai jo network-level par incoming aur outgoing traffic ko inspect aur filter karta hai.
+
+* **Layer level:** Layer 3 se Layer 7 (IP addresses, ports, protocols, domain names, aur packet contents).
+* **Key capabilities:** Statefull aur stateless inspection, URL filtering (e.g. sirf specific domains ko allow karna), aur Suricata-compatible Intrusion Prevention System (IPS) rules.
+* **Analogy:** Yeh dukaan ya building ka main gate hai jo andar aane aur bahar jaane wali har gari aur shakhs ko physical level par check karta hai aur block karta hai.
+
+---
+
+### 🎛️ 2. AWS Firewall Manager (Centralized Admin Console)
+
+Yeh khud traffic ko filter nahi karta, balki **multiple AWS accounts aur VPCs mein security policies ko centrally enforce aur manage** karta hai.
+
+* **Primary Use-case:** Central security team ke liye jo AWS Organizations use kar rahi ho.
+* **Controls managed tools:** AWS WAF rules, Shield Advanced, Security Groups, Route 53 Resolver DNS Firewall, aur **AWS Network Firewall** rules ko aapas mein sync rakhta hai.
+* **Analogy:** Yeh security company ka **Head Office** hai jo yeh order deta hai ke *“duniya bhar ki tamaam branches ke main gates par yeh 5 strict rules implement hone chahiye.”*
+
+---
+
+---
+
+### 📊 Quick Comparison Matrix
+
+| Feature | AWS Network Firewall | AWS Firewall Manager |
+| --- | --- | --- |
+| **Primary Function** | VPC Traffic Inspection & Blocking | Central Security Management & Compliance |
+| **Where it Deploys** | Specific VPC endpoints | AWS Organizations (Multi-Account) |
+| **Traffic Handling** | Live traffic filter karta hai | Traffic ko handle nahi karta (Rule deploy karta hai) |
+| **Exam Catchword** | *"Block inbound/outbound VPC traffic"* | *"Centralized policy management across accounts"* |
+
+---
+
 
 29-October-2026
 
