@@ -1367,6 +1367,99 @@ Sawal mein do shartein thin:
 * **Provision a customer managed key. Encrypt the EBS volumes using the provisioned key.**
 
 ---
+---
+---
+
+11. Question
+
+A company is strengthening its security measures and seeks to enforce data encryption at rest for its Amazon EC2 instances. An automated solution is required to detect unencrypted Amazon Elastic Block Store (Amazon EBS) volumes and apply policies to rectify them.
+
+Which option will meet these requirements with the LEAST administrative overhead?
+
+- Configure an AWS KMS key policy that only allows the creation of encrypted EBS volumes. Use a combination of Amazon EventBridge and AWS Lambda to detect and remediate unencrypted EBS volumes automatically.
+- Scan for unencrypted EBS volumes using Amazon Inspector. Use AWS Systems Manager Automation rules to encrypt the detected volumes automatically.
+- `Set up an IAM policy to ensure that only encrypted EBS volumes can be created. Create an AWS Config rule that tracks unencrypted EBS volumes and use an AWS Systems Manager Automation document for remediation.`
+- Scan for unencrypted EBS volumes using AWS Shield. Use AWS Systems Manager Automation rules to encrypt the detected volumes automatically.
+
+Aap ne jo Lambda aur EventBridge ki lab ki thi, woh bilkul real-world practical approach hai! Lehaza yahan confuse hone ki zaroorat nahi hai.
+
+Is sawal ka sahi jawab **Option 3** hai:
+
+> **Set up an IAM policy to ensure that only encrypted EBS volumes can be created. Create an AWS Config rule that tracks unencrypted EBS volumes and use an AWS Systems Manager Automation document for remediation.**
+
+---
+
+### 🔍 Exam Tricks & Rules Breakdown
+
+Is exact MCQ ko solve karne ke 2 main rules yaad rakhein:
+
+1. **Detection + Remediation Standard Architecture:**
+AWS mein jab bhi **continuous compliance tracking** (pehre-daari) aur **built-in auto-fix** ki baat aaye, toh **AWS Config + SSM Automation Document** hi standard primary combination hai. Isme koi custom code nahi likhna padta.
+
+2. **Least Administrative Overhead:**
+* **EventBridge + Lambda:** Code likhna, test karna, aur maintain karna padta hai (overhead zyada hai).
+* **AWS Config + SSM:** Pre-configured managed rules hotay hain (overhead bilkul minimal hai).
+
+
+
+---
+
+### 🔑 Quick Summary Table
+
+| Service / Tool | Primary Purpose in AWS | Encryption / Remediation Fit? |
+| --- | --- | --- |
+| **AWS Config + SSM** | Continuous resource compliance & native auto-remediation | ✅ **Best Fit** (Zero Code, Managed) |
+| **EventBridge + Lambda** | Event-driven custom actions | ⚠️ Works, but higher operational overhead |
+| **Amazon Inspector** | Vulnerability scanning & OS patch checks | ❌ Storage encryption audit nahi karta |
+| **AWS Shield** | DDoS protection for web apps | ❌ Storage encryption se koi lena dena nahi |
+
+---
+---
+---
+
+
+20. Question
+
+A large electronics company is using Amazon Simple Storage Service to store important documents. For reporting purposes, they want to track and log every request access to their S3 buckets including the requester, bucket name, request time, request action, referrer, turnaround time, and error code information. The solution should also provide more visibility into the object-level operations of the bucket.
+
+Which is the best solution among the following options that can satisfy the requirement?
+
+- Enable AWS CloudTrail to audit all Amazon S3 bucket access.
+- `Enable server access logging for all required Amazon S3 buckets.`
+- Enable Amazon S3 Event Notifications for PUT and POST.
+- Enable the Requester Pays option to track access via AWS Billing.
+
+
+<img width="1055" height="712" alt="amazon-s3-object-logging (2)" src="https://github.com/user-attachments/assets/bcd728e4-e003-43b4-b367-7596dca93449" />
+
+Aaiye isay ek bilkul **simple table** aur direct point se samajhte hain taake kabhi confusion na ho:
+
+---
+
+### 🔑 Ek-Line Ka Rule (Exam Secret)
+
+| Service | Main Focus | Yeh Cheezein Record Karta Hai: |
+| --- | --- | --- |
+| **S3 Server Access Logging** | **Web Traffic & Web Performance** | **Turnaround Time** (latency), **Referrer** (source link), HTTP status codes (404, 500). |
+| **AWS CloudTrail** | **Security & User Audit** | Kis IAM User/Role ne kaun si API call ki (e.g. `GetObject`, `PutObject`, `DeleteBucket`). |
+
+---
+
+### 💡 Sawaal Mein Kya Poocha Gaya Tha?
+
+Sawaal ne specify kiya ke company ko yeh cheezein record karni hain:
+
+1. **Turnaround time** (Request kitni der mein complete hui)
+2. **Referrer** (Traffic kahan se aaya)
+3. **Error code**
+
+Yeh teeno specific fields **CloudTrail mein nahi hotay**. Yeh sirf aur sirf **S3 Server Access Logs** ka part hotay hain!
+
+Isi liye **Server Access Logging** iska sahi jawab hai.
+
+---
+---
+---
 
 
 
