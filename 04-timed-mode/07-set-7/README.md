@@ -1509,6 +1509,60 @@ Jab bhi AWS exam mein **DynamoDB** ke sath yeh shart aaye:
 Toh bina soche samajhe **Point-In-Time Recovery (PITR)** ko select karein!
 
 ---
+---
+---
+
+
+32. Question
+
+A Solutions Architect is working for an online hotel booking firm with terabytes of customer data coming from the websites and applications. There is an annual corporate meeting where the Architect needs to present the booking behavior and acquire new insights from the customers’ data. The Architect is looking for a service to perform super-fast analytics on massive data sets in near real-time.
+
+Which of the following services gives the Architect the ability to store huge amounts of data and perform quick and flexible queries on it?
+
+- `Amazon Redshift`
+- Amazon DynamoDB
+- Amazon ElastiCache
+- Amazon RDS
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek online hotel booking firm ke paas **terabytes of customer data** aa raha hai.
+2. **Goal:** Customer booking behavior aur business insights samajhne ke liye **massive data sets par super-fast analytics** aur complex queries chalani hain.
+3. **Core Requirement:** Terabytes/Petabytes scale data ko store karke real-time/near real-time analytics aur **flexible analytical queries (SQL-based)** run karne ki service choose karni hai.
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"terabytes of customer data"`, `"acquire new insights"`, `"super-fast analytics on massive data sets"`, `"quick and flexible queries"`.
+* **Amazon Redshift (Data Warehouse):**
+* Redshift AWS ki fully managed, petabyte-scale **cloud data warehouse** service hai.
+* Yeh **OLAP (Online Analytical Processing)** workloads ke liye banai gayi hai jo columnar storage aur MPP (Massively Parallel Processing) use karti hai taake terabytes of historical data par super-fast analytics aur SQL queries chala sake.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Amazon DynamoDB:** Yeh NoSQL Key-Value database hai jo single-digit millisecond OLTP (transactional) operations ke liye best hai, complex analytical aggregate queries (OLAP) ke liye nahi.
+* **Amazon ElastiCache:** Yeh in-memory caching system (Redis/Memcached) hai jo microsecond latency aur fast read/write ke liye hotspot data store karta hai, petabyte-scale analytics ke liye nahi.
+* **Amazon RDS:** Yeh traditional relational OLTP database (MySQL/PostgreSQL) hai jo routine application database operations ke liye hota hai. Terabytes of historical analytics queries chalane se RDS slow ho jata hai.
+
+---
+
+### ✅ Correct Answer:
+
+* **Amazon Redshift**
+
+---
+
+### 🏢 Real-World Analogy (Dukaan Ka Counter vs Big Data Warehouse)
+
+* **Amazon RDS / DynamoDB (Cash Counter / Ledger):** Daily sales aur booking entries ko foran record karne ke liye hota hai.
+* **Amazon Redshift (Company HQ Analytics Center):** Pichle 5 saal ka poora saalana data ek jagah jama karke yeh analyze karne ke liye hota hai ke *"Sab se zyada log kis maheene mein hotel book karte hain?"*
+
+---
 
 
 
