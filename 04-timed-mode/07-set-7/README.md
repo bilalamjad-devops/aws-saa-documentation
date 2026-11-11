@@ -1462,6 +1462,55 @@ Isi liye **Server Access Logging** iska sahi jawab hai.
 ---
 
 
+28. Question
+
+A solutions architect is designing a plan to recover from accidental writes and deletes on an Amazon DynamoDB table. The solution must be capable of recovering data up to an hour prior to the occurrence of an incident.
+
+Which approach should be taken to meet these criteria?
+
+- Enable DynamoDB Streams to record all changes made to the table. Use an AWS Lambda function to restore the table in case of an incident.
+- Create a DynamoDB global table for automatic multi-Region replication. In case of an incident, direct the application’s requests to the global table’s endpoint.
+- `Enable Point-In-Time Recovery (PITR) in DynamoDB. Restore the table in case of an incident.`
+- Export DynamoDB data to an Amazon S3 Glacier daily for disaster recovery.
+
+
+<img width="1037" height="487" alt="pitr-062023 (1)" src="https://github.com/user-attachments/assets/653e5a15-2813-445f-a8cc-c9af3d820112" />
+
+
+Koi masla nahi! Isay ek dum direct aur simple misaal se samajhte hain:
+
+---
+
+### 🏢 Real-World Analogy (Time Machine Feature)
+
+Maan lein aap Word document par kaam kar rahe hain aur aap se galti se poora paragraph delete ho jata hai ya galat text save ho jata hai.
+
+* **PITR (Point-In-Time Recovery) = Undo / Time Machine:**
+PITR bilkul Computer ke **Undo (Ctrl + Z)** ya **Time Machine** ki tarah kaam karta hai. Yeh har second ka record rakhta hai. Agar **12:00 PM** par aap se galti se data delete hua, toh aap system ko bolte hain *"Mujhe meri table 11:59 AM wali state par wapas la do"*, aur woh 1 minute pehle ke time par wapas chala jata hai.
+
+---
+
+### ❌ Baaqi Options Kyun Fail Hue?
+
+1. **Global Tables (Multi-Region Copy):**
+Agar aap Facebook par photo delete karte hain, toh woh duniya ke sabhi servers se ek sath delete hoti hai. Isiliye Global Tables galti se delete hone wale data ko nahi bacha sakti kyunki galat delete har jagah instant copy ho jayega.
+2. **Daily S3 Backup (Rozana Ka Backup):**
+Agar aap din mein sirf ek baar shaam 5 baje backup lete hain aur galti dopahar 2 baje hoti hai, toh aap pichle 1 ghante pehle ka data wapas nahi la sakte (aapka subah se dopahar tak ka kaam zaya ho jayega).
+
+---
+
+### 🔑 Exam Secret (Seedhi Baat):
+
+Jab bhi AWS exam mein **DynamoDB** ke sath yeh shart aaye:
+👉 *"Accidental delete ya write se bachna hai"*
+
+👉 *"Kisi bhi specific time (e.g. 1 ghanta pehle ya 5 minut pehle) par restore karna hai"*
+
+Toh bina soche samajhe **Point-In-Time Recovery (PITR)** ko select karein!
+
+---
+
+
 
 
 29-October-2026
