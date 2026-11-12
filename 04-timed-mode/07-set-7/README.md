@@ -1721,6 +1721,8 @@ What solution would be able to fulfill these requirements?
 - `Configure CloudFront to return a custom error response to the viewer and apply geographic restrictions using an Allow list.`
 - Configure CloudFront to return a custom error response to the viewer. Set up a CloudFront Function URL to control access.
 
+<img width="1051" height="590" alt="geo-restriction-08-02-23-1842 (2)" src="https://github.com/user-attachments/assets/fc52ea72-9fa0-4cb4-b256-f1fdf1be3e1c" />
+
 
 ### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
 
