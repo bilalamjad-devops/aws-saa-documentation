@@ -1825,6 +1825,9 @@ Which of the following can meet the above requirements with the LEAST amount of 
 
 > **Amazon EKS / ECS + Automatic Logs & Metrics + Least Operational Overhead = CloudWatch Container Insights**
 
+<img width="1352" height="983" alt="container_insights_aws (2)" src="https://github.com/user-attachments/assets/7fc2d4bc-a738-4e76-9401-8cf7ea97a9a4" />
+
+
 ---
 ---
 ---
