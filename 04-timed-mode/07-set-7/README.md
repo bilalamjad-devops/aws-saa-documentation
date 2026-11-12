@@ -1767,7 +1767,67 @@ What solution would be able to fulfill these requirements?
 > **Friendly message instead of 403 error = Custom Error Response**
 
 ---
+---
+---
 
+60. Question
+
+A company has a mission-critical, public-facing containerized application running on an Amazon Elastic Kubernetes Service (Amazon EKS) cluster that has a microservices architecture.
+
+There is a requirement to implement a fully managed centralized application logging solution that automatically collects metrics and application logs. The company also requires a dashboard to easily monitor the application metrics.
+
+Which of the following can meet the above requirements with the LEAST amount of operational overhead?
+
+- Install and set up the Amazon CloudWatch agent on the Amazon EKS cluster to collect the metrics. Use the CloudWatch dashboard to view the application logs.
+- Use Amazon OpenSearch Service with an integration to an Amazon EKS cluster to collect and store application logs and metrics. Use OpenSearch Dashboards to monitor and visualize the application’s performance.
+- `Use Amazon CloudWatch Container Insights with the Amazon EKS cluster. Use the CloudWatch dashboard to view the application logs and metrics.`
+- Set up and configure Amazon Managed Service for Prometheus metrics collection for the EKS cluster by installing the Prometheus agent on all EKS pods. Launch a dashboard in Amazon Managed Grafana to visualize metrics and logs in Amazon EKS.
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek company ki mission-critical microservices application **Amazon EKS** par chal rahi hai.
+2. **Requirements:**
+* **Centralized logging & metrics collection:** Application logs aur metrics automatically collect hon.
+* **Dashboard:** Metrics aur logs ko monitor karne ke liye ek aasan dashboard chahiye.
+* **Key Constraint:** **LEAST amount of operational overhead** (kam se kam setup aur management mehnat).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"Amazon EKS"`, `"automatically collects metrics and application logs"`, `"dashboard"`, `"LEAST amount of operational overhead"`.
+* **Amazon CloudWatch Container Insights:**
+* Yeh AWS ki native, fully managed observability feature hai jo specially containers (**EKS**, ECS, Fargate) ke liye banayi gayi hai.
+* Yeh automatically container level metrics (CPU, memory, disk, network) aur application logs collect, aggregate, aur summarize karta hai, aur **CloudWatch Dashboards** mein ready-made visualizations deta hai—bina kisi third-party setup ke.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **CloudWatch Agent only (Option 1):** Standard CloudWatch agent sirf basic EC2 host-level metrics collect karta hai; Kubernetes/EKS pods aur containers ki deep observability aur automated dashboards ke liye **Container Insights** zaroori hota hai.
+* **Amazon OpenSearch Service (Option 2):** OpenSearch ek strong tool hai, lekin EKS ke sath isko integrate karne ke liye Fluent Bit / Logstash agents configure karna, OpenSearch cluster sizing manage karna, aur custom dashboards banana padta hai—jo **operational overhead** ko barha deta hai.
+* **Prometheus + Grafana (Option 4):** Pehli baat, har pod par Prometheus agent install karna anti-pattern aur high overhead hai (daemonset use hota hai). Doosri baat, Prometheus sirf **metrics** collect karta hai, **application logs** nahi!
+
+---
+
+### ✅ Correct Answer:
+
+* **Use Amazon CloudWatch Container Insights with the Amazon EKS cluster. Use the CloudWatch dashboard to view the application logs and metrics.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Amazon EKS / ECS + Automatic Logs & Metrics + Least Operational Overhead = CloudWatch Container Insights**
+
+---
+---
+---
 
 
 
