@@ -1685,6 +1685,91 @@ Yeh khud traffic ko filter nahi karta, balki **multiple AWS accounts aur VPCs me
 | **Exam Catchword** | *"Block inbound/outbound VPC traffic"* | *"Centralized policy management across accounts"* |
 
 ---
+---
+---
+
+
+56. Question
+
+A company has migrated its containerized workloads into the AWS Cloud. The microservices applications are hosted on Amazon EC2 instances with Docker installed, Amazon Elastic Container Service (Amazon ECS), and newer deployments are hosted on Amazon Elastic Kubernetes Service (Amazon EKS). The company is using open-source tools such as Prometheus and Grafana installed on a virtual machine in its data center for monitoring its applications. The management wants to use the same tools for monitoring its containerized applications in its cloud environment.
+
+Which of the following options is the recommended implementation for this scenario?
+
+- Create a new Amazon ECS cluster. Deploy the Prometheus and Grafana containers on this cluster for monitoring containerized workloads. Configure Prometheus for container metrics collection and Grafana for monitoring and data visualization.
+- Export the on-premises VM and upload the image to an Amazon S3 bucket. Use VM Import/Export to import the image and launch it as an Amazon EC2 instance. Reconfigure Prometheus and Grafana to monitor the containerized cloud workloads.
+- Create a new workspace AWS Managed Grafana to collect container metrics. Associate this as a data source in Amazon Managed Service for Prometheus. Configure data queries on Prometheus to visualize, monitor, and create alerts for the containerized workloads.
+- `Create a workspace on AWS Manage Service for Prometheus to collect container metrics. Set this workspace as the data source in AWS Managed Grafana for monitoring and data visualization.`
+
+### 🔑 Ek Line Ka Summary:
+
+> **Prometheus** data jama karta hai (isliye yeh **Data Source** hai), aur **Grafana** us data ko dekhne ke liye graph banata hai!
+
+---
+---
+---
+
+58. Question
+
+A well-known music streaming service is planning to broaden its platform globally. However, the company must ensure that listeners in certain countries cannot access specific music content until it is officially launched in their respective regions, in accordance with its music licensing agreements and restrictions.
+
+To achieve this, the company will utilize Amazon CloudFront’s content delivery network and Origin Access Control (OAC) feature to prevent unauthorized users from accessing the content. Customized error messages must also be configured for users who are not authorized to access particular music tracks.
+
+What solution would be able to fulfill these requirements?
+
+- Configure CloudFront to return a custom error response to the viewer. Implement a time-restricted IAM access policy for CloudFront distribution.
+- Configure CloudFront to return a custom error response to the viewer. Use both signed URLs and signed cookies for secure content access.
+- `Configure CloudFront to return a custom error response to the viewer and apply geographic restrictions using an Allow list.`
+- Configure CloudFront to return a custom error response to the viewer. Set up a CloudFront Function URL to control access.
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek music streaming company apne content ko globally distribute kar rahi hai **Amazon CloudFront** aur **Origin Access Control (OAC)** ke zariye.
+2. **Requirement 1 (Country-based Restriction):** Kuch makhsoos **countries (mulkon)** ke users ko content access karne se rokna hai jab tak wahan official launch na ho jaye (licensing agreements ki wajah se).
+3. **Requirement 2 (Custom Error):** Jo users authorized nahi hain, unhein **customized error message** dikhana hai (e.g., *"This track is not available in your region yet"*).
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"listeners in certain countries cannot access"`, `"customized error messages"`, `"CloudFront"`.
+* **CloudFront Geographic Restrictions (Geo-Blocking):**
+* Jab bhi **countries** ki bunyad par users ko allow ya block karna ho, toh CloudFront ka built-in feature **Geographic Restrictions** use hota hai.
+* Is mein do options hoti hain: **Allow list** (sirf specific mulkon ko ijazat dena) ya **Block list** (specific mulkon ko rokna).
+
+
+* **Custom Error Pages:**
+* Jab Geo-Restriction kisi user ko block karti hai, toh CloudFront default `403 Forbidden` error bhejta hai. Aap CloudFront mein **Custom Error Response** configure karke is `403` error ki jagah apna custom HTML page dikha sakte hain.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Time-restricted IAM access policy (Option 1):** IAM policies AWS internal users/roles ke permissions ke liye hoti hain, public internet listeners ko country ke hisaab se block karne ke liye nahi.
+* **Signed URLs and Signed Cookies (Option 2):** Yeh paid/premium members ko private content access dene ke liye hoti hain, lekin yeh automatically user ki **country (location)** detect karke block nahi kartin.
+* **CloudFront Function URL (Option 4):** "CloudFront Function URL" naam ka koi valid security mechanism nahi hai (Lambda Function URL hota hai). Geo-blocking ke liye CloudFront ka apna native feature mojood hai, custom code likhne ki zaroorat nahi.
+
+---
+
+### ✅ Correct Answer:
+
+* **Configure CloudFront to return a custom error response to the viewer and apply geographic restrictions using an Allow list.**
+
+---
+
+### 🏢 Direct Memory Trick (Exam Key):
+
+> **Country-level blocking + CloudFront = Geographic Restrictions (Allow list / Block list)**
+> **Friendly message instead of 403 error = Custom Error Response**
+
+---
+
+
+
+
+
 
 
 29-October-2026
