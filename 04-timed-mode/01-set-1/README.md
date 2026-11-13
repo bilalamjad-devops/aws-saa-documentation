@@ -1297,6 +1297,71 @@ Ab isay theek karne ke liye hum ne ye do steps chune:
 Kya ab ye concept clear hua, ya iska koi aur hissa dubara samjhayein?
 
 ---
+---
+---
+
+
+29. Question
+
+A retail company receives raw .csv data files into its Amazon S3 bucket from multiple sources on an hourly basis, with an average file size of 2 GB. The bucket is managed using S3 Access Grants for fine‑grained access control.
+
+An automated process must be implemented to convert these .csv files into the more efficient Apache Parquet format and store the converted files in another S3 bucket. Additionally, the conversion process must be automatically initiated each time a new file is uploaded into the S3 bucket.
+
+Which of the following options must be implemented to meet these requirements with the LEAST operational overhead?
+
+- Create an ETL (Extract, Transform, Load) job and a Data Catalog table in AWS Glue. Configure the Glue crawler to run on a schedule to check for new files in the S3 bucket every hour and convert them to Parquet format.
+- `Utilize an AWS Glue extract, transform, and load (ETL) job to process and convert the .csv files to Apache Parquet format and then store the output files into the target S3 bucket. Configure an Amazon EventBridge rule to trigger the Glue job on S3 Object Created events.`
+- Set up an Apache Spark job running in an Amazon EC2 instance and create an Amazon EventBridge rule to monitor S3 Object Created events in the S3 bucket. Configure AWS Lambda to invoke the Spark job for every new .csv file added via a Function URL.
+- Use an AWS Lambda function triggered by an S3 Object Created event to convert the .csv files to Parquet format. Use the AWS Transfer Family with SFTP service to move the output files to the target S3 bucket.
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek retail company ke paas Amazon S3 bucket hai jahan har ghante **2 GB ki CSV files** aati hain.
+2. **Requirements:**
+* **Conversion:** In CSV files ko **Apache Parquet** format mein convert karna hai aur doosri S3 bucket mein store karna hai.
+* **Automation:** Jaise hi S3 mein naye file upload ho, conversion process **automatically trigger** honi chahiye (Real-time / event-driven).
+* **Constraint:** **LEAST operational overhead** (kam se kam server management aur maintenance mehnat).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"convert .csv to Apache Parquet"`, `"automatically initiated each time a new file is uploaded"`, `"LEAST operational overhead"`.
+* **AWS Glue (Serverless ETL) + Amazon EventBridge + S3 Object Created Events:**
+* **AWS Glue:** Yeh ek fully managed, **serverless ETL (Extract, Transform, Load)** service hai. Iska matlab hai aapko koi EC2 instance, Spark cluster, ya servers manage karne ki zaroorat nahi padti—AWS sab backend khud handle karta hai (**least operational overhead**).
+* **Amazon EventBridge + S3 Events:** S3 mein jab bhi nayi file upload hoti hai (`Object Created`), woh EventBridge ko event bhejti hai, jo foran Glue job ko trigger kar deta hai. Yeh modern, event-driven aur serverless tareeqa hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Glue Crawler on a schedule (Option 1):** Sawaal mein kaha gaya hai ke process **automatically trigger** honi chahiye *har nayi file upload hone par*, jab ke scheduled crawler har ghante chalega (aur crawler sirf schema detect karta hai, data transform/convert karke doosri bucket mein save nahi karta).
+* **Apache Spark on EC2 + Lambda (Option 3):** EC2 instances khud set up karna, Spark clusters manage karna, aur custom Lambda functions ke zariye unhein invoke karna—is mein **bohot zyada operational overhead** hai.
+* **AWS Lambda + AWS Transfer Family (Option 4):**
+1. Lambda ki **15 minutes execution limit** hoti hai. 2 GB ki bari CSV file ko process aur convert karne mein Lambda timeout ho sakta hai.
+2. AWS Transfer Family SFTP ke zariye files ko internally move karne ki koi zaroorat nahi hai jab data pehle se S3 mein mojoud hai.
+
+
+
+---
+
+### ✅ Correct Answer:
+
+* **Utilize an AWS Glue extract, transform, and load (ETL) job to process and convert the .csv files to Apache Parquet format and then store the output files into the target S3 bucket. Configure an Amazon EventBridge rule to trigger the Glue job on S3 Object Created events.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Big Data Conversion / ETL + Serverless + Least Overhead = AWS Glue ETL Job**
+> **Trigger on S3 Upload = Amazon EventBridge + S3 Object Created Events**
+
+---
 
 
 
