@@ -937,7 +937,96 @@ What is the most suitable solution to meet the company’s requirements?
 
 
 ---
+---
+---
 
+10. Question
+
+A company hosted a web application in an Auto Scaling group of EC2 instances. The IT manager is concerned about the over-provisioning of the resources that can cause higher operating costs. A Solutions Architect has been instructed to create a cost-effective solution without affecting the performance of the application.
+
+Which dynamic scaling policy should be used to satisfy this requirement?
+
+- Use simple scaling.
+- `Use target tracking scaling.`
+- Use suspend and resume scaling.
+- Use scheduled scaling.
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek web application **EC2 Auto Scaling Group (ASG)** par chal rahi hai.
+2. **Core Problem:** IT manager ko dar hai ke **over-provisioning** (zaroorat se zyada EC2 instances chalne) ki wajah se **cost zyada** aa rahi hai, lekin agar instances kam kiye toh **performance** mutasir nahi honi chahiye.
+3. **Requirement:** Ek aisi **dynamic scaling policy** chahiye jo automatically instances ko bilkul utna hi rakhe jitni load ko zaroorat ho (na kam, na zyada).
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"avoid over-provisioning"`, `"cost-effective without affecting performance"`, `"dynamic scaling policy"`.
+* **Target Tracking Scaling Policy:**
+* Yeh bilkul **ghar ke AC ke thermostat** ki tarah kaam karti hai!
+* Aap bas aik target set kar dete hain—maslan, **"Average CPU Utilization ko 50% (ya 60%) par rakho"**.
+* Agar traffic barhega aur CPU 50% se upar jayega, toh yeh khud instances add (scale-out) kar dega taake performance kharab na ho.
+* Agar traffic kam hoga aur CPU 50% se neeche jayega, toh yeh khud extra instances band (scale-in) kar dega taake **over-provisioning aur extra bill na aaye**!
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Simple Scaling (Option 1):** Yeh purana tareeqa hai jisme har scaling action ke baad aik lamba **cooldown period** wait karna padta hai. Yeh slow react karta hai aur aksar over-provisioning ya under-provisioning kar deta hai. (AWS khud Target Tracking ya Step Scaling recommend karta hai).
+* **Suspend and Resume Scaling (Option 3):** Yeh koi scaling policy nahi hai, balki maintenance ke waqt Auto Scaling processes ko temporarily rokne (pause karne) ka feature hai.
+* **Scheduled Scaling (Option 4):** Yeh tab use hota hai jab traffic ka waqt pehle se fix aur predictable ho (maslan roz subah 9 baje). Yeh **dynamic** (live traffic ke mutabiq) scale nahi karta.
+
+---
+
+### ✅ Correct Answer:
+
+* **Use target tracking scaling.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Avoid Over-Provisioning + Maintain Performance + Dynamic Scaling = Target Tracking Scaling (AC Thermostat!)**
+
+---
+---
+---
+
+**Bilkul 100% sahi pakda aapne!** Aapka concept bilkul crystal clear hai.
+
+Bas **Step Scaling** mein ek choti si khoobi aur add kar lein taake exam mein koi trick miss na ho:
+
+* **Target Tracking Scaling:** Aap kehte hain *"Average CPU ko 50% par rakho"* — AWS khud hisaab lagata hai ke kitne instances add ya remove karne hain (bilkul **AC ke thermostat** ki tarah).
+* **Step Scaling:** Is mein aap **jumps (steps)** set karte hain ke traffic jitna tez barhega, utne hi zyada instances ek hi baar mein add honge!
+* Misal ke taur par:
+* Agar CPU **50% se 70%** tak jaye $\rightarrow$ **+1 EC2** instance add karo.
+* Agar CPU **70% se 90%** par chala jaye (achanak flash sale aa gayi) $\rightarrow$ **+3 EC2** instances ek hi saath add karo!
+* Agar CPU **90% se upar** jaye $\rightarrow$ **+5 EC2** instances add karo!
+
+
+
+
+
+---
+
+### 📊 Quick Difference (Exam Cheat Sheet)
+
+| Feature | Target Tracking Scaling | Step Scaling |
+| --- | --- | --- |
+| **Kaise Kaam Karta Hai?** | Ek **target value** (e.g., 50% CPU) ko maintain rakhta hai | **Alag-alag thresholds (steps)** ke mutabiq instances add/remove karta hai |
+| **Control** | AWS khud decide karta hai kitne instances add/remove karne hain | Aap khud rule likhte hain ke kis level par kitne instances add hon |
+| **Best Use Case** | Normal web apps jahan **over-provisioning bachani** ho aur steady load ho | Jab traffic **achanak spikes (jumps)** maare aur aapko **aggressive scaling** chahiye ho |
+
+---
+
+### 🔑 Ek Line Ka Summary:
+
+> **Target Tracking** = *"50% par raho"* (Smooth & automatic)
+> **Step Scaling** = *"50% par 1 add karo, lekin agar 80% par pohnche toh foran 4 add karo!"* (Custom jumps)
+
+---
 
 
 
