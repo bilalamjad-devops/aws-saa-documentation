@@ -1416,6 +1416,82 @@ On-premises Oracle database ko AWS mein shift karne ke liye **AWS DMS** sab se f
 * **AWS Schema Conversion Tool (Option 5):** SCT tab use hota hai jab aap **heterogeneous migration** kar rahe hon (misal ke taur par Oracle se PostgreSQL par jana ho). Yahan source aur target dono Oracle hain (homogeneous migration), is liye schema conversion tool ki zaroorat nahi hai.
 
 ---
+---
+---
+
+36. Question
+
+A company has a web application that uses Amazon CloudFront to distribute its images, videos, and other static content stored in its Amazon S3 bucket to users around the world. The company has recently introduced a new member-only access feature for some of its high-quality media files. There is a requirement to provide access to multiple private media files only to paying subscribers without having to change the current URLs.
+
+Which of the following is the most suitable solution to implement to satisfy this requirement?
+
+
+- `Use Signed Cookies to control who can access the private files in your CloudFront distribution by modifying your application to determine whether a user should have access to your content. For members, send the required Set-Cookie headers to the viewer which will unlock the content only to them.`
+- Configure your CloudFront distribution to use Field-Level Encryption to protect your private data and only allow access to members.
+- Configure your CloudFront distribution to use Match Viewer as its Origin Protocol Policy which will automatically match the user request. This will allow access to the private content if the request is a paying member and deny it if it is not a member.
+- Create a Signed URL with a custom policy which only allows the members to see the private files.
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek web application **Amazon CloudFront** use kar rahi hai S3 bucket se images, videos, aur static content globally deliver karne ke liye.
+2. **Core Problem:** Company ne paying subscribers ke liye ek **"member-only access"** feature launch kiya hai.
+3. **Requirements:**
+* Paying subscribers ko **multiple private media files** ka access dena hai.
+* **Key Constraint:** **Without having to change the current URLs** (mojooda URLs ko tabdeel kiye baghair).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"member-only access"`, `"multiple private media files"`, `"without having to change the current URLs"`.
+* **CloudFront Signed Cookies:**
+* Jab aapko **multiple restricted files** (jaise ek poori video series ya member-only media gallery) ka access dena ho **bina URLs ko change kiye**, toh **Signed Cookies** use hoti hain!
+* Jaise hi paying subscriber website par login karta hai, application uske browser ko `Set-Cookie` headers bhejti hai. Is ke baad user bina kisi extra query string ya badle hue URL ke un tamam private files ko access kar sakta hai jinki permission cookie mein di gayi hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Field-Level Encryption (Option 2):** Yeh specific sensitive data fields (jaise credit card numbers) ko user ke browser se origin server tak jate waqt encrypt karne ke liye hota hai—yeh user access control ya authentication ke liye nahi hai.
+* **Origin Protocol Policy - Match Viewer (Option 3):** Yeh sirf yeh decide karta hai ke CloudFront origin (S3/EC2) se HTTP par baat kare ya HTTPS par (viewer ke request protocol ke mutabiq). Iska membership ya access control se koi taluq nahi.
+* **Signed URL (Option 4):** Signed URL sirf **ek single file** ke access ke liye hota hai aur is mein URL ke aakhir mein lambi query parameters (`?Expires=...&Signature=...`) add karni padti hain—yani **URL change ho jata hai**, jo sawaal ki shart ke khilaf hai!
+
+---
+
+### 📊 Quick Comparison: Signed URL vs. Signed Cookies
+
+| Feature | CloudFront Signed URL | CloudFront Signed Cookies |
+| --- | --- | --- |
+| **Kitni Files?** | Sirf **1 single file** ke liye | **Multiple files** ke liye (e.g., all videos in `/members/*`) |
+| **URL Change?** | **Haan** (Query string add hoti hai) | **Nahi** (Original URLs bilkul same rehte hain) |
+| **Best Use Case** | Single file download (jaise ek software installer ya ek PDF) | Paid streaming website, member-only portal, online courses |
+
+---
+
+### ✅ Correct Answer:
+
+* **Use Signed Cookies to control who can access the private files in your CloudFront distribution by modifying your application to determine whether a user should have access to your content. For members, send the required Set-Cookie headers to the viewer which will unlock the content only to them.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Multiple Private Files + Without Changing URLs = CloudFront Signed Cookies**
+
+> **Single Private File (URL change allowed) = CloudFront Signed URL**
+
+<img width="1695" height="1079" alt="amazon-cloud-front-signed-URL-signed-Cookies (1)" src="https://github.com/user-attachments/assets/bda2ba3d-b525-4ff3-83b9-aff9416e01af" />
+
+
+---
+
+
+
+
 
 
 
