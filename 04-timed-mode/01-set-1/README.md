@@ -1813,6 +1813,70 @@ So in Question 51:
 ---
 ---
 
+
+53. Question
+
+A company plans to host a web application in an Auto Scaling group of Amazon EC2 instances. The application will be used globally by users to upload and store several types of files. Based on user trends, files that are older than 2 years must be stored in a different storage class. The Solutions Architect of the company needs to create a cost-effective and scalable solution to store the old files yet still provide durability and high availability.
+
+Which of the following approach can be used to fulfill this requirement? (Select TWO.)
+
+- Use Amazon EFS and create a lifecycle policy that will move the objects to EFS-IA after 2 years.
+- Use Amazon EBS volumes to store the files. Configure the Amazon Data Lifecycle Manager (DLM) to schedule snapshots of the volumes after 2 years.
+- `Use Amazon S3 and create a lifecycle policy that will move the objects to S3 Glacier after 2 years.`
+- Use a RAID 0 storage configuration that stripes multiple Amazon EBS volumes together to store the files. Configure the Amazon Data Lifecycle Manager (DLM) to schedule snapshots of the volumes after 2 years.
+- `Use Amazon S3 and create a lifecycle policy that will move the objects to S3 Standard-IA after 2 years.`
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek web application Auto Scaling group (EC2 instances) par chal rahi hai jahan dunya bhar ke users mukhtalif types ki files upload aur store karte hain.
+2. **Requirements:**
+* **Lifecycle Rule:** Jo files **2 saal se purani** ho jayein, unhein kisi doosri cost-effective storage class mein move karna hai.
+* **Core Qualities:** Solution **cost-effective, scalable, durable (99.999999999%), aur highly available** hona chahiye.
+* **Select TWO options.**
+
+
+
+---
+
+### ✅ Correct Options (Select TWO)
+
+1. **Use Amazon S3 and create a lifecycle policy that will move the objects to S3 Glacier after 2 years.**
+2. **Use Amazon S3 and create a lifecycle policy that will move the objects to S3 Standard-IA after 2 years.**
+
+---
+
+### 🔍 Detailed Explanation (Kyun Yehi Do Theek Hain?)
+
+* **Amazon S3 (Scalability, Durability & High Availability):**
+User-uploaded files (images, documents, videos) ko globally store karne ke liye **Amazon S3** sab se best, practically unlimited scalable, aur cost-effective object storage hai. Yeh **99.999999999% (11 nines) durability** aur Multi-AZ high availability deta hai.
+* **Choice 3 & Choice 5 (S3 Lifecycle Policies — Glacier & Standard-IA):**
+S3 mein aap **Lifecycle Transition Policies** laga sakte hain ke jab koi file 2 saal (730 days) purani ho jaye, toh woh automatically sasti storage class mein shift ho jaye:
+* **S3 Standard-IA (Infrequent Access):** Agar purani files ko kabhi-kabhar turant (millisecond access) kholne ki zaroorat padti hai.
+* **S3 Glacier (Flexible Retrieval / Deep Archive):** Agar purani files ko bohot kam access kiya jata hai aur sab se zyada paise bachane hain.
+* Dono classes same 11 nines durability aur high availability maintain rakhti hain!
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Amazon EFS Lifecycle Policy after 2 years (Option 1):** **EFS Lifecycle Management** ke maximum transition periods sirf **1, 7, 14, 30, 60, 90, 180, 270, ya 365 days (1 saal)** tak hote hain—is mein **2 saal (730 days)** ka option hota hi nahi hai! Saath hi global object uploads ke liye EFS S3 ke muqable mein kaafi mehenga hota hai.
+* **Amazon EBS + DLM Snapshots after 2 years (Option 2):** EBS ek block storage hai jo single AZ tak mehdood hota hai (scalable global object storage nahi hai), aur DLM snapshots backup lete hain, purani files ko kisi doosri storage class mein move nahi karte.
+* **RAID 0 on multiple EBS volumes + DLM (Option 4):** RAID 0 mein agar ek bhi disk fail ho jaye toh **poora data khatam** ho jata hai (zero fault tolerance/durability), jo sawaal ki requirement ke bilkul khilaf hai.
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Global User File Uploads + Cost-Effective + 11 Nines Durability + Move Old Files (after 2 years) = Amazon S3 + Lifecycle Policy (Standard-IA / Glacier)**
+> *(Yaad rakhein: EFS Lifecycle policy max 365 days tak hoti hai, 2 years nahi!)*
+
+---
+---
+---
+
+
 08-October-2026
 
 06-October-2026
