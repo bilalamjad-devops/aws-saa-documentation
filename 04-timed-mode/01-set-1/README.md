@@ -1670,12 +1670,71 @@ Kyunki source aur target dono Oracle hain, yeh ek **homogeneous migration** hai 
 ### 🔑 Direct Memory Trick (Exam Key):
 
 > **.NET App + Minimal Code Changes + Easy Management + Multi-AZ = AWS Elastic Beanstalk**
+
 > **Oracle to Oracle + Easy Management + Multi-AZ = AWS DMS + Amazon RDS for Oracle (Multi-AZ)**
 
 ---
 
+46. Question
+
+An application consists of multiple Amazon EC2 instances in private subnets in different availability zones. The application uses a single NAT Gateway for downloading software patches from the Internet to the instances. There is a requirement to protect the application from a single point of failure when the NAT Gateway encounters a failure or if its availability zone goes down.
+
+How should the Solutions Architect redesign the architecture to be more highly available and cost-effective?
+
+- Create three NAT Gateways in each availability zone. Configure the route table in each private subnet to ensure that instances use the NAT Gateway in the same availability zone.
+- Create a NAT Gateway in each availability zone. Configure the route table in each public subnet to ensure that instances use the NAT Gateway in the same availability zone.
+- `Create a NAT Gateway in each availability zone. Configure the route table in each private subnet to ensure that instances use the NAT Gateway in the same availability zone`
+- Create two NAT Gateways in each availability zone. Configure the route table in each public subnet to ensure that instances use the NAT Gateway in the same availability zone.
 
 
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek application ke **multiple Amazon EC2 instances** alag-alag Availability Zones (AZs) ke **private subnets** mein chal rahe hain.
+2. **Current Problem:** Yeh tamam instances internet se software patches download karne ke liye sirf **ek single NAT Gateway** use kar rahe hain. Agar woh NAT Gateway fail ho jaye ya uski Availability Zone down ho jaye, toh saare private instances ka internet connection kat jayega (**Single Point of Failure**).
+3. **Requirements:**
+* Architecture ko **Highly Available** banana hai (taake ek AZ down hone se doosri AZ ka internet band na ho).
+* **Cost-effective** bhi rakhna hai (zaroorat se zyada NAT Gateways lagane se bill bohot barh jata hai).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"private subnets in different availability zones"`, `"single NAT Gateway"`, `"protect from a single point of failure"`, `"highly available and cost-effective"`.
+* **1 NAT Gateway per Availability Zone + Private Subnet Route Tables:**
+* AWS ka standard best practice hai ke **har Availability Zone (AZ) ke public subnet mein ek NAT Gateway** banaya jaye.
+* Uske baad **har private subnet ke route table** ko configure kiya jaye ke us AZ ke EC2 instances apni hi AZ ke NAT Gateway ko use karein (`0.0.0.0/0 -> nat-gateway-in-same-az`).
+* Is se do bade faide hote hain:
+1. **High Availability:** Agar AZ-1 down hoti hai, toh AZ-2 ke instances apna khud ka NAT Gateway use karte rehte hain.
+2. **Cost-Effective:** Cross-AZ data transfer charges bachte hain aur har AZ mein 2 ya 3 NAT Gateways lagane ka faltu kharcha nahi hota (kyunki ek NAT Gateway khud ek AZ ke andar AWS ki taraf se redundant hota hai).
+
+
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Create three NAT Gateways in each AZ (Option 1):** Har AZ mein 3 NAT Gateways lagana bilkul bewakoofi aur bohot mehenga (not cost-effective) hai, kyunki NAT Gateway pehle hi apni AZ mein highly available hota hai.
+* **Configure the route table in each public subnet... (Options 2 & 4):** Yeh ek classic exam trap hai! NAT Gateway khud **public subnet** mein launch hota hai aur public subnet ka route table **Internet Gateway (IGW)** ki taraf jata hai (`0.0.0.0/0 -> igw-xxxx`), na ke NAT Gateway ki taraf. NAT Gateway ka route hamesha **private subnet ke route table** mein lagta hai! (Aur Option 4 mein har AZ mein 2 NAT Gateways bhi galat hain).
+
+---
+
+### ✅ Correct Answer:
+
+* **Create a NAT Gateway in each availability zone. Configure the route table in each private subnet to ensure that instances use the NAT Gateway in the same availability zone**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Multi-AZ Private Subnets + High Availability + Cost-Effective = 1 NAT Gateway per AZ**
+
+> **Route Table Rule:** **Private Subnet** Route Table $\rightarrow$ **NAT Gateway** (in same AZ) | **Public Subnet** Route Table $\rightarrow$ **Internet Gateway (IGW)**
+
+---
 
 
 08-October-2026
