@@ -1087,7 +1087,103 @@ Which of the following options should be implemented to meet the company’s req
 > **Auto-delete files after X days = Amazon S3 Lifecycle Rule (Expiration)** *(EFS lifecycle sirf tiering karta hai, delete nahi!)*
 
 ---
+---
+---
 
+21. Question
+
+A content management system (CMS) is hosted on a fleet of auto-scaled, On-Demand Amazon EC2 instances that use Amazon Aurora as its database. Currently, the system stores the file documents that users upload in one of the attached Amazon EBS volumes. The system’s performance has been observed to be slow, and the manager has instructed the team to improve the architecture.
+
+In this scenario, which solution should be implemented to achieve a scalable, highly available, POSIX-compliant shared file system?
+
+- `Use Amazon EFS to provide a shared file system for concurrent access to data`
+- Upgrade your existing EBS volumes to Provisioned IOPS SSD volumes
+- Leverage Amazon ElastiCache to cache frequently accessed data and reduce latency
+- Create an Amazon S3 bucket and use this as the storage for the CMS
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek Content Management System (CMS) **auto-scaled EC2 instances** par chal raha hai aur database ke liye Amazon Aurora use kar raha hai.
+2. **Core Problem:** Abhi users ki uploaded files ek single **Amazon EBS volume** par store ho rahi hain. Chuke multiple EC2 instances auto-scale ho rahe hain, un sab ko ek hi shared storage par concurrent access chahiye, aur current EBS setup slow aur bottleneck ban raha hai.
+3. **Requirements:** Ek aisa storage solution chahiye jo:
+* **Scalable** ho (khud-ba-khud grow/shrink ho).
+* **Highly Available** ho (Multi-AZ).
+* **POSIX-compliant shared file system** ho (multiple Linux EC2 instances ek hi waqt par mount karke read/write kar sakein).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"fleet of auto-scaled EC2 instances"`, `"scalable"`, `"highly available"`, `"POSIX-compliant shared file system"`.
+* **Amazon Elastic File System (Amazon EFS):**
+* Yeh AWS ki fully managed, serverless, **POSIX-compliant** network file system (NFS) service hai.
+* Yeh **multiple Availability Zones (Multi-AZ)** mein data store karti hai (high availability) aur **hazaaron EC2 instances** ko ek hi waqt par **concurrent read/write access** deti hai.
+* Jaise-jaise files upload hoti hain, EFS automatically petabytes tak scale karta hai bina kisi manual provisioning ke.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Upgrade EBS to Provisioned IOPS SSD (Option 2):** Standard Amazon EBS ek block storage volume hai jo aam taur par ek hi Availability Zone mein aik instance se attach hota hai (Multi-Attach sirf kuch specific Nitro/io2 cases mein aur bina built-in cluster file system ke file corruption karta hai). Yeh true multi-AZ POSIX shared file system nahi hai.
+* **Amazon ElastiCache (Option 3):** Yeh in-memory caching service (Redis/Memcached) hai jo database queries ko tez karne ke liye hoti hai, na ke user-uploaded documents store karne ke liye persistent file system.
+* **Amazon S3 (Option 4):** S3 ek **Object Storage** service hai, yeh **POSIX-compliant file system** nahi hai (aap isay standard Linux file system ki tarah mount karke POSIX file operations nahi chala sakte).
+
+---
+
+### ✅ Correct Answer:
+
+* **Use Amazon EFS to provide a shared file system for concurrent access to data**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Multiple EC2 Instances (Auto Scaling) + Shared Storage + POSIX-Compliant File System = Amazon EFS**
+
+---
+
+**POSIX** ka matlab hai **Portable Operating System Interface**.
+
+Bilkul aasan lafzon mein samjhein toh **POSIX ek standard rulebook hai** jo batati hai ke **Linux ya Unix operating systems** (jaise Ubuntu, Amazon Linux, macOS) files aur folders ko kaise handle karte hain.
+
+---
+
+### 💡 POSIX File System Kya Hota Hai? (Aasan Concept)
+
+Jab aap apne computer ya Linux server par koi folder kholte hain, toh aap kya kar sakte hain?
+
+1. **Folders ke andar folders** bana sakte hain (`/var/www/uploads/report.pdf`).
+2. **Permissions** set kar sakte hain (kaun file read/write/execute kar sakta hai — jaise `chmod 755` ya owner/group rights).
+3. Ek file ko **open karke uske beech mein se thora sa data edit** kar sakte hain (poori file dobara upload kiye baghair).
+4. **File Locking** laga sakte hain (agar ek program file edit kar raha hai toh doosra usay kharab na kare).
+
+Jo storage system in sab Linux rules ko follow karta hai, usay **POSIX-compliant file system** kehte hain!
+
+---
+
+### 🔍 AWS Exam Mein "POSIX" Kyun Pocha Jata Hai? (S3 vs. EFS)
+
+Exam mein yeh lafz **"POSIX-compliant"** aksar **Amazon S3** aur **Amazon EFS** ke darmiyan farq karne ke liye diya jata hai:
+
+| Feature | Amazon EFS (POSIX-Compliant ✅) | Amazon S3 (Not POSIX ❌) |
+| --- | --- | --- |
+| **Kaise Kaam Karta Hai?** | Bilkul aapke laptop ke **hard drive folders** ki tarah mount hota hai (`/mnt/efs`). | Ek **Object Storage** hai jo internet APIs (`GET`, `PUT`) se chalta hai. |
+| **File Edit Karna** | Aap kisi badi file ka sirf ek chota hissa edit/append kar sakte hain. | File ka ek lafz bhi badalna ho toh poori file dobara upload karni padti hai. |
+| **Linux Permissions** | Standard Linux `chmod` / `chown` aur file locking support karta hai. | Standard Linux permissions nahi hotin (IAM policies / Bucket policies chalti hain). |
+| **Exam Catchword** | *"Shared file system, Linux instances, POSIX-compliant"* | *"Static files, media hosting, backups, object storage"* |
+
+---
+
+### 🔑 Direct Memory Trick:
+
+> **POSIX = Linux/Unix wala standard folder & file system.**
+> Jab bhi sawaal mein **"POSIX-compliant shared file system"** likha dikhe, toh **Amazon S3** ko foran cross kar dein aur **Amazon EFS** (ya Windows ke liye FSx) select karein!
+
+---
 
 
 
