@@ -1488,11 +1488,72 @@ Which of the following is the most suitable solution to implement to satisfy thi
 
 
 ---
+---
+---
+
+39. Question
+
+A government agency plans to store confidential tax documents on AWS. Due to the sensitive information in the files, the Solutions Architect must restrict the data access requests made to the storage solution to a specific Amazon VPC only. The solution should also prevent the files from being deleted or overwritten to meet the regulatory requirement of having a write-once-read-many (WORM) storage model.
+
+Which combination of the following options should the Architect implement? (Select TWO.)
+
+- Enable Object Lock but disable Object Versioning on the new Amazon S3 bucket to comply with the write-once-read-many (WORM) storage model requirement.
+- Set up a new Amazon S3 bucket to store the tax documents and integrate it with AWS Network Firewall. Configure the Network Firewall to only accept data access requests from a specific VPC.
+- Store the tax documents in the Amazon S3 Glacier Instant Retrieval storage class. Use the PutBucketPolicy API to apply a bucket policy that restricts access requests to a specific VPC.
+- `Configure an Amazon S3 Access Point for the S3 bucket to restrict data access to a particular VPC only.`
+- `Create a new Amazon S3 bucket with the S3 Object Lock feature enabled. Store the documents in the bucket and set the Legal Hold option for object retention.`
 
 
 
 
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
 
+1. **Setup:** Ek government agency apne confidential tax documents ko AWS par store karna chahti hai.
+2. **Requirements (Do Badi Shartein):**
+* **Network Restriction:** Storage tak sirf ek **specific Amazon VPC** ke andar se hi access requests aani chahiye (bahar se nahi).
+* **WORM Compliance (Write-Once-Read-Many):** Files ko koi delete ya overwrite na kar sake taake regulatory rules pure hon.
+* **Select TWO options.**
+
+
+
+---
+
+### ✅ Correct Options (Select TWO)
+
+1. **Configure an Amazon S3 Access Point for the S3 bucket to restrict data access to a particular VPC only.**
+2. **Create a new Amazon S3 bucket with the S3 Object Lock feature enabled. Store the documents in the bucket and set the Legal Hold option for object retention.**
+
+---
+
+### 🔍 Detailed Explanation (Kyun Yehi Do Theek Hain?)
+
+* **Choice 4 (S3 Access Point restricted to a VPC):**
+Jab aap **Amazon S3 Access Point** banate hain, toh aap uski network origin ko **VPC** par set karke ek specific **VPC ID** lock kar sakte hain. Is ke baad us Access Point ke zariye aane wali har request sirf usi VPC (via VPC Endpoint) se accept hogi, aur bahar ke internet ya kisi doosre VPC se block ho jayegi.
+* **Choice 5 (S3 Object Lock + Legal Hold for WORM):**
+**Amazon S3 Object Lock** specifically **Write-Once-Read-Many (WORM)** model ke liye bana hai. Is mein **Legal Hold** lagane se koi bhi user (chahe woh root user hi kyun na ho!) us object version ko overwrite ya delete nahi kar sakta jab tak Legal Hold explicitly hataya na jaye.
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Enable Object Lock but disable Object Versioning (Option 1):** Yeh technically **impossible** hai! **S3 Object Lock** sirf unhi buckets par kaam karta hai jin par **Object Versioning enabled** ho (Object Lock enable karte hi versioning khud-ba-khud on ho jati hai aur usay disable nahi kiya ja sakta).
+* **Integrate S3 bucket with AWS Network Firewall (Option 2):** AWS Network Firewall ek VPC-level stateful firewall hai; aap S3 bucket ko directly AWS Network Firewall se integrate nahi kar sakte.
+* **S3 Glacier Instant Retrieval + PutBucketPolicy (Option 3):** S3 Glacier Instant Retrieval ek storage class hai (archive/backup ke liye), yeh WORM compliance (delete/overwrite protection) guarantee nahi karta—WORM ke liye **S3 Object Lock** zaroori hai.
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **WORM Model (Prevent Delete/Overwrite) = S3 Object Lock (Requires Versioning ON!)**
+
+> **Restrict S3 Access to Specific VPC = S3 Access Point (VPC-restricted) OR Bucket Policy with `aws:SourceVpc**`
+
+<img width="1517" height="988" alt="amazon-s3-access-points-via-vpc (1)" src="https://github.com/user-attachments/assets/3cd97024-3725-40ca-8759-f8cb3d3e8239" />
+
+<img width="1920" height="1022" alt="td-s3-object-lock-08-14-2024 (1)" src="https://github.com/user-attachments/assets/037cff2f-05f2-4051-ab17-5ed23d84fead" />
+
+
+---
 
 
 
