@@ -1735,7 +1735,83 @@ How should the Solutions Architect redesign the architecture to be more highly a
 > **Route Table Rule:** **Private Subnet** Route Table $\rightarrow$ **NAT Gateway** (in same AZ) | **Public Subnet** Route Table $\rightarrow$ **Internet Gateway (IGW)**
 
 ---
+---
+---
 
+
+51. Question
+
+A company hosted an e-commerce website on an Auto Scaling group of Amazon EC2 instances behind an Application Load Balancer. The Solutions Architect noticed that the website is receiving a high number of illegitimate external requests from multiple systems with frequently changing IP addresses. To address the performance issues, the Solutions Architect must implement a solution that would block these requests while having minimal impact on legitimate traffic.
+
+Which of the following options fulfills this requirement?
+
+- Create a custom network ACL and associate it with the subnet of the Application Load Balancer to block the offending requests.
+- Create a regular rule in AWS WAF and associate the web ACL to an Application Load Balancer.
+- Create a private connection using AWS PrivateLink to block the offending requests.
+- `Create a rate-based rule in AWS WAF and associate the web ACL to an Application Load Balancer.`
+
+### ✅ Correct Answer:
+**Create a rate-based rule in AWS WAF and associate the web ACL with the Application Load Balancer.**
+
+**Why:**  
+The requests come from **many changing IP addresses**. A **rate-based WAF rule** detects and blocks clients sending an unusually high number of requests, without blocking normal legitimate traffic.
+
+🧠 **Exam memory:**  
+**High-volume / abusive requests → AWS WAF Rate-based rule** ✅  
+**Changing IPs → don't rely on NACL IP blocking** ❌  
+**ALB → WAF can protect it** ✅
+
+Yes. Think of it very simply:
+
+| Rule | What it checks | Example |
+|---|---|---|
+| **Regular rule** | **What the request looks like** | Block requests containing a malicious SQL pattern |
+| **Rate-based rule** | **How many requests are coming** | Block an IP sending 10,000 requests in 5 minutes |
+
+### 1. Regular WAF rule
+You define a **condition/pattern** to match.
+
+Example:
+> Block requests where URI contains `/admin`  
+> Block a specific IP  
+> Block a specific country  
+> Block SQL injection patterns
+
+It mainly asks:
+
+**"Does this request match my condition?"**
+
+---
+
+### 2. Rate-based rule
+You define a **request threshold**.
+
+Example:
+> If an IP sends more than **2,000 requests in 5 minutes**, temporarily block/rate-limit it.
+
+It asks:
+
+**"Is this source sending too many requests?"**
+
+This is perfect for your question because the attacker has **frequently changing IP addresses**. You don't need to manually identify every IP.
+
+### 🧠 SAA exam shortcut
+
+**Malicious pattern/content → Regular WAF rule**  
+**Too many requests / flooding / abusive traffic → Rate-based rule** ✅
+
+So in Question 51:
+
+**High number of illegitimate requests from changing IPs → Rate-based WAF rule.**
+
+<img width="1047" height="786" alt="TD-AWS-WAF-RateLimit (2)" src="https://github.com/user-attachments/assets/996a391e-4f4d-4d35-b816-e9a1dc0809f9" />
+
+
+
+
+---
+---
+---
 
 08-October-2026
 
