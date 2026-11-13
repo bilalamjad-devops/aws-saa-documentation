@@ -933,6 +933,9 @@ What is the most suitable solution to meet the company’s requirements?
 
 > **Amazon EKS + Encrypt Secrets inside `etcd` = Enable EKS Secret Encryption with AWS KMS Key (Envelope Encryption)**
 
+<img width="1920" height="893" alt="Amazon-EKS-27072023" src="https://github.com/user-attachments/assets/4eaafe69-b49c-4d20-8751-a852b3f1f2e3" />
+
+
 ---
 
 
