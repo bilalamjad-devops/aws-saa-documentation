@@ -880,7 +880,62 @@ Standard **Amazon RDS Multi-AZ** sirf ek hi region ke andar high availability de
 * **Aurora Global Database:** Ek high-speed fiber wire lagi hai jo aapke likhte hi **1 second se pehle** doosre shehar ke locker mein exact copy chhap deti hai, aur emergency mein **1 minute se pehle** wo office main branch ban jata hai.
 * **DynamoDB Global Tables:** Har shehar ke office ko poora ikhtiyar hai ke woh khud likhe aur khud padhe—kisi ko main branch banane ki zaroorat hi nahi padti!
 
----**
+---
+---
+---
+
+
+9. Question
+
+A company has recently migrated its microservices-based application to Amazon Elastic Kubernetes Service (Amazon EKS). As part of the migration, the company must ensure that all sensitive configuration data and credentials, such as database passwords and API keys, are stored securely and encrypted within the Amazon EKS cluster’s etcd key-value store.
+
+What is the most suitable solution to meet the company’s requirements?
+
+- Use Amazon EKS default options and the Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver as an add-on to securely store sensitive data within the Amazon EKS cluster.
+- Use AWS Secrets Manager with a new AWS KMS key to securely manage and store sensitive data within the EKS cluster's etcd key-value store.
+- `Enable secret encryption with a new AWS KMS key on an existing Amazon EKS cluster to encrypt sensitive data stored in the EKS cluster's etcd key-value store.`
+- Enable default Amazon EBS volume encryption for the account with a new AWS KMS key to ensure encryption of sensitive data within the Amazon EKS cluster.
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek company ne apni microservices application ko **Amazon EKS** par migrate kiya hai.
+2. **Core Problem:** Kubernetes mein sensitive data (database passwords, API keys) ko **Kubernetes Secrets** ke taur par store kiya jata hai, jo cluster ke **`etcd` key-value store** mein save hote hain.
+3. **Requirement:** Is `etcd` store ke andar mojood secrets ko **customer-managed AWS KMS key** ke zariye envelope-encrypt karna hai (application-layer encryption).
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"Amazon EKS"`, `"sensitive configuration data and credentials"`, `"encrypted within the Amazon EKS cluster’s etcd key-value store"`.
+* **Amazon EKS Secrets Encryption (Envelope Encryption):**
+* By default, Kubernetes `etcd` mein secrets base64-encoded hote hain (jo encryption nahi hai) aur disk-level encryption AWS managed hoti hai.
+* Defense-in-depth security ke liye, AWS EKS ek native feature deta hai jisme aap cluster par **Secret Encryption** enable karke apni **AWS KMS key** attach kar sakte hain. Is se Kubernetes API server har secret ko `etcd` mein likhne se pehle KMS key (Envelope Encryption) se encrypt karta hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **EBS CSI Driver (Option 1):** EBS CSI driver pods ko persistent block storage volumes attach karne ke liye hota hai; iska `etcd` mein mojood Kubernetes Secrets ki encryption se koi taluq nahi.
+* **AWS Secrets Manager inside etcd (Option 2):** AWS Secrets Manager ek external, separate AWS service hai—yeh `etcd` key-value store ke *andar* data manage/store nahi karti. Sawaal ne specifically `etcd` ke andar encryption maangi hai.
+* **Default EBS Volume Encryption (Option 4):** Yeh aapke account mein launch hone wale EC2/EBS volumes ko disk level par encrypt karta hai, na ke EKS control plane ke `etcd` key-value store mein application-layer secret encryption ko.
+
+---
+
+### ✅ Correct Answer:
+
+* **Enable secret encryption with a new AWS KMS key on an existing Amazon EKS cluster to encrypt sensitive data stored in the EKS cluster's etcd key-value store.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Amazon EKS + Encrypt Secrets inside `etcd` = Enable EKS Secret Encryption with AWS KMS Key (Envelope Encryption)**
+
+---
+
+
 
 
 08-October-2026
