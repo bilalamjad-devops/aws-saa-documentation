@@ -801,6 +801,9 @@ Yeh bohot hi zabardast sawal hai! Dono mein farq samajhna AWS exam ke liye bohat
 * **Standard Aurora:** Jaise aapka ghar aur aapke ghar ka locker aik hi city mein alag alag jagah par ho. Agar city mein light chali jaye ya chota masla ho, toh kaam chal jata hai; lekin agar poori city mein koi bara hadsa ho jaye, toh risk ho jata hai.
 * **Aurora Global Database:** Jaise aapka aik live locker **Pakistan** mein ho aur uski exact digital copy sath hi sath **Dubai** ke office mein bhi update ho rahi ho. Agar Pakistan wale office mein kuch ho jaye, toh aap Dubai se foran business run kar sakein!
 
+<img width="1272" height="618" alt="rds-db-latestdrawio (1)" src="https://github.com/user-attachments/assets/7f6c5d0c-fc62-4f89-a0da-a200e15e9f81" />
+
+
 ---
 
 ---
