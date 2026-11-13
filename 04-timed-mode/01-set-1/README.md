@@ -1359,7 +1359,12 @@ Which of the following options must be implemented to meet these requirements wi
 ### 🔑 Direct Memory Trick (Exam Key):
 
 > **Big Data Conversion / ETL + Serverless + Least Overhead = AWS Glue ETL Job**
+
 > **Trigger on S3 Upload = Amazon EventBridge + S3 Object Created Events**
+
+
+<img width="2285" height="743" alt="AmazonS3eventtoGlueviaEventBridge-17Feb2026" src="https://github.com/user-attachments/assets/b2d54342-9179-4a12-b97c-2a732bc16f57" />
+
 
 ---
 
