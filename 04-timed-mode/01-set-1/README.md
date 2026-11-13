@@ -1184,6 +1184,66 @@ Exam mein yeh lafz **"POSIX-compliant"** aksar **Amazon S3** aur **Amazon EFS** 
 > Jab bhi sawaal mein **"POSIX-compliant shared file system"** likha dikhe, toh **Amazon S3** ko foran cross kar dein aur **Amazon EFS** (ya Windows ke liye FSx) select karein!
 
 ---
+---
+---
+
+22. Question
+
+A company is in the process of migrating their applications to AWS. One of their systems requires a database that can scale globally and handle frequent schema changes. The application should not have any downtime or performance issues whenever there is a schema change in the database. It should also provide a low latency response to high-traffic queries.
+
+Which is the most suitable database solution to use to achieve this requirement?
+
+- `Amazon DynamoDB`
+- Redshift
+- An Amazon RDS instance in Multi-AZ Deployments configuration
+- An Amazon Aurora database with Read Replicas
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek company apni applications ko AWS par migrate kar rahi hai.
+2. **Requirements:**
+* **Global scale:** Database globally scale kar sake (duniya bhar ke users ke liye).
+* **Frequent schema changes:** Database ka structure (columns/fields) bar-bar badalta rehta hai, aur schema change karte waqt **koi downtime ya performance issue nahi** hona chahiye.
+* **Low latency for high-traffic:** Heavy traffic mein bhi single-digit millisecond response time chahiye.
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"scale globally"`, `"frequent schema changes"`, `"no downtime whenever there is a schema change"`, `"low latency response to high-traffic queries"`.
+* **Amazon DynamoDB:**
+* Yeh ek **NoSQL (schema-less / flexible schema)** key-value aur document database hai.
+* **Zero-downtime schema changes:** Kyunki yeh **schema-less** hai, har item (row) mein alag attributes ho sakte hain! Naye columns add karne ke liye koi `ALTER TABLE` command nahi chalani padti—is liye **kabhi downtime ya table locking nahi hoti**.
+* **Global Scale & Low Latency:** DynamoDB **Global Tables** ke zariye multi-region active-active global scaling deta hai aur kisi bhi scale par **single-digit millisecond latency** maintain karta hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Amazon Redshift (Option 2):** Yeh ek **Data Warehouse (OLAP)** service hai jo heavy analytics aur reporting queries ke liye bani hai—na ke high-traffic operational apps ke liye low-latency queries ya frequent schema changes ke liye.
+* **Amazon RDS Multi-AZ (Option 3):** Yeh ek **Relational (SQL)** database hai jiska **rigid (fixed) schema** hota hai. Is mein bar-bar schema changes (`ALTER TABLE`) karne se table lock ho sakta hai aur performance/downtime issues aate hain, aur yeh single region tak mehdood hai.
+* **Amazon Aurora with Read Replicas (Option 4):** Aurora bhi ek **Relational (SQL)** database hai jisme fixed schema hota hai—frequent schema changes bina kisi impact ke handle karna iski fitrat nahi hai (woh NoSQL ka kaam hai).
+
+---
+
+### ✅ Correct Answer:
+
+* **Amazon DynamoDB**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Frequent Schema Changes (No Downtime) + Global Scale + Low Latency = Amazon DynamoDB (NoSQL / Schema-less)**
+
+---
+
+
 
 
 
