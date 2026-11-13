@@ -1242,6 +1242,63 @@ Which is the most suitable database solution to use to achieve this requirement?
 > **Frequent Schema Changes (No Downtime) + Global Scale + Low Latency = Amazon DynamoDB (NoSQL / Schema-less)**
 
 ---
+---
+---
+
+
+27. Question
+
+A popular social media website uses a Amazon CloudFront web distribution to serve static content to millions of users around the globe. Recently, the website has received a number of complaints about long login times. Additionally, there are instances where users encounter HTTP 504 errors. The manager has instructed the team to significantly reduce login time and further optimize the system.
+
+Which of the following options should be used together to set up a cost-effective solution that improves the application’s performance? (Select TWO.)
+
+
+- Configure your origin to add a Cache-Control max-age directive to your objects, and specify the longest practical value for max-age to increase the cache hit ratio of your CloudFront distribution.
+- `Customize the content that the CloudFront web distribution delivers to your users using Lambda@Edge, which allows your AWS Lambda functions to execute the authentication process in AWS locations closer to the users.`
+- Deploy your application to multiple AWS regions to accommodate your users around the world. Set up a Route 53 record with latency routing policy to route incoming traffic to the region that provides the best latency to the user.
+- Establish multiple Amazon VPCs in different AWS regions and configure a transit VPC to interconnect all of your resources. To handle the requests faster, set up AWS Lambda functions in each region with the AWS Serverless Application Model (SAM) service.
+- `Implement an origin failover by creating an origin group that includes two origins. Assign one as the primary origin and the other as secondary, which enables CloudFront to automatically switch to if the primary origin encounters specific HTTP status code failure responses.`
+
+Koi baat nahi! Is sawaal ko bilkul aasan, zero-technical bhasha mein tod kar samajhte hain ke is mein asli masla kya tha aur hum ne ye do options kyun chune.
+
+---
+
+### 🎬 Poora Scenario Asaan Lafzon Mein:
+
+Maan lein aap ki ek website hai jiska server **America** mein pada hai, aur aapke users **Pakistan, Europe, aur dunya bhar** se us par aate hain.
+
+Sawaal mein do badi shikayatein aayin:
+
+1. **"Login hone mein bohot der lag rahi hai"** (Long login times).
+2. **"Kabhi kabhi HTTP 504 (Timeout) error aa jata hai"** (Yani server jawab hi nahi de raha, thak gaya hai).
+
+Ab isay theek karne ke liye hum ne ye do steps chune:
+
+---
+
+### 1️⃣ Pehli Cheez: Lambda@Edge (Login Fast Karne Ke Liye)
+
+* **Masla:** Jab koi user Pakistan ya kisi doosre mulk se login karta hai, toh uska password/request chal kar seedha America ke main server tak jati hai. Is lamba safar ki wajah se login slow ho jata hai.
+* **Hal (Lambda@Edge):** AWS ke dunya bhar mein **Edge Locations** (chhote data centers jo user ke bilkul qareeb hote hain) bane hote hain. **Lambda@Edge** ki madad se hum authentication (login check karne ka code) ko main server se utha kar user ke sab se qareeb wale Edge Location par rakh dete hain. User wahi qareeb hi login ho jata hai aur speed rocket jaisi tez ho jati hai!
+
+---
+
+### 2️⃣ Doosri Cheez: Origin Failover (504 Timeout Error Khatam Karne Ke Liye)
+
+* **Masla:** 504 Error tab aata hai jab main server par achanak bohot zyada traffic aa jaye aur server crash ho jaye ya jawab na de sake.
+* **Hal (Origin Failover):** Hum CloudFront ke andar **do origins (servers)** set kar dete hain — ek **Primary (Main server)** aur ek **Secondary (Backup server)**. Jaise hi Primary server 504 error dega ya down hoga, CloudFront foran bina kisi error ke user ko backup server par shift kar dega. User ko pata bhi nahi chalega aur website chalti rahegi!
+
+---
+
+### 🔑 Ek Line Ka Summary:
+
+> **Lambda@Edge** ne login ko user ke qareeb kar ke tez kar diya, aur **Origin Failover** ne server down hone par backup server laga kar 504 error bhaga diya!
+
+Kya ab ye concept clear hua, ya iska koi aur hissa dubara samjhayein?
+
+---
+
+
 
 
 
