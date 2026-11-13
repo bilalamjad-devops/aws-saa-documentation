@@ -803,6 +803,38 @@ Yeh bohot hi zabardast sawal hai! Dono mein farq samajhna AWS exam ke liye bohat
 
 <img width="1272" height="618" alt="rds-db-latestdrawio (1)" src="https://github.com/user-attachments/assets/7f6c5d0c-fc62-4f89-a0da-a200e15e9f81" />
 
+Aapka concept **90% bilkul theek** hai! Bas ek chota sa naam aur ek bohot important technical farq clear karna baqi hai jo exam mein aksar test hota hai:
+
+1. **Naam ki correction:**
+* Relational (SQL) wale ka naam **Amazon Aurora Global Database** hai.
+* NoSQL wale ka naam **Amazon DynamoDB Global Tables** hai (aapne thora ulta likh diya tha).
+
+
+2. **Asal Technical Farq (Active-Passive vs. Active-Active):**
+* **Aurora Global Database (Active-Passive):** Is mein sirf **ek Primary Region** mein **Write** (naya data save) ho sakta hai. Baqi secondary regions mein sirf **Read** hota hai (aur disaster ke waqt woh promote ho kar write bante hain).
+* **DynamoDB Global Tables (Multi-Region Active-Active):** Is mein **har region mein ek hi waqt par Read aur Write dono** ho sakte hain! Yani America ka user America wale table mein data write kare aur Europe ka user Europe wale table mein write kare—dono aapas mein khud-ba-khud sync ho jaate hain.
+
+
+
+---
+
+### 📊 Quick Comparison (Exam Cheat Sheet)
+
+| Feature | Amazon Aurora Global Database | Amazon DynamoDB Global Tables |
+| --- | --- | --- |
+| **Database Type** | Relational (**SQL** - MySQL/PostgreSQL) | Non-Relational (**NoSQL** - Key-Value/Document) |
+| **Write Architecture** | **Active-Passive** (Sirf 1 Primary region mein write) | **Active-Active** (Har region mein ek sath read & write) |
+| **Failover / DR** | Secondary region ko promote karna padta hai (`< 1 min`) | Koi failover ki zaroorat nahi — sab regions pehle se active hain |
+| **Exam Catchwords** | *"Relational DB + Multi-region DR + RPO 1s"* | *"NoSQL + Multi-region active-active + local read/write"* |
+
+---
+
+### 🏢 Asaan Misaal (Real-World Analogy)
+
+* **Aurora Global Database:** Ek **Head Office** (jahan main register mein entry hoti hai) aur baqi shehron mein **Branch Offices** (jahan log sirf photocopy dekh sakte hain; agar Head Office band ho jaye toh Branch Office ko Head Office bana diya jata hai).
+* **DynamoDB Global Tables:** Har shehar mein **barabar ke offices** jahan har koi naya data likh bhi sakta hai aur padh bhi sakta hai, aur sab registers aapas mein automatically sync rehte hain.
+
+---
 
 ---
 
