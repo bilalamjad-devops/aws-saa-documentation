@@ -1027,6 +1027,67 @@ Bas **Step Scaling** mein ek choti si khoobi aur add kar lein taake exam mein ko
 > **Step Scaling** = *"50% par 1 add karo, lekin agar 80% par pohnche toh foran 4 add karo!"* (Custom jumps)
 
 ---
+---
+---
+
+
+12. Question
+
+A logistics company plans to automate its order management application. The company wants to use SFTP file transfer for uploading business-critical documents. Since the files are confidential, encryption at rest is required, and high availability must be ensured. Additionally, each file must be automatically deleted one month after creation.
+
+Which of the following options should be implemented to meet the company’s requirements with the least operational overhead?
+
+- Create an Amazon Elastic File System (Amazon EFS) and enable encryption. Configure AWS Transfer for SFTP to securely upload files to the EFS file system. Apply an EFS lifecycle policy to delete files after 30 days.
+- Provision an Amazon EC2 instance and install the SFTP service. Mount an encrypted Amazon EFS file system on the EC2 instance to store the uploaded files. Add a cron job to delete the files older than a month.
+- Create an Amazon S3 bucket with encryption enabled. Configure AWS Transfer for SFTP to securely upload files to the S3 bucket. Configure the retention policy on the SFTP server to delete files after a month.
+- `Create an Amazon S3 bucket with encryption enabled. Launch an AWS Transfer for SFTP endpoint to securely upload files to the S3 bucket. Configure an S3 lifecycle rule to delete files after a month.`
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek logistics company ko business-critical documents upload karne ke liye **SFTP file transfer** chahiye.
+2. **Requirements:**
+* **Encryption at rest:** Files encrypted honi chahiye.
+* **High availability (HA):** Service down nahi honi chahiye.
+* **Auto-deletion after 1 month:** Har file banne ke 30 din (1 mahine) baad khud-ba-khud delete ho jaye.
+* **Key Constraint:** **Least operational overhead** (kam se kam management mehnat).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"SFTP file transfer"`, `"encryption at rest"`, `"high availability"`, `"automatically deleted one month after creation"`, `"least operational overhead"`.
+* **AWS Transfer Family (AWS Transfer for SFTP) + Amazon S3 + S3 Lifecycle Rule:**
+* **AWS Transfer for SFTP:** Yeh ek fully managed, serverless, aur highly available SFTP service hai—aapko koi EC2 server ya SFTP software install/manage nahi karna padta (**least operational overhead**).
+* **Amazon S3 (with Encryption):** S3 native durability (99.999999999%) aur Multi-AZ high availability deta hai, aur default server-side encryption (SSE-S3 ya SSE-KMS) provide karta hai.
+* **S3 Lifecycle Rule:** S3 mein aap aasani se ek **Lifecycle Expiration Rule** laga sakte hain jo objects ko creation ke **30 days (1 month)** baad automatically delete kar deta hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **EFS + EFS Lifecycle Policy (Option 1):** EFS Lifecycle policy files ko **delete nahi karti**, balki purani files ko Infrequent Access (IA) ya Archive storage class mein **move** karti hai! Deletion ke liye S3 Lifecycle Expiration rule chahiye hota hai (aur EFS S3 ke muqable mehenga bhi hai).
+* **EC2 + SFTP + EFS + Cron Job (Option 2):** Single EC2 instance high availability nahi deta, aur OS updates, SFTP server management, aur cron job maintain karne mein bohot zyada **operational overhead** hai.
+* **Retention policy on SFTP server (Option 3):** AWS Transfer for SFTP mein khud ka koi file retention/deletion policy feature nahi hota—yeh kaam storage layer (**S3 Lifecycle Rule**) par hota hai.
+
+---
+
+### ✅ Correct Answer:
+
+* **Create an Amazon S3 bucket with encryption enabled. Launch an AWS Transfer for SFTP endpoint to securely upload files to the S3 bucket. Configure an S3 lifecycle rule to delete files after a month.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Managed SFTP + Least Operational Overhead = AWS Transfer for SFTP**
+> **Auto-delete files after X days = Amazon S3 Lifecycle Rule (Expiration)** *(EFS lifecycle sirf tiering karta hai, delete nahi!)*
+
+---
+
 
 
 
