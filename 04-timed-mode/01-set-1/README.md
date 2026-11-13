@@ -1612,6 +1612,68 @@ Multiple AWS accounts ko ek hi umbrella ke neeche **centrally manage karne, cons
 > **Share Transit Gateway / Subnets / Route 53 Resolver Rules across Accounts = AWS Resource Access Manager (RAM)**
 
 ---
+---
+---
+
+
+42. Question
+
+An online learning company hosts its Microsoft .NET e-Learning application on a Windows Server in its on-premises data center. The application uses an Oracle Database Standard Edition as its backend database.
+
+The company wants a high-performing solution to migrate this workload to the AWS cloud to take advantage of the cloud’s high availability. The migration process should minimize development changes, and the environment should be easier to manage.
+
+Which of the following options should be implemented to meet the company requirements? (Select TWO.)
+
+- `Rehost the on-premises .NET application to an AWS Elastic Beanstalk Multi-AZ environment which runs in multiple Availability Zones.`
+- Refactor the application to .NET Core and run it as a serverless container service using Amazon Elastic Kubernetes Service (Amazon EKS) with AWS Fargate.
+- Provision and replatform the application to Amazon Elastic Container Service (Amazon ECS) with Amazon EC2 worker nodes. Use the Windows Server Amazon Machine Image (AMI) and deploy the .NET application using to the ECS cluster via the ECS Anywhere service.
+- Use AWS Transform MGN to migrate the on-premises Oracle database server to a new Amazon EC2 instance.
+- `Perform a homogeneous migration by moving the Oracle database to Amazon RDS for Oracle in a Multi-AZ deployment using AWS Database Migration Service (AWS DMS).`
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek online learning company apni **Microsoft .NET application** ko on-premises Windows Server par chala rahi hai, aur backend par **Oracle Database Standard Edition** use kar rahi hai.
+2. **Requirements:**
+* **High Availability (HA) & High Performance:** Cloud ki Multi-AZ high availability chahiye.
+* **Minimize development changes:** Code mein zyada tabdeeli (refactoring) nahi karni.
+* **Easier to manage:** Infrastructure management asaan (managed service) honi chahiye.
+* **Select TWO options.**
+
+
+
+---
+
+### ✅ Correct Options (Select TWO)
+
+1. **Rehost the on-premises .NET application to an AWS Elastic Beanstalk Multi-AZ environment which runs in multiple Availability Zones.**
+2. **Perform a homogeneous migration by moving the Oracle database to Amazon RDS for Oracle in a Multi-AZ deployment using AWS Database Migration Service (AWS DMS).**
+
+---
+
+### 🔍 Detailed Explanation (Kyun Yehi Do Theek Hain?)
+
+* **Choice 1 (AWS Elastic Beanstalk Multi-AZ for .NET):**
+**AWS Elastic Beanstalk** natively Windows Server aur **.NET applications** ko support karta hai! Aapko code rewrite ya refactor karne ki zaroorat nahi padti (**minimizes development changes**), aur yeh khud-ba-khud EC2 instances, Auto Scaling, Load Balancing, aur **Multi-AZ High Availability** manage karta hai (**easier to manage**).
+* **Choice 5 (AWS DMS + Amazon RDS for Oracle Multi-AZ):**
+Kyunki source aur target dono Oracle hain, yeh ek **homogeneous migration** hai jo **AWS DMS** ke zariye aasani se ho jati hai. Aur database ko EC2 par khud manage karne ke bajaye **Amazon RDS for Oracle (Multi-AZ)** par rakhne se automatic failover, patching, aur backups milte hain (**easier to manage + high availability**).
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Refactor to .NET Core on EKS + Fargate (Option 2):** "Refactor" karne ka matlab hai poora application code dobara likhna/badalna, jo sawaal ki shart **"minimize development changes"** ke bilkul khilaf hai (aur AWS Fargate Windows containers on EKS support nahi karta).
+* **ECS with Windows AMI via ECS Anywhere (Option 3):** **ECS Anywhere** on-premises servers ko AWS ECS control plane se jodne ke liye hota hai—jab ke company workload ko **AWS cloud par migrate** karna chahti hai, on-premises par nahi rakhna chahti!
+* **AWS MGN (Application Migration Service) for Oracle DB on EC2 (Option 4):** Oracle database ko EC2 instance par lift-and-shift karne se OS aur database administration (patching, backups, failover) khud karni padegi, jo **"easier to manage"** requirement ko poora nahi karta (RDS is ke liye behtar hai).
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **.NET App + Minimal Code Changes + Easy Management + Multi-AZ = AWS Elastic Beanstalk**
+> **Oracle to Oracle + Easy Management + Multi-AZ = AWS DMS + Amazon RDS for Oracle (Multi-AZ)**
+
+---
+
 
 
 
