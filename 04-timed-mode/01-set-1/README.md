@@ -698,6 +698,38 @@ CORS S3 bucket ko yeh permission dene ka permission letter hota hai jo browser k
 * **Increase the size of the Aurora DB cluster:** Cluster ki DB instance class ko upgrade karna (Vertical Scaling) sabhi waqt ke liye cost barha deta hai, chahe peak hours hon ya off-peak hours.
 * **Aurora Global Database:** Cross-region disaster recovery aur global low-latency reads ke liye specialized heavy feature hai, local regional peak load handling ke liye cost-effective nahi hai.
 
+
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+
+
+
+
+3. Question
+
+A Solutions Architect is designing a highly available relational database solution to mitigate the risk of a multi-region failure. The database must meet a Recovery Point Objective (RPO) of 1 second and a Recovery Time Objective (RTO) of less than 1 minute. The architect needs a disaster recovery plan that enables automatic cross-region replication with minimal data loss and rapid recovery in the event of a failure, which is a requirement beyond the regional high availability provided by Amazon RDS Multi-AZ.
+
+Which AWS solution best fulfills this requirement?
+
+- Amazon DynamoDB Global table
+- `Amazon Aurora Global Database`
+- Amazon Timestream for Analytics
+- RDS for PostgreSQL with cross-region read replicas
+
+
+
 08-October-2026
 
 06-October-2026
@@ -707,3 +739,5 @@ CORS S3 bucket ko yeh permission dene ka permission letter hota hai jo browser k
 03-October-2026
 
 08-October-2026
+
+12-November-2026
