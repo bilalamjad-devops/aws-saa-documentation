@@ -1368,6 +1368,55 @@ Which of the following options must be implemented to meet these requirements wi
 
 ---
 
+34. Question
+
+A Forex trading platform, which frequently processes and stores global financial data every minute, is hosted in an on-premises data center and uses an Oracle database. Due to a recent cooling problem in its data center, the company urgently needs to migrate its infrastructure to AWS to improve the performance of its applications. As the Solutions Architect, the responsibility is to ensure that the database is properly migrated and remains available in case of database server failure in the future, following AWS Prescriptive Guidance for database migration and high availability.
+
+Which combination of actions would meet the requirement? (Select TWO.)
+
+- `Create an Oracle database in Amazon RDS with Multi-AZ deployments.`
+- `Migrate the Oracle database to AWS using the AWS Database Migration Service`
+- Migrate the Oracle database to a non-cluster Amazon Aurora with a single instance.
+- Launch an Oracle database instance in Amazon RDS with Recovery Manager (RMAN) enabled.
+- Convert the database schema using the AWS Schema Conversion Tool.
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek Forex trading platform hai jo on-premises data center mein **Oracle database** use kar raha hai.
+2. **Core Problem:** Data center mein cooling ka masla hone ki wajah se unhein foran infrastructure ko AWS par migrate karna hai.
+3. **Requirements:**
+* Database ko properly AWS par migrate karna hai.
+* Future mein database server fail hone ki soorat mein **High Availability (HA)** aur zero downtime ensure karni hai.
+* **Select TWO options.**
+
+
+
+---
+
+### ✅ Correct Options (Select TWO)
+
+1. **Create an Oracle database in Amazon RDS with Multi-AZ deployments.**
+2. **Migrate the Oracle database to AWS using the AWS Database Migration Service.**
+
+---
+
+### 🔍 Detailed Explanation (Kyun Yehi Do Theek Hain?)
+
+* **Choice 1 (Amazon RDS with Multi-AZ):**
+High availability aur disaster recovery ke liye **Amazon RDS Multi-AZ** best option hai. Yeh data ko synchronously doosre Availability Zone (AZ) mein replicate karta hai. Agar primary database server kharab ho jaye, toh RDS automatically standby instance par failover kar deta hai, jis se trading platform band nahi hota.
+* **Choice 2 (AWS Database Migration Service - DMS):**
+On-premises Oracle database ko AWS mein shift karne ke liye **AWS DMS** sab se fast, secure, aur industry-standard tool hai. Yeh migration ke dauran source database ko operational rakhta hai (minimal downtime).
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Non-cluster Amazon Aurora with a single instance (Option 3):** Amazon Aurora Oracle ko support nahi karta (aurora sirf MySQL aur PostgreSQL support karta hai), aur single instance High Availability provide nahi karta.
+* **RDS with RMAN enabled (Option 4):** RMAN Oracle ka backup tool hai, lekin migration ke liye DMS standard aur automated managed service hai.
+* **AWS Schema Conversion Tool (Option 5):** SCT tab use hota hai jab aap **heterogeneous migration** kar rahe hon (misal ke taur par Oracle se PostgreSQL par jana ho). Yahan source aur target dono Oracle hain (homogeneous migration), is liye schema conversion tool ki zaroorat nahi hai.
+
+---
+
 
 
 
