@@ -2009,6 +2009,92 @@ Which of the following Amazon storage services should the developer use?
 > **Cost-Effective Cold / Archive Storage + Native FSx Integration = Amazon S3**
 
 ---
+---
+---
+
+58. Question
+
+An online shopping platform is hosted on an Auto Scaling group of Amazon EC2 Spot instances and utilizes Amazon Aurora PostgreSQL as its database. It is required to optimize database workloads in the cluster by directing the production traffic to high-capacity instances and routing the reporting queries from the internal staff to the low-capacity instances.
+
+Which is the most suitable configuration for the application as well as the Aurora database cluster to achieve this requirement?
+
+- `Create a custom endpoint in Aurora based on the specified criteria for the production traffic and another custom endpoint to handle the reporting queries.`
+- Configure your application to use the reader endpoint for both production traffic and reporting queries, which will enable your Aurora database to automatically perform load-balancing among all the Aurora Replicas.
+- In your application, use the instance endpoint of your Aurora database to handle the incoming production traffic and use the cluster endpoint to handle reporting queries.
+- Do nothing since by default, Aurora will automatically direct the production traffic to your high-capacity instances and the reporting queries to your low-capacity instances.
+
+Yes, your understanding is basically correct. Just make **instance** and **custom** precise:
+
+- **Cluster endpoint = Write** → points to the **primary/writer**
+- **Reader endpoint = Read + load balancing** → distributes read connections among Aurora Replicas
+- **Instance endpoint = One specific DB instance** → you choose exactly which Aurora instance to connect to
+- **Custom endpoint = Your own group of DB instances** → you define which instances belong to the endpoint, usually to separate workloads
+
+### 🧠 Super-short memory
+
+**Cluster → Writer**  
+**Reader → Read + Load balance**  
+**Instance → One specific instance**  
+**Custom → Your own selected group**
+
+For Question 58:
+
+**High-capacity production + low-capacity reporting = Custom endpoints** ✅
+
+Bahut achha! Jab **Custom Endpoint** clear ho gaya hai, toh baqi teenon endpoints (**Cluster, Reader, aur Instance**) bilkul aasani se usi bank/office ki misaal se samajh aa jayenge.
+
+---
+
+### 1️⃣ Cluster Endpoint (Writer Endpoint) — "Main Manager"
+
+* **Kya hai?** Yeh aapke Aurora cluster ka **main address** hota hai jo hamesha **Primary (Master / Writer) Instance** ki taraf point karta hai.
+* **Kaam kya hai?** Jab bhi aapki application ko database mein koi **nayi entry dalni ho (`INSERT`), badalni ho (`UPDATE`), ya delete karni ho (`DELETE`)**—yani koi bhi **Write operation**—toh woh is endpoint par bhejti hai.
+* **Magic (Failover):** Agar kisi wajah se Primary instance crash ho jaye, toh Aurora kisi ek Read Replica ko naya Primary bana deta hai aur **Cluster Endpoint automatically us naye Primary ki taraf point karne lagta hai** (aapko apni app mein URL change nahi karna padta).
+
+---
+
+### 2️⃣ Reader Endpoint — "Sab Replicas Ka Receptionist"
+
+* **Kya hai?** Yeh ek single DNS endpoint hai jo aapke cluster mein mojood **tamam Aurora Read Replicas** ke darmiyan connections ko distribute (load-balance) karta hai.
+* **Kaam kya hai?** Jab website par log sirf **data dekh rahe hon (`SELECT` / Read queries)**—jaise product catalog browse karna—toh aap Reader Endpoint use karte hain taake Primary instance par bojh na pade.
+* **Magic (Load Balancing):** Agar aapke paas 3 Read Replicas hain, toh yeh endpoint bari-bari sab par traffic bhejta rehta hai. *(Note: Yeh sirf naye connections ko balance karta hai, har single SQL query ko nahi).*
+
+---
+
+### 3️⃣ Instance Endpoint — "Direct Kisi Ek Server Ka Number"
+
+* **Kya hai?** Cluster ke andar mojood **har aik database instance** (chahe Primary ho ya Replica) ka apna ek **unique, direct URL** hota hai.
+* **Kaam kya hai?** Jab aapko load balancing nahi chahiye, balke aap chahte hain ke aap **seedha aur sirf kisi ek specific server** se connect hon.
+* **Use Case:** Yeh aam production traffic ke liye use nahi hota (kyunki agar woh ek server down hua toh connection toot jayega). Yeh zyada tar **troubleshooting, diagnostics, ya specific server ki performance check karne** ke liye use hota hai.
+
+---
+
+### 📊 Charon Endpoints Ka Ek Nazar Mein Farq
+
+| Endpoint | Kis Ki Taraf Point Karta Hai? | Main Kaam | Failover Support? |
+| --- | --- | --- | --- |
+| **Cluster (Writer)** | Sirf **Primary (Writer)** instance | Tamam **Write** (`INSERT/UPDATE/DELETE`) aur Read operations | **Haan** (Auto-switches to new Primary) |
+| **Reader** | **Tamam Read Replicas** (Load Balanced) | Sirf **Read (`SELECT`)** queries ko distribute karna | **Haan** (Healthy replicas par bhejta hai) |
+| **Custom** | **Selected Replicas** ka specific group | Workload isolation (e.g., bade vs chhote servers) | **Haan** (Group ke healthy members par) |
+| **Instance** | Sirf **1 specific DB instance** | Debugging, testing, aur diagnostics | **Nahi** (Direct single server link) |
+
+---
+
+### 🔑 Direct Memory Trick:
+
+> * **Likho / Save Karo (Write)** $\rightarrow$ **Cluster Endpoint**
+> * **Sab Se Parho (All Reads)** $\rightarrow$ **Reader Endpoint**
+> * **Chune Hue Servers Se Parho (Specific Group)** $\rightarrow$ **Custom Endpoint**
+> * **Seedha Ek Server Check Karo (Debug)** $\rightarrow$ **Instance Endpoint**
+ 
+<img width="880" height="422" alt="2019-04-03_00-40-18-850e58ca7802358579be53729bfc0cbb" src="https://github.com/user-attachments/assets/693ec080-a8ae-4293-8be3-fb5457722393" />
+ 
+
+
+
+---
+
+
 08-October-2026
 
 06-October-2026
