@@ -1870,11 +1870,90 @@ S3 mein aap **Lifecycle Transition Policies** laga sakte hain ke jab koi file 2 
 ### 🔑 Direct Memory Trick (Exam Key):
 
 > **Global User File Uploads + Cost-Effective + 11 Nines Durability + Move Old Files (after 2 years) = Amazon S3 + Lifecycle Policy (Standard-IA / Glacier)**
+
 > *(Yaad rakhein: EFS Lifecycle policy max 365 days tak hoti hai, 2 years nahi!)*
 
 ---
 ---
 ---
+
+
+54. Question
+
+A financial services company plans to migrate its trading application from on-premises Microsoft Windows Server to Amazon Web Services (AWS).
+The solution must ensure high availability across multiple Availability Zones and offer low-latency access to block storage.
+
+Which of the following solutions will fulfill these requirements?
+
+- Deploy the trading application on Amazon EC2 Windows Server instances across two Availability Zones. Use Amazon FSx for Windows File Server for shared storage.
+- `Configure the trading application on Amazon EC2 Windows Server instances across two Availability Zones. Use Amazon FSx for NetApp ONTAP to create a Multi-AZ file system and access the data via iSCSI protocol.`
+- Deploy the trading application on Amazon EC2 Windows Server instances across two Availability Zones. Use Amazon Elastic File System (Amazon EFS) to provide shared storage between the instances. Configure Amazon EFS with cross-region replication to sync data across Availability Zones.
+- Configure the trading application on Amazon EC2 Windows instances across two Availability Zones. Use Amazon Simple Storage Service (Amazon S3) for storage and configure cross-region replication to sync data between S3 buckets in each Availability Zone.
+
+<img width="1017" height="711" alt="td-amazon-FSx-for-NetApp-ONTAP-12-12-24 (2)" src="https://github.com/user-attachments/assets/4b1aba3a-44bc-4811-90cd-440a04c3673f" />
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek financial services company apni trading application ko on-premises **Microsoft Windows Server** se AWS par migrate kar rahi hai.
+2. **Requirements (Do Badi Shartein):**
+* **High Availability across Multiple AZs:** Application aur storage dono Multi-AZ hone chahiye.
+* **Low-latency access to BLOCK storage:** Yeh is sawaal ka sab se bara catchword hai! Trading application ko shared **Block Storage** chahiye (na ke sirf file storage ya object storage).
+
+
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"Microsoft Windows Server"`, `"multiple Availability Zones"`, `"low-latency access to block storage"`.
+* **Amazon FSx for NetApp ONTAP (Multi-AZ + iSCSI):**
+* **iSCSI (Internet Small Computer Systems Interface)** ek industry-standard **Block Storage protocol** hai!
+* **Amazon FSx for NetApp ONTAP** wahid managed FSx service hai jo file protocols (SMB, NFS) ke saath-saath **iSCSI block storage** bhi support karti hai, aur **Multi-AZ deployment** mein sub-millisecond low latency aur automatic failover deti hai.
+* Is se Windows Server instances alag-alag AZs mein baith kar ek hi shared block volume ko high speed par access kar sakte hain.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Amazon FSx for Windows File Server (Option 1):** Yeh sirf **SMB file storage** deta hai—yeh **block storage (iSCSI)** support nahi karta, jab ke sawaal mein explicitly **"block storage"** manga gaya hai!
+* **Amazon EFS + Cross-Region Replication (Option 3):**
+1. **Amazon EFS Windows instances ko support nahi karta** (sirf Linux/POSIX).
+2. EFS ek **file storage (NFS)** hai, block storage nahi.
+3. Cross-Region Replication regions ke darmiyan hoti hai, Availability Zones ke darmiyan nahi.
+
+
+* **Amazon S3 + Cross-Region Replication (Option 4):** S3 **Object Storage** hai (block storage nahi), aur S3 buckets pehle hi region-level par multi-AZ redundant hoti hain—unhein AZs ke darmiyan replicate karne ki zaroorat nahi hoti.
+
+---
+
+### 📊 Quick Comparison: Storage Types in AWS (Exam Trap!)
+
+| Storage Type | AWS Service | Protocol / Access Method |
+| --- | --- | --- |
+| **Shared Block Storage (Multi-AZ)** | **Amazon FSx for NetApp ONTAP** | **iSCSI** (Block-level access across AZs) |
+| **Single-AZ Block Storage** | Amazon EBS (or Multi-Attach in same AZ) | Direct block volume attached to EC2 |
+| **Windows File Storage** | Amazon FSx for Windows File Server | **SMB** (File-level access) |
+| **Linux File Storage** | Amazon EFS | **NFS** (POSIX File-level access) |
+| **Object Storage** | Amazon S3 | HTTP / REST APIs (`GET`, `PUT`) |
+
+---
+
+### ✅ Correct Answer:
+
+* **Configure the trading application on Amazon EC2 Windows Server instances across two Availability Zones. Use Amazon FSx for NetApp ONTAP to create a Multi-AZ file system and access the data via iSCSI protocol.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Windows Server + Multi-AZ + Shared BLOCK Storage = Amazon FSx for NetApp ONTAP + iSCSI**
+> *(Yaad rakhein: FSx for Windows = File Storage [SMB], jab ke FSx for NetApp ONTAP = File + Block Storage [iSCSI]!)*
+
+---
+
+
 
 
 08-October-2026
