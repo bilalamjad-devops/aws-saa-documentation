@@ -2093,6 +2093,126 @@ Bahut achha! Jab **Custom Endpoint** clear ho gaya hai, toh baqi teenon endpoint
 
 
 ---
+---
+---
+
+61. Question
+
+A car dealership website hosted in Amazon EC2 stores car listings in an Amazon Aurora database managed by Amazon RDS. Once a vehicle has been sold, its data must be removed from the current listings and forwarded to a distributed processing system.
+
+Which of the following options can satisfy the given requirement?
+
+- Create an RDS event subscription and send the notifications to Amazon SNS. Configure the SNS topic to fan out the event notifications to multiple Amazon SQS queues. Process the data using AWS Lambda functions.
+- Create an RDS event subscription and send the notifications to AWS Lambda. Configure the Lambda function to fanout the event notifications to multiple Amazon SQS queues to update the target groups.
+- Create an RDS event subscription and send the notifications to Amazon SQS. Configure the SQS queues to fan out the event notifications to multiple Amazon SNS topics. Process the data using AWS Lambda functions.
+- `Use an Aurora MySQL native function to invoke an AWS Lambda function whenever a vehicle listing is deleted. Configure the Lambda function to send the data to an Amazon SQS queue for the distributed processing system to consume.`
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek car dealership ki website **Amazon Aurora** database mein car listings store karti hai.
+2. **Event / Trigger:** Jab koi gadi bik jati hai (**vehicle has been sold**), toh uska data current listings table se **delete (remove)** kiya jata hai.
+3. **Requirement:** Jaise hi database table se woh row delete ho, us gadi ka **data** foran ek **distributed processing system** (jaise SQS queue + downstream consumers) ko bhejna hai.
+
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"Amazon Aurora database"`, `"data must be removed from the current listings"`, `"forwarded to a distributed processing system"`.
+* **Aurora Native Function (`lambda_sync` / `lambda_async`) + AWS Lambda + Amazon SQS:**
+* **Amazon Aurora (MySQL & PostgreSQL)** mein ek khaas native feature hota hai jis ke zariye aap **Database Triggers ya Stored Procedures** ke andar se directly ek **AWS Lambda function** invoke kar sakte hain!
+* Jaise hi `DELETE` query chalti hai (car listing remove hoti hai), database trigger foran Lambda function ko call karta hai aur us deleted row ka data pass kar deta hai.
+* Uske baad Lambda function us data ko **Amazon SQS queue** mein bhej deta hai, jahan se distributed processing system usay consume karke process kar leta hai.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain? (Bohat Bara Exam Trap!)
+
+* **RDS Event Subscription (Options 1, 2, aur 3):**
+Yeh teenon options **RDS Event Subscriptions** ki baat kar rahe hain—jo ke **bilkul galat** hai!
+* **RDS Event Subscriptions** sirf **infrastructure/database-level events** ke liye hoti hain (jaise: *DB instance restart hua, failover hua, storage full ho gayi, ya backup complete hua*).
+* Yeh **table ke andar data changes** (`INSERT`, `UPDATE`, `DELETE` rows) ko track nahi kartin!
+* Is ke ilawa:
+* Option 2 mein RDS event subscription directly Lambda ko trigger nahi kar sakta (yeh sirf **Amazon SNS** topic par notification bhejta hai).
+* Option 3 mein SQS se SNS fan-out ulta likha hua hai (fan-out pattern **SNS $\rightarrow$ SQS** hota hai, SQS $\rightarrow$ SNS nahi).
+
+
+
+
+
+---
+
+### 📊 Quick Comparison: Table Data Changes vs. DB Infrastructure Events
+
+| Aap Kya Track Karna Chahte Hain? | Sahi AWS Service / Feature |
+| --- | --- |
+| **Table ke andar Row `INSERT / UPDATE / DELETE**` (Data-level event) | **Aurora Native Lambda Function** (via DB Trigger) ya **AWS DMS (CDC)** |
+| **Database Server Reboot, Failover, Backup, Storage Full** (Infrastructure-level event) | **Amazon RDS Event Subscriptions** $\rightarrow$ **Amazon SNS** |
+
+---
+
+### ✅ Correct Answer:
+
+* **Use an Aurora MySQL native function to invoke an AWS Lambda function whenever a vehicle listing is deleted. Configure the Lambda function to send the data to an Amazon SQS queue for the distributed processing system to consume.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Aurora Table Row Change (`INSERT/UPDATE/DELETE`) $\rightarrow$ Downstream App = Aurora Trigger + Native Lambda Function + SQS**
+> *(RDS Event Subscriptions sirf DB Server/Instance events ke liye hoti hain, table rows ke liye nahi!)*
+
+---
+
+Bilkul sahi pakda aapne! Aapki logic 100% theek hai: **Table/Row-level changes** ke liye database ke andar ke triggers/streams kaam karte hain, jabke **DB Server/Infrastructure-level events** (failover, backup, reboot) ke liye AWS control-plane events kaam karte hain.
+
+Teenon databases (**Aurora, Standard RDS, aur DynamoDB**) ka complete comparison neeche diya gaya hai:
+
+---
+
+### 📊 Complete Cheat Sheet: Table-Level vs. DB-Level Events
+
+| Database Service | 1️⃣ Table / Row-Level Changes (`INSERT`, `UPDATE`, `DELETE` data) | 2️⃣ DB / Infrastructure-Level Events (Failover, Backup, Reboot, Table Created/Deleted) |
+| --- | --- | --- |
+| **Amazon Aurora** *(MySQL & PostgreSQL)* | **Aurora Native Lambda Function** (`lambda_sync` / `lambda_async` via DB Trigger/Stored Procedure) | **RDS Event Subscriptions** $\rightarrow$ **Amazon SNS** *(Kyunki Aurora RDS infrastructure par chalta hai)* |
+| **Standard Amazon RDS** *(MySQL, PostgreSQL, SQL Server, Oracle)* | **Direct Lambda trigger nahi hota!**<br>
+
+<br>• **AWS DMS (CDC - Change Data Capture)** use karke changes Kinesis/S3 par bhejein.<br>
+
+<br>• Ya application code se **SNS/SQS/EventBridge** par event publish karein. | **RDS Event Subscriptions** $\rightarrow$ **Amazon SNS** |
+| **Amazon DynamoDB** | **DynamoDB Streams** $\rightarrow$ **AWS Lambda** (ya Kinesis Data Streams) | **Amazon EventBridge** (via AWS CloudTrail management events — e.g., `CreateTable`, `DeleteTable`, `UpdateTable`) |
+
+---
+
+### 🔍 Har Database Ko Detail Mein Samjhein:
+
+#### 1️⃣ Amazon Aurora
+
+* **Internal (Table/Data Level):** Aurora mein built-in superpower hai ke aap SQL Trigger ke andar se directly AWS Lambda function call kar sakte hain (jaise Q61 mein car delete hone par hua).
+* **DB Level (Infrastructure):** Aurora bhi RDS console aur control plane ke neeche aata hai, is liye server reboot, failover, ya storage alerts ke liye **RDS Event Subscriptions $\rightarrow$ SNS** hi use hota hai.
+
+#### 2️⃣ Standard Amazon RDS (Non-Aurora)
+
+* **Internal (Table/Data Level):** Standard RDS (jaise normal RDS MySQL ya RDS PostgreSQL) mein Aurora wala native Lambda trigger **mojood nahi hota**! Agar aapne standard RDS ki kisi table ke changes capture karne hon, toh exam mein **AWS DMS (Change Data Capture / CDC)** ya **application-level event publishing** (SNS/SQS) sahi jawab hota hai.
+* **DB Level (Infrastructure):** Failover, snapshot completion, ya parameter group change ke liye **RDS Event Subscriptions $\rightarrow$ SNS**.
+
+#### 3️⃣ Amazon DynamoDB
+
+* **Internal (Table/Item Level):** DynamoDB mein jab bhi koi item add, update, ya delete hota hai, toh usay pakadne ka sab se best tareeqa **DynamoDB Streams** hai, jo directly **AWS Lambda** ko trigger karta hai (is ke ilawa DynamoDB EventBridge ke saath bhi direct integration deta hai).
+* **DB Level (Control Plane):** DynamoDB serverless hai is liye is mein "server reboot" ya "failover" nahi hota, lekin agar kisi ne poora table banaya ya delete kiya (`CreateTable` / `DeleteTable`), toh usay **AWS CloudTrail + Amazon EventBridge** se capture karte hain.
+
+---
+
+### 🔑 Exam Golden Rule:
+
+* **Aurora row change** $\rightarrow$ **Aurora Trigger + Native Lambda**
+* **Standard RDS row change** $\rightarrow$ **AWS DMS (CDC)** (Native Lambda nahi hota!)
+* **DynamoDB item change** $\rightarrow$ **DynamoDB Streams + Lambda**
+* **Aurora / RDS server event** $\rightarrow$ **RDS Event Subscription + SNS**
+
+---
+
 
 
 08-October-2026
