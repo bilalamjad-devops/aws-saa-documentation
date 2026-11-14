@@ -1949,13 +1949,66 @@ Which of the following solutions will fulfill these requirements?
 ### 🔑 Direct Memory Trick (Exam Key):
 
 > **Windows Server + Multi-AZ + Shared BLOCK Storage = Amazon FSx for NetApp ONTAP + iSCSI**
+
 > *(Yaad rakhein: FSx for Windows = File Storage [SMB], jab ke FSx for NetApp ONTAP = File + Block Storage [iSCSI]!)*
 
 ---
 
+57. Question
+
+An AI-powered Forex trading application consumes thousands of data sets to train its machine learning model. The application’s workload requires a high-performance, parallel hot storage to process the training datasets concurrently. It also needs cost-effective cold storage to archive those datasets that yield low profit.
+
+Which of the following Amazon storage services should the developer use?
+
+- Use Amazon FSx For Lustre and the Provisioned IOPS SSD (io1) volumes of Amazon EBS for hot and cold storage respectively.
+- Use Amazon FSx For Windows File Server and Amazon S3 for hot and cold storage respectively.
+- `Use Amazon FSx For Lustre and Amazon S3 for hot and cold storage respectively.`
+- Use Amazon Elastic File System and Amazon S3 for hot and cold storage respectively.
+
+
+### 🧠 Question Kya Keh Raha Hai? (Scenario Breakdown)
+
+1. **Setup:** Ek AI-powered Forex trading application hazaaron datasets use karke apna **Machine Learning (ML) model train** kar rahi hai.
+2. **Requirements (Do Alag Storage Zarooratein):**
+* **Hot Storage (Active Training):** Ek **high-performance, parallel file system** chahiye jo hazaaron training datasets ko **concurrently (ek saath)** sub-millisecond latency aur high throughput par process kar sake.
+* **Cold Storage (Archiving):** Low-profit datasets ko archive karne ke liye **cost-effective cold storage** chahiye.
 
 
 
+---
+
+### 🔍 Keyword Scanning & Correct Option Analysis
+
+* **Keywords in Question:** `"AI-powered / machine learning model"`, `"high-performance, parallel hot storage"`, `"cost-effective cold storage to archive"`.
+* **Amazon FSx for Lustre (Hot Storage) + Amazon S3 (Cold Storage):**
+* **Amazon FSx for Lustre:** Yeh duniya ke sab se tez parallel file system (**Lustre**) par bana hai, aur AWS mein specifically **Machine Learning (ML), High-Performance Computing (HPC), aur Big Data** workloads ke liye design kiya gaya hai. Yeh hundreds of GB/s throughput aur millions of IOPS deta hai taake compute nodes data ko concurrently process kar sakein.
+* **Seamless S3 Integration:** FSx for Lustre directly **Amazon S3** ke saath link ho jata hai! Aap active training ke dauran data ko FSx for Lustre (hot storage) par rakhte hain, aur kaam khatam hone ke baad low-profit datasets ko cost-effective **Amazon S3 (Standard-IA / Glacier)** mein archive kar dete hain.
+
+
+
+---
+
+### ❌ Baaqi Options Kyun Galat Hain?
+
+* **Provisioned IOPS SSD (io1) as Cold Storage (Option 1):** EBS `io1` ek bohot **mehenga (high-performance block storage)** volume hai—yeh bilkul bhi "cost-effective cold storage" nahi hai!
+* **Amazon FSx for Windows File Server (Option 2):** Yeh Windows SMB file sharing ke liye hai, high-performance parallel ML compute workloads ke liye nahi.
+* **Amazon EFS (Option 4):** EFS general-purpose Linux POSIX shared storage hai, lekin extreme parallel throughput aur ML/HPC speed ke liye **FSx for Lustre** is se kahin zyada tez aur specialized hai.
+
+---
+
+### ✅ Correct Answer:
+
+* **Use Amazon FSx For Lustre and Amazon S3 for hot and cold storage respectively.**
+
+---
+
+### 🔑 Direct Memory Trick (Exam Key):
+
+> **Machine Learning / HPC + Parallel High-Performance Hot Storage = Amazon FSx for Lustre**
+
+> **Cost-Effective Cold / Archive Storage + Native FSx Integration = Amazon S3**
+
+---
 08-October-2026
 
 06-October-2026
