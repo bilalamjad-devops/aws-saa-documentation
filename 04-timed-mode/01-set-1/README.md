@@ -2212,7 +2212,23 @@ Teenon databases (**Aurora, Standard RDS, aur DynamoDB**) ka complete comparison
 * **Aurora / RDS server event** $\rightarrow$ **RDS Event Subscription + SNS**
 
 ---
+---
+---
 
+65. Question
+
+A company has 3 DevOps engineers that are handling its software development and infrastructure management processes. One of the engineers accidentally deleted a file hosted in Amazon S3 which has caused disruption of service.
+
+What can the DevOps engineers do to prevent this from happening again?
+
+- Use S3 Infrequently Accessed storage to store the data.
+- `Enable S3 Versioning and Multi-Factor Authentication Delete on the bucket.`
+- Create an IAM bucket policy that disables delete operation.
+- Set up a signed URL for all users.
+
+<img width="1647" height="840" alt="TD-S3BucketVersioning-11June2025 (1)" src="https://github.com/user-attachments/assets/cb6dcacb-3413-4db9-ae0d-6065798585bd" />
+
+<img width="2694" height="480" alt="S3-Enable MFA (1)" src="https://github.com/user-attachments/assets/32dea0ba-41c3-42d1-bafa-cd8db720ecd1" />
 
 
 08-October-2026
